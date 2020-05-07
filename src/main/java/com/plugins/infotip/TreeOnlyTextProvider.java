@@ -23,15 +23,14 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
 
     @NotNull
     @Override
-    public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent, @NotNull Collection<AbstractTreeNode<?>> children, ViewSettings settings) {
-        PsiDirectoryNode(parent);
-        return children;
+    public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode abstractTreeNode, @NotNull Collection<AbstractTreeNode> collection, ViewSettings viewSettings) {
+        PsiDirectoryNode(abstractTreeNode);
+        return collection;
     }
-
 
     @Nullable
     @Override
-    public Object getData(@NotNull Collection<AbstractTreeNode<?>> selected, @NotNull String dataId) {
+    public Object getData(@NotNull Collection<AbstractTreeNode> selected, @NotNull String dataId) {
         for (AbstractTreeNode abstractTreeNode : selected) {
             PsiDirectoryNode(abstractTreeNode);
         }
@@ -40,6 +39,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
 
     /**
      * 获取遍历目录
+     *
      * @param abstractTreeNode
      */
     private void PsiDirectoryNode(AbstractTreeNode abstractTreeNode) {
@@ -59,7 +59,6 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
                 }
             }
         }
-
     }
 
 

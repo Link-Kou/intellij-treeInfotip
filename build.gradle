@@ -1,9 +1,5 @@
 buildscript {
     repositories {
-        maven { url '/Users/lk/Downloads/ideaIU-2019.3.zip' }
-        maven { url '/Users/lk/Downloads/intellij-core-2019.3.zip' }
-        maven { url '/Users/lk/Downloads/ideaIU-2019.3-annotations.zip' }
-        maven { url '/Users/lk/Downloads/jbr-11_0_4-osx-x64-b520.11.tar.gz' }
         maven { url 'https://maven.aliyun.com/repository/public/' }
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
@@ -37,7 +33,6 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
-    maven { url '/Users/lk/Downloads/jbr-11_0_4-osx-x64-b520.11.tar.gz' }
     maven { url 'https://maven.aliyun.com/repository/public/' }
     maven { url 'https://maven.aliyun.com/repository/google/' }
     maven { url 'https://maven.aliyun.com/repository/jcenter' }
