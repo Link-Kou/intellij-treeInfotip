@@ -4,10 +4,6 @@
 
 > TreeInfotip是基于IntelliJ 开发的项目目录自定义备注显示，主要通过自定义XML来生成项目目录树备注。
 
- ![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-47-30.jpg "样列")
-  
----
-
 
 ### 为什么要这个插件
 
