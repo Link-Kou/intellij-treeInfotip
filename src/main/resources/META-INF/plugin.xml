@@ -4,9 +4,9 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="172"/>
+    <idea-version since-build="201"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
       <ul>
@@ -37,6 +37,11 @@
         <p>1.0.2</p>
         <li> 1.BUG:查找不到文件报错 </li>
         <li> 1.BUG:Unable to find file error </li>
+      </ul>
+      <ul>
+        <p>1.0.3</p>
+        <li> 1.FIX:升级SDKAPI </li>
+        <li> 1.FIX:upgrade SDKAPI </li>
       </ul>
     ]]></change-notes>
 

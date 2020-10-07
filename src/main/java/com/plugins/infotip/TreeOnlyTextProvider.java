@@ -23,14 +23,14 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
 
     @NotNull
     @Override
-    public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode abstractTreeNode, @NotNull Collection<AbstractTreeNode> collection, ViewSettings viewSettings) {
+    public Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> abstractTreeNode, @NotNull Collection<AbstractTreeNode<?>> collection, ViewSettings viewSettings) {
         PsiDirectoryNode(abstractTreeNode);
         return collection;
     }
 
     @Nullable
     @Override
-    public Object getData(@NotNull Collection<AbstractTreeNode> selected, @NotNull String dataId) {
+    public Object getData(@NotNull Collection<AbstractTreeNode<?>> selected, @NotNull String dataId) {
         for (AbstractTreeNode abstractTreeNode : selected) {
             PsiDirectoryNode(abstractTreeNode);
         }
@@ -60,6 +60,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
             }
         }
     }
+
 
 
 }

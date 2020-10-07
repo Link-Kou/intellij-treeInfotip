@@ -1,5 +1,6 @@
 package com.plugins.infotip;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -25,79 +26,84 @@ public class PluginStartupActivity implements StartupActivity {
         /**
          * 监控文件变化
          */
-        PsiManager.getInstance(project).addPsiTreeChangeListener(new PsiTreeChangeListener() {
+        PsiManager.getInstance(project).addPsiTreeChangeListener(
+                new PsiTreeChangeListener() {
 
-            @Override
-            public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            //内
-            @Override
-            public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                if (null != psiTreeChangeEvent) {
-                    final PsiFile file = psiTreeChangeEvent.getFile();
-                    if (null != file) {
-                        final VirtualFile virtualFile = file.getVirtualFile();
-                        if (null != virtualFile) {
-                            if (virtualFile.getName().contains("Directory.xml")) {
-                                ProjectInfo.getParsingConfigureXML(project);
+                    //内
+                    @Override
+                    public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                        final PsiFile file = psiTreeChangeEvent.getFile();
+                        if (null != file) {
+                            final VirtualFile virtualFile = file.getVirtualFile();
+                            if (null != virtualFile) {
+                                if (virtualFile.getName().contains("Directory.xml")) {
+                                    ProjectInfo.getParsingConfigureXML(project);
+                                }
                             }
                         }
                     }
-                }
-            }
 
-            @Override
-            public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                System.out.print("");
-            }
+                    @Override
+                    public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                        System.out.print("");
+                    }
 
-            @Override
-            public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
+                    }
 
-            @Override
-            public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                    @Override
+                    public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
 
-            }
-        });
+                    }
+                },
+                new Disposable() {
+                    @Override
+                    public void dispose() {
+
+                    }
+                });
     }
 
 }
