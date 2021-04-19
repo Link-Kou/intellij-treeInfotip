@@ -10,6 +10,8 @@ import com.plugins.infotip.parsing.model.ProjectInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
      * @param abstractTreeNode
      */
     private void PsiDirectoryNode(AbstractTreeNode abstractTreeNode) {
+        //文件夹类型
         if (abstractTreeNode instanceof PsiDirectoryNode) {
             ProjectInfo.getParsingConfigureXML(abstractTreeNode.getProject());
             List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
@@ -52,15 +55,42 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
                     for (ListTreeInfo listTreeInfo : listTreeInfos) {
                         if (listTreeInfo != null) {
                             if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                                //设置备注
                                 abstractTreeNode.getPresentation().setLocationString(listTreeInfo.getTitle());
                             }
                         }
                     }
                 }
             }
+        } else {
+            if (abstractTreeNode != null && abstractTreeNode.getValue() != null) {
+                ProjectInfo.getParsingConfigureXML(abstractTreeNode.getProject());
+                List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
+                Method[] methods = abstractTreeNode.getClass().getMethods();
+                for (Method method : methods) {
+                    if ("getVirtualFile".equals(method.getName())) {
+                        method.setAccessible(true);
+                        try {
+                            Object invoke = method.invoke(abstractTreeNode);
+                            if (invoke instanceof VirtualFile) {
+                                VirtualFile pdn = (VirtualFile) invoke;
+                                for (ListTreeInfo listTreeInfo : listTreeInfos) {
+                                    if (listTreeInfo != null) {
+                                        if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                                            //设置备注
+                                            abstractTreeNode.getPresentation().setLocationString(listTreeInfo.getTitle());
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
         }
     }
-
 
 
 }

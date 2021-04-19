@@ -15,7 +15,8 @@ buildscript {
 
 plugins {
     id 'idea'
-    id 'org.jetbrains.intellij' version '0.4.17'
+    //0.4.21
+    id 'org.jetbrains.intellij' version '0.7.2'
 }
 
 //2.1 插件配置
@@ -24,16 +25,12 @@ apply plugin: 'idea'
 apply plugin: 'java'
 
 group 'com.linkkou'
-version '1.0.3'
+version '1.0.5'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
-    maven { url 'https://maven.aliyun.com/repository/public/' }
-    maven { url 'https://maven.aliyun.com/repository/google/' }
-    maven { url 'https://maven.aliyun.com/repository/jcenter' }
-    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
     mavenCentral()
 }
 

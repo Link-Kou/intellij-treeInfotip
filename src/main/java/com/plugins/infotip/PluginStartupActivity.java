@@ -28,28 +28,15 @@ public class PluginStartupActivity implements StartupActivity {
          */
         PsiManager.getInstance(project).addPsiTreeChangeListener(
                 new PsiTreeChangeListener() {
-
                     @Override
-                    public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
-                    //内
+                    public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
+                    //更新前
                     @Override
                     public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
                         final PsiFile file = psiTreeChangeEvent.getFile();
@@ -62,47 +49,24 @@ public class PluginStartupActivity implements StartupActivity {
                             }
                         }
                     }
-
                     @Override
-                    public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        System.out.print("");
-                    }
-
+                    public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
-
+                    public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                     @Override
-                    public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-
-                    }
+                    public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) { }
                 },
                 new Disposable() {
                     @Override
-                    public void dispose() {
-
-                    }
+                    public void dispose() { }
                 });
     }
 

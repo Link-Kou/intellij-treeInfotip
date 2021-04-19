@@ -30,7 +30,7 @@
  
 ### 手动安装
 
- [plugin.intellij.assistant-1.0.0.zip](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/builds/plugin.intellij.assistant-1.0.0.zip)
+ [plugin.intellij.assistant-1.0.5.zip](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-1.0.5.jar)
  
 ### 一、示列
 > ##### 图片示列教程：（国内有些网络啊！tmd图片看不了的）

@@ -38,6 +38,8 @@ import com.plugins.infotip.parsing.model.ListTreeInfo;
 import com.plugins.infotip.parsing.model.ProjectInfo;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.intellij.ui.SimpleTextAttributes.STYLE_SMALLER;
@@ -59,6 +61,7 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
+        //文件夹类型
         if (node instanceof PsiDirectoryNode) {
             ProjectInfo.getParsingConfigureXML(node.getProject());
             List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
@@ -68,8 +71,36 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
                     for (ListTreeInfo listTreeInfo : listTreeInfos) {
                         if (listTreeInfo != null) {
                             if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                                //设置备注
                                 data.setLocationString(listTreeInfo.getTitle());
                             }
+                        }
+                    }
+                }
+            }
+        } else {
+            if (node != null && node.getValue() != null) {
+                ProjectInfo.getParsingConfigureXML(node.getProject());
+                List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
+                Method[] methods = node.getClass().getMethods();
+                for (Method method : methods) {
+                    if ("getVirtualFile".equals(method.getName())) {
+                        method.setAccessible(true);
+                        try {
+                            Object invoke = method.invoke(node);
+                            if (invoke instanceof VirtualFile) {
+                                VirtualFile pdn = (VirtualFile) invoke;
+                                for (ListTreeInfo listTreeInfo : listTreeInfos) {
+                                    if (listTreeInfo != null) {
+                                        if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                                            //设置备注
+                                            data.setLocationString(listTreeInfo.getTitle());
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -79,7 +110,5 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
     public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {
-
-
     }
 }
