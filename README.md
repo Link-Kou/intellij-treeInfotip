@@ -47,25 +47,16 @@ IDEA或WebStrom -> Preferences -> Plugins -> TreeInfotip
 
 > ##### 说明文档：
 
-1. 在项目根目录下创建Directory.xml文件(文件名称不能改变)
+1. 1.0和2.0不兼容
+   
+2. 在项目根目录下创建DirectoryV2.xml文件(文件名称不能改变)
 
-2. 文件内容示列
+3. 文件内容示列
 
 ```xml：
   <?xml version="1.0" encoding="UTF-8"?>
   <trees>
-      <tree path="/src">
-          <tree path="/main">
-              <tree path="/java/com">
-                  <tree path="/plugins" title="插件">
-                      <tree path="/infotip" title="信息显示">
-                          <tree path="/parsing" title="读取"/>
-                      </tree>
-                  </tree>
-              </tree>
-              <tree path="/resources" title="资源文件夹"/>
-          </tree>
-      </tree>
+      <tree path="/src"/>
       <tree path="/builds" title="构建文件"/>
       <tree path="/image" title="图片示例"/>
   </trees>
@@ -78,20 +69,10 @@ IDEA或WebStrom -> Preferences -> Plugins -> TreeInfotip
   //trees只能有一个，所有子标签都在此标签里面
   <trees/>
 
-  //模块（Maven多模块可以采用此标签作为标识） 
-  <model/>
-
-  //普通文件夹
-  <tree/> 文件夹说明
-```
-
-4. 属性说明
-
-```xml：
-
-    //路径，MAC与Win的路径都是通用的，上下级的标签会拼接上父节点的path属性
-    <path/> 
-
-    //显示的内容
-    <title/> 
+  //文件夹或文件说明
+  //path 路径，MAC与Win的路径都是通用的，上下级的标签会拼接上父节点的path属性 
+  //title 显示的内容
+  //extension 后缀
+  
+  <tree path="" title=""  extension=""/> 
 ```
