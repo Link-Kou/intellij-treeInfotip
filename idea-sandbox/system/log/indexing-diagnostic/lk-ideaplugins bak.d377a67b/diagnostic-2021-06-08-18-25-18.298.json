@@ -1,0 +1,257 @@
+{
+  "appInfo" : {
+    "build" : "211.7442.40",
+    "buildDate" : "2021-06-01T03:17:04.035Z[UTC]",
+    "productCode" : "IU",
+    "generated" : "2021-06-08T10:25:18.301107Z",
+    "os" : "macOS 10.16",
+    "runtime" : "Oracle Corporation 11.0.9 11.0.9+7-LTS"
+  },
+  "runtimeInfo" : {
+    "maxMemory" : 536870912,
+    "numberOfProcessors" : 12,
+    "maxNumberOfIndexingThreads" : 4,
+    "maxSizeOfFileForIntelliSense" : 2560000,
+    "maxSizeOfFileForContentLoading" : 20971520
+  },
+  "projectIndexingHistory" : {
+    "projectName" : "LK-IDEAPlugins bak",
+    "times" : {
+      "totalUpdatingTime" : 710097983,
+      "indexingTime" : 42127000,
+      "contentLoadingTime" : 5215582,
+      "scanFilesTime" : 539632000,
+      "pushPropertiesTime" : 33600000,
+      "indexExtensionsTime" : 0,
+      "updatingStart" : "2021-06-08T10:25:17.587523Z",
+      "updatingEnd" : "2021-06-08T10:25:18.297675Z",
+      "totalSuspendedTime" : 0,
+      "wasInterrupted" : false
+    },
+    "fileCount" : {
+      "numberOfFileProviders" : 18,
+      "numberOfScannedFiles" : 704,
+      "numberOfFilesIndexedByInfrastructureExtensionsDuringScan" : 0,
+      "numberOfFilesScheduledForIndexingAfterScan" : 7,
+      "numberOfFilesIndexedByInfrastructureExtensionsDuringIndexingStage" : 7,
+      "numberOfFilesIndexedWithLoadingContent" : 7
+    },
+    "totalStatsPerFileType" : [ {
+      "fileType" : "JAVA",
+      "partOfTotalProcessingTime" : {
+        "part" : 63407209,
+        "total" : 63407209
+      },
+      "partOfTotalContentLoadingTime" : {
+        "part" : 14936449,
+        "total" : 14936449
+      },
+      "totalNumberOfFiles" : 7,
+      "totalFilesSize" : 19836,
+      "indexingSpeed" : {
+        "totalBytes" : 19836,
+        "totalTime" : 63407209
+      },
+      "biggestContributors" : [ {
+        "providerName" : "Module 'DJ-IDEAPlugins'",
+        "numberOfFiles" : 7,
+        "totalFilesSize" : 19836,
+        "partOfTotalProcessingTimeOfThisFileType" : {
+          "part" : 63407209,
+          "total" : 63407209
+        }
+      } ]
+    } ],
+    "totalStatsPerIndexer" : [ ],
+    "scanningStatistics" : [ {
+      "providerName" : "com.intellij.javaee.ExternalResourcesRootsProvider@fe550b8",
+      "numberOfScannedFiles" : 580,
+      "numberOfSkippedFiles" : 11,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 358580049,
+      "timeProcessingUpToDateFiles" : 46171394,
+      "timeUpdatingContentLessIndexes" : 7381306,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.lang.javascript.index.JSIndexedRootProvider@3ba2649c",
+      "numberOfScannedFiles" : 35,
+      "numberOfSkippedFiles" : 37,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 136841663,
+      "timeProcessingUpToDateFiles" : 27890302,
+      "timeUpdatingContentLessIndexes" : 796158,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.lang.javascript.index.JSIndexedRootProvider@3ba2649c",
+      "numberOfScannedFiles" : 13,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 124577416,
+      "timeProcessingUpToDateFiles" : 27801732,
+      "timeUpdatingContentLessIndexes" : 381072,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.lang.typescript.library.TypeScriptLibraryIndexableSetContributor@39afb2c3",
+      "numberOfScannedFiles" : 33,
+      "numberOfSkippedFiles" : 27,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 123405105,
+      "timeProcessingUpToDateFiles" : 29736128,
+      "timeUpdatingContentLessIndexes" : 725749,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "Module 'DJ-IDEAPlugins'",
+      "numberOfScannedFiles" : 26,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 7,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 79423360,
+      "timeProcessingUpToDateFiles" : 12441072,
+      "timeUpdatingContentLessIndexes" : 908145,
+      "timeIndexingWithoutContent" : 878659
+    }, {
+      "providerName" : "com.intellij.ide.scratch.ScratchesAndConsolesIndexSetContributor@398fef32",
+      "numberOfScannedFiles" : 1,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 63777548,
+      "timeProcessingUpToDateFiles" : 521393,
+      "timeUpdatingContentLessIndexes" : 86025,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "org.jetbrains.plugins.scss.index.SassScssIndexedRootProvider@28d2ddf2",
+      "numberOfScannedFiles" : 8,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 63772755,
+      "timeProcessingUpToDateFiles" : 7923890,
+      "timeUpdatingContentLessIndexes" : 475904,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.httpClient.http.request.HttpRequestCollectionProvider@1fb11fd9",
+      "numberOfScannedFiles" : 7,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 42906467,
+      "timeProcessingUpToDateFiles" : 12465635,
+      "timeUpdatingContentLessIndexes" : 838838,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.httpClient.http.request.run.HttpClientDynamicVariablesStubController@5a885187",
+      "numberOfScannedFiles" : 1,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 29555148,
+      "timeProcessingUpToDateFiles" : 1911870,
+      "timeUpdatingContentLessIndexes" : 38648,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.javaee.ExternalResourcesRootsProvider@fe550b8",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "org.jetbrains.plugins.scss.index.SassScssIndexedRootProvider@28d2ddf2",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.ide.scratch.ScratchesAndConsolesIndexSetContributor@398fef32",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.lang.typescript.library.TypeScriptLibraryIndexableSetContributor@39afb2c3",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "org.jetbrains.kotlin.idea.core.script.dependencies.KotlinScriptDependenciesIndexableSetContributor@7513007b",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "org.jetbrains.kotlin.idea.core.script.dependencies.KotlinScriptDependenciesIndexableSetContributor@7513007b",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.httpClient.http.request.HttpRequestCollectionProvider@1fb11fd9",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.httpClient.http.request.run.HttpClientDynamicVariablesStubController@5a885187",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    }, {
+      "providerName" : "com.intellij.openapi.roots.ImmutableSyntheticLibrary@15168add",
+      "numberOfScannedFiles" : 0,
+      "numberOfSkippedFiles" : 0,
+      "numberOfFilesForIndexing" : 0,
+      "numberOfFilesFullyIndexedByInfrastructureExtensions" : 0,
+      "scanningTime" : 0,
+      "timeProcessingUpToDateFiles" : 0,
+      "timeUpdatingContentLessIndexes" : 0,
+      "timeIndexingWithoutContent" : 0
+    } ],
+    "fileProviderStatistics" : [ {
+      "providerName" : "Module 'DJ-IDEAPlugins'",
+      "totalNumberOfIndexedFiles" : 7,
+      "totalNumberOfFilesFullyIndexedByExtensions" : 7,
+      "totalIndexingTime" : 22140839,
+      "contentLoadingTime" : 5215582,
+      "numberOfTooLargeForIndexingFiles" : 0,
+      "slowIndexedFiles" : [ ]
+    } ]
+  }
+}

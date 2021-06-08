@@ -1,0 +1,9 @@
+<conversion>
+  <applied-converters>
+    <converter id="DockerRunConfigurationConverterProvider" />
+    <converter id="kotlin-non-jvm-source-roots" />
+  </applied-converters>
+  <project-files>
+    <f p="./.idea/workspace.xml" t="1623065598" />
+  </project-files>
+</conversion>

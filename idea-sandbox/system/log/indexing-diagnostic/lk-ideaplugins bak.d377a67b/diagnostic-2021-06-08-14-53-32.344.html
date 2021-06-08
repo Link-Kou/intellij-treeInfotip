@@ -1,0 +1,110 @@
+<html><head><title>Indexing diagnostics of &#39;LK-IDEAPlugins bak&#39;</title><style>body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table {
+  width: 80%;
+}
+
+table.two-columns td {
+  width: 50%;
+}
+
+th, td {
+  padding: 3px;
+}
+
+th {
+  background: lightgrey;
+}
+
+td {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+        
+.stats-content {
+  margin-left: 20%;
+}
+
+.aggregate-report-content {
+  margin-left: 10%;
+}
+
+.navigation-bar {
+  width: 15%;
+  background-color: lightgrey;
+  position: fixed;
+  height: 100%;
+}
+
+div.navigation-bar ul {
+  list-style-type: none;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+}
+
+div.navigation-bar ul li a, label {
+  display: block;
+  color: #000;
+  padding: 8px 20px;
+  text-decoration: none;
+}
+
+label input {
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+div.navigation-bar ul li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+.minor-data {}
+
+.invisible {
+  display: none;
+}
+
+.jetbrains-logo {
+  width: 50%;
+  bottom: 5%;
+  position: absolute;
+  left: 20%;
+}</style><script>function hideElementsHavingClass(className, hideOrShow) {
+  const elements = document.getElementsByClassName(className)
+  const displayType = hideOrShow ? 'none' : 'initial'
+  for (const element of elements) {
+    element.classList.toggle('invisible', hideOrShow)
+  }
+}</script></head><body><div class="navigation-bar"><ul><li><a href="#id-project-name">Project name</a></li><li><a href="#id-app-info">Application info</a></li><li><a href="#id-runtime-info">Runtime</a></li><li><a href="#id-indexing-info">Indexing info</a></li><li><a href="#id-slow-files">Slowly indexed files</a></li><li><a href="#id-stats-per-file-type">Statistics per file type</a></li><li><a href="#id-stats-per-indexer">Statistics per indexer</a></li><li><a href="#id-scanning">Scanning</a></li><li><a href="#id-indexing">Indexing</a></li></ul><hr class="solid"/><ul><li><label for="id-hide-minor-data-checkbox">Hide minor data<input id="id-hide-minor-data-checkbox" type="checkbox" style="padding-left: 10px" checked onclick="hideElementsHavingClass('minor-data', this.checked)"/></label></li></ul><div class="jetbrains-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.21407 130.10375">
+  <title>logo-grey</title>
+  <g>
+    <path d="M120.2,68.6a4.99684,4.99684,0,0,0-1.4-3.5L55.191,2.68736a7.86372,7.86372,0,0,0-3.36731-2.261c-.03467-.012-.06812-.02612-.103-.03766-.19336-.06323-.3913-.11511-.591-.16327-.06689-.0163-.13177-.0368-.1994-.05133-.18744-.04-.37909-.06738-.57117-.09363-.0788-.0108-.15527-.0274-.23492-.03589A7.83914,7.83914,0,0,0,49.3,0a7.73961,7.73961,0,0,0-1.21088.10413c-.0235.00391-.04694.00671-.07037.0108a7.62573,7.62573,0,0,0-3.092,1.24969c-.07343.04773-.155.08575-.22668.13538L4.9,28.3c-.08221.08221-.15106.10632-.17773.16437L4.67218,28.5H4.6A11.11647,11.11647,0,0,0,.15875,39.45683l.00854.04449c.05176.28589.11011.56958.18372.84973.03052.119.06964.235.104.35284.054.181.10278.3634.16571.5412A11.15109,11.15109,0,0,0,5.3,47.1a8.82025,8.82025,0,0,0,2,.9c.4.2,45.4,18.8,45.4,18.8a4.291,4.291,0,0,0,4.4-7.3c-.06525,0-16.839-13.21332-28.69928-22.52606l21.105-19.03113,57.91815,49.58282L28.6,110.7a9.82332,9.82332,0,0,0-4.7,4.1,10.0662,10.0662,0,0,0,3.6,13.9,10.28689,10.28689,0,0,0,10.7-.2c.2-.2.5-.3.7-.5L116.9,73.2a18.32,18.32,0,0,0,1.58612-1.2663A4.74573,4.74573,0,0,0,120.2,68.6Z" transform="translate(0.01406 0.00002)" fill="#cdcdcd"/>
+    <g id="_Group_" data-name="&lt;Group&gt;">
+      <rect id="_Path_" data-name="&lt;Path&gt;" x="34.61406" y="37.40002" width="51" height="51"/>
+      <rect id="_Path_2" data-name="&lt;Path&gt;" x="39.01406" y="78.80002" width="19.1" height="3.2" fill="#fff"/>
+      <g id="_Group_2" data-name="&lt;Group&gt;">
+        <path id="_Path_3" data-name="&lt;Path&gt;" d="M38.8,50.8l1.5-1.4a1.70271,1.70271,0,0,0,1.3.8q.9,0,.9-1.2V43.7h2.3V49a2.79543,2.79543,0,0,1-3.1,3.1A3.026,3.026,0,0,1,38.8,50.8Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Path_4" data-name="&lt;Path&gt;" d="M45.3,43.8H52v1.9H47.6V47h4v1.8h-4v1.3h4.5v2H45.4Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Path_5" data-name="&lt;Path&gt;" d="M55,45.8H52.5v-2h7.3v2H57.3v6.3H55Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Compound_Path_" data-name="&lt;Compound Path&gt;" d="M39,54h4.3a3.7023,3.7023,0,0,1,2.3.7,1.97822,1.97822,0,0,1,.5,1.4h0A1.95538,1.95538,0,0,1,44.8,58a1.94762,1.94762,0,0,1,1.6,2h0c0,1.4-1.2,2.3-3.1,2.3H39Zm4.8,2.6c0-.5-.4-.7-1-.7H41.3v1.5h1.4c.7-.1,1.1-.3,1.1-.8ZM43,59H41.2v1.5H43c.7,0,1.1-.3,1.1-.8h0C44.1,59.2,43.7,59,43,59Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Compound_Path_2" data-name="&lt;Compound Path&gt;" d="M46.8,54h3.9a3.51463,3.51463,0,0,1,2.7.9,2.48948,2.48948,0,0,1,.7,1.9h0a2.76053,2.76053,0,0,1-1.7,2.6l2,2.9H51.8l-1.7-2.5h-1v2.5H46.8Zm3.8,4c.8,0,1.2-.4,1.2-1h0c0-.7-.5-1-1.2-1H49.1v2Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Compound_Path_3" data-name="&lt;Compound Path&gt;" d="M56.8,54H59l3.5,8.4H60l-.6-1.5H56.2l-.6,1.5H53.2Zm2,5-.9-2.3L57,59Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Path_6" data-name="&lt;Path&gt;" d="M62.8,54h2.3v8.3H62.8Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Path_7" data-name="&lt;Path&gt;" d="M65.7,54h2.1l3.4,4.4V54h2.3v8.3h-2L68,57.8v4.6H65.7Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+        <path id="_Path_8" data-name="&lt;Path&gt;" d="M73.7,61.1,75,59.6a3.94219,3.94219,0,0,0,2.7,1c.6,0,1-.2,1-.6h0c0-.4-.3-.5-1.4-.8-1.8-.4-3.1-.9-3.1-2.6h0c0-1.5,1.2-2.7,3.2-2.7A5.33072,5.33072,0,0,1,80.8,55l-1.2,1.6a4.55346,4.55346,0,0,0-2.3-.8c-.6,0-.8.2-.8.5h0c0,.4.3.5,1.4.8,1.9.4,3.1,1,3.1,2.6h0c0,1.7-1.3,2.7-3.4,2.7A5.29336,5.29336,0,0,1,73.7,61.1Z" transform="translate(0.01406 0.00002)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg></div></div><div class="stats-content"><div id="id-project-name"><h1>Project name</h1>LK-IDEAPlugins bak</div><div id="id-app-info"><h1>Application info</h1><table class="two-columns"><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody><tr><td>Build</td><td>211.7442.40</td></tr><tr><td>Build date</td><td>Tue, 1 Jun 2021 03:17:20 GMT</td></tr><tr><td>Product code</td><td>IU</td></tr><tr><td>Generated</td><td>Tue, 8 Jun 2021 06:53:32 GMT</td></tr><tr><td>OS</td><td>macOS 10.16</td></tr><tr><td>Runtime</td><td>Oracle Corporation 11.0.9 11.0.9+7-LTS</td></tr></tbody></table></div><div id="id-runtime-info"><h1>Runtime</h1><table class="two-columns"><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody><tr><td>Max memory</td><td>536.87 MB</td></tr><tr><td>Number of processors</td><td>12</td></tr><tr><td>Max number of indexing threads</td><td>4</td></tr><tr><td>Max size of file for analysis</td><td>2.56 MB</td></tr><tr><td>Max size of file for content loading</td><td>20.97 MB</td></tr></tbody></table></div><div id="id-indexing-info"><h1>Indexing info</h1><table class="two-columns"><thead><tr><th>Name</th><th>Time</th></tr></thead><tbody><tr><td>Number of file providers</td><td>18</td></tr><tr><td>Number of scanned files</td><td>705</td></tr><tr><td>Number of files indexed by shared indexes during the scan (without loading content)</td><td>0</td></tr><tr><td>Number of files scheduled for indexing after scanning</td><td>7</td></tr><tr><td>Number of files indexed by shared indexes during the indexing stage (with loading content)</td><td>7</td></tr><tr><td>Number of files indexed during the indexing stage with loading content (including indexed by shared indexes)</td><td>7</td></tr><tr><td>Number of too large for indexing files</td><td>0</td></tr><tr><td>Total updating time</td><td>1 s 272 ms</td></tr><tr><td>Interrupted</td><td>false</td></tr><tr><td>Started at</td><td>Tue, 8 Jun 2021 06:53:31 GMT</td></tr><tr><td>Finished at</td><td>Tue, 8 Jun 2021 06:53:32 GMT</td></tr><tr><td>Suspended time</td><td>0</td></tr><tr><td>Indexing time</td><td>47 ms</td></tr><tr><td>Scanning time</td><td>736 ms</td></tr><tr><td>Content loading time</td><td>4 ms</td></tr><tr><td>Pushing properties time</td><td>36 ms</td></tr><tr><td>Running extensions time</td><td>0</td></tr></tbody></table></div><div id="id-slow-files"><h1>Slowly indexed files (&gt; 500 ms)</h1><table><thead><tr><th>Provider name</th><th>File</th><th>Content loading time</th><th>Indexing time</th><th>Total processing time</th></tr></thead><tbody></tbody></table></div><div id="id-stats-per-file-type"><h1>Statistics per file type</h1><table><thead><tr><th>File type</th><th>Number of files</th><th>Indexing time</th><th>Content loading time</th><th>Total files size</th><th>Indexing speed</th><th>The biggest contributors</th></tr></thead><tbody><tr class="minor-data invisible"><td>JAVA</td><td>7</td><td>47 ms (100.0%)</td><td>4 ms (100.0%)</td><td>19.84 kB</td><td>275.01 kB/s</td><td>100.0%: Module &#39;DJ-IDEAPlugins&#39; 7 files of total size 19.84 kB</td></tr></tbody></table></div><div id="id-stats-per-indexer"><h1>Statistics per indexer</h1><table><thead><tr><th>Index</th><th>Number of files</th><th>Part of total indexing time</th><th>Total number of files indexed by shared indexes</th><th>Total files size</th><th>Indexing speed</th><th>Snapshot input mapping statistics</th></tr></thead><tbody></tbody></table></div><div id="id-scanning"><h1>Scanning</h1><table><thead><tr><th>Provider name</th><th>Number of scanned files</th><th>Number of files scheduled for indexing</th><th>Number of files fully indexed by shared indexes</th><th>Number of double-scanned skipped files</th><th>Scanning time</th><th>Time processing up-to-date files</th><th>Time updating content-less indexes</th><th>Time indexing without content</th></tr></thead><tbody><tr><td>com.intellij.javaee.ExternalResourcesRootsProvider@6fa13102</td><td>580</td><td>0</td><td>0</td><td>11</td><td>482 ms</td><td>53 ms</td><td>14 ms</td><td>0</td></tr><tr><td>com.intellij.lang.javascript.index.JSIndexedRootProvider@156c09e4</td><td>32</td><td>0</td><td>0</td><td>40</td><td>136 ms</td><td>42 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr><td>com.intellij.lang.typescript.library.TypeScriptLibraryIndexableSetContributor@334b7abf</td><td>36</td><td>0</td><td>0</td><td>24</td><td>127 ms</td><td>39 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr><td>com.intellij.lang.javascript.index.JSIndexedRootProvider@156c09e4</td><td>13</td><td>0</td><td>0</td><td>0</td><td>111 ms</td><td>39 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr><td>Module &#39;DJ-IDEAPlugins&#39;</td><td>27</td><td>7</td><td>0</td><td>0</td><td>110 ms</td><td>14 ms</td><td>&lt; 1 ms</td><td>&lt; 1 ms</td></tr><tr class="minor-data invisible"><td>org.jetbrains.plugins.scss.index.SassScssIndexedRootProvider@73755071</td><td>8</td><td>0</td><td>0</td><td>0</td><td>65 ms</td><td>6 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.httpClient.http.request.HttpRequestCollectionProvider@6cc0e388</td><td>7</td><td>0</td><td>0</td><td>0</td><td>62 ms</td><td>&lt; 1 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.ide.scratch.ScratchesAndConsolesIndexSetContributor@461b5bbb</td><td>1</td><td>0</td><td>0</td><td>0</td><td>57 ms</td><td>&lt; 1 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.httpClient.http.request.run.HttpClientDynamicVariablesStubController@254cd27f</td><td>1</td><td>0</td><td>0</td><td>0</td><td>38 ms</td><td>5 ms</td><td>&lt; 1 ms</td><td>0</td></tr><tr class="minor-data invisible"><td>org.jetbrains.plugins.scss.index.SassScssIndexedRootProvider@73755071</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.javaee.ExternalResourcesRootsProvider@6fa13102</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.ide.scratch.ScratchesAndConsolesIndexSetContributor@461b5bbb</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.lang.typescript.library.TypeScriptLibraryIndexableSetContributor@334b7abf</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>org.jetbrains.kotlin.idea.core.script.dependencies.KotlinScriptDependenciesIndexableSetContributor@676ec6b5</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.httpClient.http.request.HttpRequestCollectionProvider@6cc0e388</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>org.jetbrains.kotlin.idea.core.script.dependencies.KotlinScriptDependenciesIndexableSetContributor@676ec6b5</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.httpClient.http.request.run.HttpClientDynamicVariablesStubController@254cd27f</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="minor-data invisible"><td>com.intellij.openapi.roots.ImmutableSyntheticLibrary@15168add</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div><div id="id-indexing"><h1>Indexing</h1><table><thead><tr><th>Provider name</th><th>Indexing time</th><th>Content loading time</th><th>Number of indexed files</th><th>Number of files indexed by shared indexes</th><th>Number of too large for indexing files</th></tr></thead><tbody><tr class="minor-data invisible"><td>Module &#39;DJ-IDEAPlugins&#39;</td><td>26 ms</td><td>4 ms</td><td>7</td><td>7</td><td>0</td></tr></tbody></table></div></div></body></html>

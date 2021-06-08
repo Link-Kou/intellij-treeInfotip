@@ -1,0 +1,34 @@
+{
+  "appInfo" : {
+    "build" : "203.7717.56",
+    "buildDate" : "Mon, 15 Mar 2021 17:50:12 +0800",
+    "productCode" : "IU",
+    "generated" : "Mon, 19 Apr 2021 12:59:00 +0800",
+    "os" : "macOS 10.16",
+    "runtime" : "Oracle Corporation 11.0.9 11.0.9+7-LTS"
+  },
+  "runtimeInfo" : {
+    "maxMemory" : 536870912,
+    "numberOfProcessors" : 12,
+    "maxNumberOfIndexingThreads" : 4,
+    "maxSizeOfFileForIntelliSense" : 2560000,
+    "maxSizeOfFileForContentLoading" : 20971520
+  },
+  "projectIndexingHistory" : {
+    "projectName" : "lkSpaceRPC",
+    "numberOfFileProviders" : 19,
+    "totalNumberOfFiles" : 2605,
+    "totalNumberOfUpToDateFiles" : 2605,
+    "times" : {
+      "totalUpdatingTime" : "323 ms",
+      "pushPropertiesTime" : "2 ms",
+      "updatingStart" : "Mon, 19 Apr 2021 12:59:00 +0800",
+      "updatingEnd" : "Mon, 19 Apr 2021 12:59:00 +0800",
+      "wasInterrupted" : false
+    },
+    "numberOfIndexingThreads" : 0,
+    "totalStatsPerFileType" : [ ],
+    "totalStatsPerIndexer" : [ ],
+    "fileProviderStatistics" : [ ]
+  }
+}

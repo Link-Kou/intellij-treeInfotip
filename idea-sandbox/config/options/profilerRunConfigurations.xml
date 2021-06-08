@@ -1,0 +1,20 @@
+<application>
+  <component name="ProfilerRunConfigurations">
+    <profilerRunConfigurations>
+      <item configurationTypeId="AsyncProfilerCPUConfiguration">
+        <AsyncProfilerCPUConfigurationState name="CPU Profiler" />
+      </item>
+      <item configurationTypeId="AsyncProfilerMemoryConfiguration">
+        <AsyncProfilerMemoryConfigurationState name="Allocation Profiler" />
+      </item>
+      <item configurationTypeId="JFRSimpleConfiguration">
+        <JFRConfigurationState name="Java Flight Recorder" />
+      </item>
+    </profilerRunConfigurations>
+    <knownConfigurationTypes>
+      <id>AsyncProfilerCPUConfiguration</id>
+      <id>AsyncProfilerMemoryConfiguration</id>
+      <id>JFRSimpleConfiguration</id>
+    </knownConfigurationTypes>
+  </component>
+</application>

@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artifacts>
+  <artifact name="HSQLDB">
+    <version version="2.3.2">
+      <item name="hsqldb-2.3.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-2.3.2.jar"
+            md5=""/>
+      <item type="license" name="hsqldb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-license.txt" md5=""/>
+    </version>
+    <version version="2.3.4">
+      <item name="hsqldb-2.3.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-2.3.4.jar"
+            md5=""/>
+      <item type="license" name="hsqldb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-license.txt" md5=""/>
+    </version>
+    <version version="2.4.0">
+      <item name="hsqldb-2.4.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-2.4.0.jar"
+            md5=""/>
+      <item type="license" name="hsqldb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hsqldb-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="MySQL Connector/J">
+    <version version="5.1.35">
+      <item name="mysql-connector-java-5.1.35-bin.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.35/COPYING"
+            md5=""/>
+    </version>
+    <version version="5.1.40">
+      <item name="mysql-connector-java-5.1.40-bin.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.40/COPYING"
+            md5=""/>
+    </version>
+    <version version="5.1.44">
+      <item name="mysql-connector-java-5.1.44-bin.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.44/COPYING"
+            md5=""/>
+    </version>
+    <version version="5.1.45">
+      <item name="mysql-connector-java-5.1.45-bin.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.45/COPYING"
+            md5=""/>
+    </version>
+    <version version="5.1.46">
+      <item name="mysql-connector-java-5.1.46.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.46/COPYING"
+            md5=""/>
+    </version>
+    <version version="5.1.47">
+      <item name="mysql-connector-java-5.1.47.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.47/COPYING"
+            md5=""/>
+    </version>
+  </artifact>
+
+  <artifact id="MySQL ConnectorJ" name="MySQL Connector/J 8">
+    <version version="8.0.13" id="MySQL ConnectorJ">
+      <item name="mysql-connector-java-8.0.13.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.13/LICENSE"
+            md5=""/>
+    </version>
+    <version version="8.0.15" id="MySQL ConnectorJ">
+      <item name="mysql-connector-java-8.0.15.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.15/LICENSE"
+            md5=""/>
+    </version>
+    <version version="8.0.21" id="MySQL ConnectorJ">
+      <item name="mysql-connector-java-8.0.21.jar"
+            url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.21/mysql-connector-java-8.0.21.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt" url="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.21/LICENSE"
+            md5=""/>
+    </version>
+    <constraint from="8" dbms="MYSQL" db-from="5.2"/>
+  </artifact>
+
+  <artifact name="MariaDB Connector J">
+    <version version="2.2.1">
+      <item name="mariadb-java-client-2.2.1.jar"
+            url="https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar"
+            md5=""/>
+      <item type="license" name="mariadb-connector-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/mariadb-connector-license.txt" md5=""/>
+    </version>
+    <version version="2.4.1">
+      <item name="mariadb-java-client-2.4.1.jar"
+            url="https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.4.1/mariadb-java-client-2.4.1.jar"
+            md5=""/>
+      <item type="license" name="mariadb-connector-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/mariadb-connector-license.txt" md5=""/>
+    </version>
+    <version version="2.6.0">
+      <item name="mariadb-java-client-2.6.0.jar"
+            url="https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.6.0/mariadb-java-client-2.6.0.jar"
+            md5=""/>
+      <item type="license" name="mysql-connector-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/mariadb-connector-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="PostgreSQL">
+    <version version="9.4-1212">
+      <item name="postgresql-9.4-1212.jdbc42.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql-9.4-1212.jdbc42.jar"
+            md5=""/>
+      <item os="win" name="jna-platform-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-platform-win-4.4.0.jar"
+            md5=""/>
+      <item os="win" name="jna-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-win-4.4.0.jar" md5=""/>
+      <item os="win" name="waffle-jna-win-1.8.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/waffle-jna-win-1.8.1.jar"
+            md5=""/>
+      <item type="license" name="postgresql-driver-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql-driver-license.txt" md5=""/>
+    </version>
+    <version version="42.2.2">
+      <item name="postgresql-42.2.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql-42.2.2.jar"
+            md5=""/>
+      <item os="win" name="jna-platform-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-platform-win-4.4.0.jar"
+            md5=""/>
+      <item os="win" name="jna-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-win-4.4.0.jar" md5=""/>
+      <item os="win" name="waffle-jna-win-1.8.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/waffle-jna-win-1.8.1.jar"
+            md5=""/>
+      <item type="license" name="postgresql-driver-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql-driver-license.txt" md5=""/>
+    </version>
+    <version version="42.2.5">
+      <item name="postgresql-42.2.5.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql/42.2/postgresql-42.2.5.jar"
+            md5=""/>
+      <item os="win" name="jna-platform-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-platform-win-4.4.0.jar"
+            md5=""/>
+      <item os="win" name="jna-win-4.4.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jna-win-4.4.0.jar" md5=""/>
+      <item os="win" name="waffle-jna-win-1.8.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/waffle-jna-win-1.8.1.jar"
+            md5=""/>
+      <item type="license" name="postgresql-driver-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/postgresql-driver-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="jTDS (SQL Server and Sybase)">
+    <version version="1.3.0">
+      <item name="jtds-1.3.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-1.3.0.jar"
+            md5=""/>
+      <item type="license" name="jtds-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-license.txt" md5=""/>
+    </version>
+    <version version="1.3.1">
+      <item name="jtds-1.3.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-1.3.1.jar"
+            md5=""/>
+      <item os="win" type="native" name="jtds-win-auth.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-win-auth.jar"
+            md5=""/>
+      <item type="license" name="jtds-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-license.txt" md5=""/>
+    </version>
+    <version version="1.3.1.1">
+      <item name="jtds-1.3.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-1.3.1.jar"
+            md5=""/>
+      <item os="win" type="native" name="jtds-win-auth.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-win-auth.jar"
+            md5=""/>
+      <item type="license" name="jtds-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtds-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="DB2">
+    <version version="4.9.78">
+      <item name="db2jcc4-4.9.78.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/db2jcc4-4.9.78.jar"
+            md5=""/>
+      <item type="license" name="db2-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/db2-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="4.23.42">
+      <item name="db2jcc4-4.23.42.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/db2jcc4-4.23.42.jar"
+            md5=""/>
+      <item type="license" name="db2-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/db2-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="4.26.14">
+      <item name="db2jcc4_4.26.14.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Db2/4.26/db2jcc4_4.26.14.jar"
+            md5=""/>
+      <item type="license" name="db2-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/db2-driver-license.txt"
+            md5=""/>
+    </version>
+    <constraint from="4.26" dbms="DB2_LUW" db-from="11.0"/>
+  </artifact>
+
+  <artifact name="JTOpen (DB2 iSeries)">
+    <version version="8.3">
+      <item name="jt400.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jt400.jar"
+            md5=""/>
+      <item type="license" name="jtopen-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtopen-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="9.4">
+      <item name="jt400-9.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jt400-9.4.jar"
+            md5=""/>
+      <item type="license" name="jtopen-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jtopen-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="10.4">
+      <item name="jt400-10.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Db2JTOpen/10.4/jt400-10.4.jar"
+            md5=""/>
+      <item type="license" name="jtopen-driver-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Db2JTOpen/jtopen-driver-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Oracle">
+    <version version="11.2.0.4">
+      <item name="ojdbc6-11.2.0.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ojdbc6-11.2.0.4.jar"
+            md5=""/>
+      <item name="xdb6-11.2.0.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xdb6-11.2.0.4.jar"
+            md5=""/>
+      <item name="xmlparserv2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xmlparserv2.jar"
+            md5=""/>
+      <item type="license" name="oracle-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="12.1.0.2">
+      <item name="ojdbc6-12.1.0.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ojdbc6-12.1.0.2.jar"
+            md5=""/>
+      <item name="xdb6-12.1.0.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xdb6-12.1.0.2.jar"
+            md5=""/>
+      <item name="xmlparserv2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xmlparserv2.jar"
+            md5=""/>
+      <item type="license" name="oracle-driver-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle-driver-license.txt"
+            md5=""/>
+    </version>
+    <version version="12.2.0.1">
+      <item name="ojdbc8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/12.2.0.1/ojdbc8.jar"
+            md5=""/>
+      <item name="xdb6.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/12.2.0.1/xdb6.jar"
+            md5=""/>
+      <item name="orai18n.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/12.2.0.1/orai18n.jar"
+            md5=""/>
+      <item name="xmlparserv2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/12.2.0.1/xmlparserv2.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/license.txt" md5=""/>
+    </version>
+    <version version="19.3.0.0">
+      <item name="ojdbc8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.3.0.0/ojdbc8.jar" md5=""/>
+      <item name="xdb6.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.3.0.0/xdb6.jar"
+            md5=""/>
+      <item name="orai18n.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.3.0.0/orai18n.jar" md5=""/>
+      <item name="xmlparserv2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.3.0.0/xmlparserv2.jar" md5=""/>
+      <item type="license" name="license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/license.txt" md5=""/>
+    </version>
+    <version version="19.8.0.0">
+      <item name="ojdbc8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.8.0.0/ojdbc8.jar" md5=""/>
+      <item name="xdb6.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.8.0.0/xdb.jar"
+            md5=""/>
+      <item name="orai18n.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.8.0.0/orai18n.jar" md5=""/>
+      <item name="xmlparserv2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.8.0.0/xmlparserv2.jar" md5=""/>
+      <item type="license" name="license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/19.8.0.0/BASIC_LICENSE.txt" md5=""/>
+    </version>
+    <version version="21.1.0.0" name="Oracle">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/ojdbc8.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/ons.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/oraclepki.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/orai18n.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/osdt_cert.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/osdt_core.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/rsi.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/simplefan.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/ucp.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/xdb.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/xmlparserv2.jar"/>
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/ojdbc.policy"/>
+      <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/oracle/21.1.0.0/BASIC_LICENSE.txt"/>
+    </version>
+    <constraint from="12" dbms="ORACLE" db-from="11.2"/>
+  </artifact>
+
+  <artifact name="Xerial SQLiteJDBC">
+    <version version="3.8.11.2">
+      <item name="sqlite-jdbc-3.8.11.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite-jdbc-3.8.11.2.jar"
+            md5=""/>
+      <item type="license" name="xerial-sqlite-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xerial-sqlite-license.txt"
+            md5=""/>
+    </version>
+    <version version="3.16.1">
+      <item name="sqlite-jdbc-3.16.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite-jdbc-3.16.1.jar"
+            md5=""/>
+      <item type="license" name="xerial-sqlite-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xerial-sqlite-license.txt"
+            md5=""/>
+    </version>
+    <version version="3.20.1.1">
+      <item name="sqlite-jdbc-3.20.1.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite-jdbc-3.20.1.1.jar"
+            md5=""/>
+      <item type="license" name="xerial-sqlite-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/xerial-sqlite-license.txt"
+            md5=""/>
+    </version>
+    <version version="3.25.1">
+      <item name="sqlite-jdbc-3.25.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/3.25/sqlite-jdbc-3.25.1.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/license.txt" md5=""/>
+    </version>
+    <version version="3.31.1">
+      <item name="sqlite-jdbc-3.31.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/sqlite-jdbc-3.31.1.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/license.txt" md5=""/>
+    </version>
+    <version version="3.34.0">
+      <item name="sqlite-jdbc-3.34.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/sqlite-jdbc-3.34.0.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlite/license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="H2">
+    <version version="1.3.176">
+      <item name="h2-1.3.176.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-1.3.176.jar"
+            md5=""/>
+      <item type="license" name="h2-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-license.txt" md5=""/>
+    </version>
+    <version version="1.4.192">
+      <item name="h2-1.4.192.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-1.4.192.jar"
+            md5=""/>
+      <item type="license" name="h2-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-license.txt" md5=""/>
+    </version>
+    <version version="1.4.196">
+      <item name="h2-1.4.196.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-1.4.196.jar"
+            md5=""/>
+      <item type="license" name="h2-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-license.txt" md5=""/>
+    </version>
+    <version version="1.4.200">
+      <item name="h2-1.4.200.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2/1.4/h2-1.4.200.jar"
+            md5=""/>
+      <item type="license" name="h2-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/h2-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Apache Derby">
+    <version version="10.11.1.1">
+      <item name="derby-10.11.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-10.11.1.1.jar" md5=""/>
+      <item name="derbyclient-10.11.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derbyclient-10.11.1.1.jar" md5=""/>
+      <item type="license" name="derby-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-license.txt" md5=""/>
+    </version>
+    <version version="10.12.1.1">
+      <item name="derby-10.12.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-10.12.1.1.jar" md5=""/>
+      <item name="derbyclient-10.12.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derbyclient-10.12.1.1.jar" md5=""/>
+      <item type="license" name="derby-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-license.txt" md5=""/>
+    </version>
+    <version version="10.13.1.1">
+      <item name="derby-10.13.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-10.13.1.1.jar" md5=""/>
+      <item name="derbyclient-10.13.1.1.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derbyclient-10.13.1.1.jar" md5=""/>
+      <item type="license" name="derby-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-license.txt" md5=""/>
+    </version>
+    <version version="10.14.1.0">
+      <item name="derby-10.14.1.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-10.14.1.0.jar" md5=""/>
+      <item name="derbyclient-10.14.1.0.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derbyclient-10.14.1.0.jar" md5=""/>
+      <item type="license" name="derby-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/derby-license.txt" md5=""/>
+    </version>
+    <version version="10.15.1.3">
+      <item name="derby-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derby-10.15.1.3.jar" md5=""/>
+      <item name="derbyclient-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derbyclient-10.15.1.3.jar" md5=""/>
+      <item name="derbytools-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derbytools-10.15.1.3.jar" md5=""/>
+      <item name="derbyrun-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derbyrun-10.15.1.3.jar" md5=""/>
+      <item name="derbyoptionaltools-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derbyoptionaltools-10.15.1.3.jar" md5=""/>
+      <item name="derbyshared-10.15.1.3.jar" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/10.15/derbyshared-10.15.1.3.jar" md5=""/>
+      <item type="license" name="derby-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Derby/derby-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="SQL Server">
+    <version version="6.4.0">
+      <item name="sqljdbc42-6.4.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqljdbc42-6.4.0.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver64-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlserver64-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver-driver6-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlserver-driver6-license.txt" md5=""/>
+    </version>
+    <version version="7.0.0">
+      <item name="mssql-jdbc-7.0.0.jre8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.0.0/mssql-jdbc-7.0.0.jre8.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver7-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.0.0/sqlserver7-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver7-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.0.0/sqlserver7-license.txt" md5=""/>
+    </version>
+    <version version="7.2.1">
+      <item name="mssql-jdbc-7.2.1.jre8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.2/mssql-jdbc-7.2.1.jre8.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver7-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.0.0/sqlserver7-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver7-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.0.0/sqlserver7-license.txt" md5=""/>
+    </version>
+    <version version="7.4.1">
+      <item name="mssql-jdbc-7.4.1.jre8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/7.2/mssql-jdbc-7.4.1.jre8.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver64-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlserver64-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver-driver6-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/sqlserver-driver6-license.txt" md5=""/>
+    </version>
+    <version version="8.2.2">
+      <item name="mssql-jdbc-8.2.2.jre8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/8/mssql-jdbc-8.2.2.jre8.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/8/sqlserver8-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver8-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/8/license.txt" md5=""/>
+    </version>
+    <version version="9.2.0">
+      <item name="mssql-jdbc-9.2.0.jre8.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/9/mssql-jdbc-9.2.0.jre8.jar"
+            md5=""/>
+      <item os="win" type="native" name="sqlserver-win-auth.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/9/sqlserver9-win-auth.jar" md5=""/>
+      <item type="license" name="sqlserver9-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MSSQL/9/license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Redshift">
+    <version version="1.2.1.1001">
+      <item name="redshiftjdbc42-1.2.1.1001.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/redshiftjdbc42-1.2.1.1001.jar"
+            md5=""/>
+      <item type="license" name="amazon-redshift-jdbc-driver-license-agreement.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/amazon-redshift-jdbc-driver-license-agreement.txt" md5=""/>
+    </version>
+    <version version="1.2.10.1009">
+      <item name="redshiftjdbc42-1.2.10.1009.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/redshiftjdbc42-1.2.10.1009.jar"
+            md5=""/>
+      <item type="license" name="amazon-redshift-jdbc-driver-license-agreement.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/amazon-redshift-jdbc-driver-license-agreement.txt" md5=""/>
+    </version>
+    <version version="1.2.16.1027">
+      <item name="RedshiftJDBC42-1.2.16.1027.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.16/RedshiftJDBC42-1.2.16.1027.jar"
+            md5=""/>
+      <item type="license" name="license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license.txt" md5=""/>
+    </version>
+    <version version="1.2.41.1065">
+      <item name="RedshiftJDBC42-1.2.41.1065.jar"
+            url="https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.41.1065/RedshiftJDBC42-1.2.41.1065.jar"
+            md5=""/>
+      <item type="license" name="license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license.txt" md5=""/>
+    </version>
+    <version version="1.2.50.1077">
+      <item name="antlr4-4.5.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/antlr4-4.5.3.jar" md5=""/>
+      <item name="aws-java-sdk-core-1.11.118.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/aws-java-sdk-core-1.11.118.jar"
+            md5=""/>
+      <item name="aws-java-sdk-redshift-1.11.118.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/aws-java-sdk-redshift-1.11.118.jar"
+            md5=""/>
+      <item name="aws-java-sdk-sts-1.11.118.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/aws-java-sdk-sts-1.11.118.jar"
+            md5=""/>
+      <item name="commons-codec-1.9.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/commons-codec-1.9.jar"
+            md5=""/>
+      <item name="commons-logging-1.1.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/commons-logging-1.1.3.jar"
+            md5=""/>
+      <item name="httpclient-4.5.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/httpclient-4.5.2.jar"
+            md5=""/>
+      <item name="httpcore-4.4.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/httpcore-4.4.4.jar"
+            md5=""/>
+      <item name="jackson-annotations-2.10.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/jackson-annotations-2.10.1.jar"
+            md5=""/>
+      <item name="jackson-core-2.10.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/jackson-core-2.10.1.jar"
+            md5=""/>
+      <item name="jackson-databind-2.10.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/jackson-databind-2.10.1.jar"
+            md5=""/>
+      <item name="jackson-dataformat-cbor-2.10.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/jackson-dataformat-cbor-2.10.1.jar"
+            md5=""/>
+      <item name="joda-time-2.8.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/joda-time-2.8.1.jar"
+            md5=""/>
+      <item name="log4j-1.2.17.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/log4j-1.2.17.jar" md5=""/>
+      <item name="RedshiftJDBC42-no-awssdk-1.2.50.1077.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/1.2.50/RedshiftJDBC42-no-awssdk-1.2.50.1077.jar"
+            md5=""/>
+      <item type="license" name="license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license.txt" md5=""/>
+    </version>
+  </artifact>
+  <artifact id="Redshift 2" name="Redshift 2">
+    <version version="2.0.0.0">
+      <item name="redshift-jdbc42-2.0.0.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/redshift-jdbc42-2.0.0.0.jar"
+            md5=""/>
+      <item type="license" name="amazon-redshift-jdbc-driver-license-agreement.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license2.txt"
+            md5=""/>
+    </version>
+    <version version="2.0.0.2">
+      <item name="redshift-jdbc42-2.0.0.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/redshift-jdbc42-2.0.0.2.jar"
+            md5=""/>
+      <item type="license" name="amazon-redshift-jdbc-driver-license-agreement.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license2.txt"
+            md5=""/>
+    </version>
+    <version version="2.0.0.3">
+      <item name="redshift-jdbc42-2.0.0.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/redshift-jdbc42-2.0.0.3.jar"
+            md5=""/>
+      <item type="license" name="amazon-redshift-jdbc-driver-license-agreement.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Redshift/license2.txt"
+            md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Exasol">
+    <version version="6.0.3">
+      <item name="exajdbc-6.0.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/exajdbc-6.0.3.jar"
+            md5=""/>
+      <item type="license" name="exasol-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/exasol-license.txt" md5=""/>
+    </version>
+    <version version="6.2.5">
+      <item name="exajdbc-6.2.5.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Exasol/6.2/exajdbc-6.2.5.jar"
+            md5=""/>
+      <item type="license" name="exasol-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Exasol/LICENSE.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="ClickHouse">
+    <version version="0.1.40">
+      <item name="clickhouse-jdbc-0.1.40d.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ClickHouse/0.1.40/clickhouse-jdbc-0.1.40d.jar"
+            md5=""/>
+      <item type="license" name="clickhouse-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ClickHouse/clickhouse-license.txt" md5=""/>
+    </version>
+    <version version="0.1.50">
+      <item name="clickhouse-jdbc-0.1.50d.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ClickHouse/0.1.50/clickhouse-jdbc-0.1.50d.jar"
+            md5=""/>
+      <item type="license" name="clickhouse-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ClickHouse/clickhouse-license.txt" md5=""/>
+    </version>
+    <version version="0.2.4">
+      <item type="license" name="clickhouse-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/ClickHouse/clickhouse-license.txt" md5=""/>
+      <item type="maven" url="ru.yandex.clickhouse:clickhouse-jdbc:0.2.4"/>
+    </version>
+  </artifact>
+
+  <artifact name="Cassandra">
+    <version version="1.3.4">
+      <item name="cassandra-jdbc-driver-1.3.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/1.3/cassandra-jdbc-driver-1.3.4.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/license.txt" md5=""/>
+    </version>
+    <version version="1.3.5">
+      <item name="cassandra-jdbc-driver-1.3.5.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/1.3/cassandra-jdbc-driver-1.3.5.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/license.txt" md5=""/>
+    </version>
+    <version version="1.4">
+      <item name="cassandra-jdbc-driver-1.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/1.4/cassandra-jdbc-driver-1.4.jar"
+            md5=""/>
+      <item type="license" name="license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Cassandra/license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Vertica">
+    <version version="9.1.1">
+      <item name="vertica-jdbc-9.1.1-0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/vertica/vertica-jdbc-9.1.1-0.jar"
+            md5=""/>
+    </version>
+    <version version="9.2.0">
+      <item name="vertica-jdbc-9.2.0-0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/vertica/vertica-jdbc-9.2.0-0.jar"
+            md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Hive">
+    <version version="3.1.1">
+      <item name="hive-jdbc-3.1.1-standalone.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/3.1.1/hive-jdbc-3.1.1-standalone.jar"
+            md5=""/>
+      <item name="hadoop-common-3.1.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/3.1.1/hadoop-common-3.1.0.jar"
+            md5=""/>
+      <item name="commons-configuration2-2.1.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/3.1.1/commons-configuration2-2.1.1.jar"
+            md5=""/>
+      <item name="hadoop-auth-3.1.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/3.1.1/hadoop-auth-3.1.0.jar"
+            md5=""/>
+      <item type="license" name="hive-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/hive-license.txt" md5=""/>
+    </version>
+    <version version="3.1.2">
+      <item name="hive-jdbc-3.1.2-standalone.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/hive-jdbc-3.1.2-standalone.jar"
+            md5=""/>
+      <item type="license" name="hive-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/hive/hive-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="Snowflake">
+    <version version="3.6.9">
+      <item name="snowflake-jdbc-3.6.9.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-jdbc-3.6.9.jar"
+            md5=""/>
+    </version>
+    <version version="3.7.0">
+      <item name="snowflake-jdbc-3.7.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-jdbc-3.7.0.jar"
+            md5=""/>
+      <item type="license" name="snowflake-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-license.txt" md5=""/>
+    </version>
+    <version version="3.11.0">
+      <item name="snowflake-jdbc-3.11.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-jdbc-3.11.0.jar"
+            md5=""/>
+      <item type="license" name="snowflake-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-license.txt" md5=""/>
+    </version>
+    <version version="3.12.9">
+      <item name="snowflake-jdbc-3.12.9.jar"
+            url="https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.12.9/snowflake-jdbc-3.12.9.jar"
+            md5=""/>
+      <item type="license" name="snowflake-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-license.txt" md5=""/>
+    </version>
+    <version version="3.13.0">
+      <item name="snowflake-jdbc-3.13.0.jar"
+            url="https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.13.0/snowflake-jdbc-3.13.0.jar"
+            md5=""/>
+      <item type="license" name="snowflake-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/snowflake/snowflake-license.txt" md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="MongoDB">
+    <version version="1.4">
+      <item name="mongo-jdbc-1.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.4/mongo-jdbc-1.4.jar"
+            md5=""/>
+      <item name="mongo-java-driver-3.11.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.4/mongo-java-driver-3.11.0.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.5">
+      <item name="mongo-jdbc-1.5.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.5/mongo-jdbc-1.5.jar"
+            md5=""/>
+      <item name="mongo-java-driver-3.11.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.5/mongo-java-driver-3.11.0.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.6">
+      <item name="mongo-jdbc-1.6.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.6/mongo-jdbc-1.6.jar"
+            md5=""/>
+      <item name="mongo-java-driver-3.11.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.6/mongo-java-driver-3.11.0.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.7">
+      <item name="mongo-jdbc-1.7.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.7/mongo-jdbc-1.7.jar"
+            md5=""/>
+      <item name="mongo-java-driver-3.11.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.7/mongo-java-driver-3.11.0.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.7.1">
+      <item name="mongo-jdbc-standalone-1.7.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.7/mongo-jdbc-standalone-1.7.1.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.7.2">
+      <item name="mongo-jdbc-standalone-1.7.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.7/mongo-jdbc-standalone-1.7.2.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.7.3">
+      <item name="mongo-jdbc-standalone-1.7.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.7/mongo-jdbc-standalone-1.7.3.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.8">
+      <item name="mongo-jdbc-standalone-1.8.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.8/mongo-jdbc-standalone-1.8.0.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.8.1">
+      <item name="mongo-jdbc-standalone-1.8.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.8/mongo-jdbc-standalone-1.8.1.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.8.2">
+      <item name="mongo-jdbc-standalone-1.8.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.8/mongo-jdbc-standalone-1.8.2.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.8.3">
+      <item name="mongo-jdbc-standalone-1.8.3.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.8/mongo-jdbc-standalone-1.8.3.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.9">
+      <item name="mongo-jdbc-standalone-1.9.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.9/mongo-jdbc-standalone-1.9.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.9.1">
+      <item name="mongo-jdbc-standalone-1.9.1.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.9/mongo-jdbc-standalone-1.9.1.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.10">
+      <item name="mongo-jdbc-standalone-1.10.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.10/mongo-jdbc-standalone-1.10.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+    <version version="1.11">
+      <item name="mongo-jdbc-standalone-1.11.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/1.11/mongo-jdbc-standalone-1.11.jar"
+            md5=""/>
+      <item type="license" name="mongodb-license.txt" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/MongoDB/mongodb-license.txt"
+            md5=""/>
+    </version>
+  </artifact>
+  <artifact name="Couchbase">
+    <version version="0.4">
+      <item name="couchbase-jdbc-driver-0.4.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/couchbase/couchbase-jdbc-driver-0.4.0.jar"
+            md5=""/>
+      <item type="license" name="couchbase-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/couchbase/license.txt"
+            md5=""/>
+    </version>
+    <version version="0.5">
+      <item name="couchbase-jdbc-driver-0.5.0.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/couchbase/couchbase-jdbc-driver-0.5.0.jar"
+            md5=""/>
+      <item type="license" name="couchbase-license.txt"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/couchbase/license.txt"
+            md5=""/>
+    </version>
+  </artifact>
+
+  <artifact name="ADAL4J" id="Active Directory">
+    <version version="1.6.6">
+      <item type="maven" url="com.microsoft.azure:adal4j:1.6.6"/>
+    </version>
+  </artifact>
+
+  <artifact name="MSAL4J">
+    <version version="1.8.1">
+      <item type="maven" url="com.microsoft.azure:msal4j:1.8.1"/>
+    </version>
+  </artifact>
+
+  <artifact name="junixsocket-mysql">
+    <version version="2.3.2">
+      <item type="maven" url="com.kohlschutter.junixsocket:junixsocket-mysql:2.3.2"/>
+      <item type="maven" url="com.kohlschutter.junixsocket:junixsocket-native-common:2.3.2"/>
+    </version>
+  </artifact>
+
+  <artifact name="Presto">
+    <version version="0.213">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/presto/presto-jdbc-0.213.jar"/>
+    </version>
+    <version version="0.245.1">
+      <item url="https://repo1.maven.org/maven2/com/facebook/presto/presto-jdbc/0.245.1/presto-jdbc-0.245.1.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Trino">
+    <version version="351">
+      <item url="https://repo1.maven.org/maven2/io/trino/trino-jdbc/351/trino-jdbc-351.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Tarantool">
+    <version version="1.9.4">
+      <item url="https://repo1.maven.org/maven2/org/tarantool/connector/1.9.4/connector-1.9.4.jar"/>
+      <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/tarantool/license.txt"/>
+    </version>
+  </artifact>
+
+  <artifact name="Apache Phoenix Client">
+    <version version="4.15">
+      <item url="https://repository.apache.org/content/repositories/releases/org/apache/phoenix/phoenix-client/4.15.0-HBase-1.5/phoenix-client-4.15.0-HBase-1.5.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Apache Phoenix Thin">
+    <version version="4.7">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Phoenix/phoenix-server-client-jdbc-4.7.0-HBase-1.1.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Cloud Spanner">
+    <version version="1.18.3">
+      <item url="https://repo1.maven.org/maven2/com/google/cloud/google-cloud-spanner-jdbc/1.18.3/google-cloud-spanner-jdbc-1.18.3-single-jar-with-dependencies.jar"/>
+      <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/CloudSpanner/license.txt"/>
+    </version>
+    <version version="2.0.0">
+      <item url="https://repo1.maven.org/maven2/com/google/cloud/google-cloud-spanner-jdbc/2.0.0/google-cloud-spanner-jdbc-2.0.0-single-jar-with-dependencies.jar"/>
+      <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/CloudSpanner/license.txt"/>
+    </version>
+  </artifact>
+
+  <artifact name="OpenEdge">
+    <version version="12.3">
+      <item type="pack" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Progress/openedge_jdbc_12.3.zip"/>
+    </version>
+  </artifact>
+
+  <artifact name="InterSystems IRIS">
+    <version version="3.2.0">
+      <item type="pack" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/InterSystems/IRIS/intersystems-jdbc-3.2.0.zip"/>
+      <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/InterSystems/IRIS/license.txt"/>
+    </version>
+  </artifact>
+
+  <artifact name="Firebird">
+    <version version="4.0.2">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Firebird/jaybird-full-4.0.2.java8.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Tibero">
+    <version version="6.0">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Tibero/tibero6-jdbc.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="SAP Hana" version="2.7.9">
+    <item url="https://repo1.maven.org/maven2/com/sap/cloud/db/jdbc/ngdbc/2.7.9/ngdbc-2.7.9.jar"/>
+    <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Sybase/hana_license.txt"/>
+  </artifact>
+
+  <artifact name="SAP jConnect">
+    <version version="7.07">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/jconn4.jar"/>
+    </version>
+    <version version="16.0.27276">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Sybase/16.0/jConnect40_16.0_27276.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Apache Spark">
+    <version version="1.2.2">
+      <item url="https://repo1.maven.org/maven2/org/apache/hive/hive-jdbc/1.2.2/hive-jdbc-1.2.2-standalone.jar"/>
+      <item url="https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.3.0/hadoop-common-2.3.0.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Elasticsearch">
+    <version version="7.10.2">
+      <item type="maven" url="org.elasticsearch.plugin:x-pack-sql-jdbc:7.10.2"/>
+      <item type="license" url="https://github.com/elastic/elasticsearch/blob/master/licenses/ELASTIC-LICENSE-2.0.txt"/>
+    </version>
+  </artifact>
+
+  <artifact name="Teradata">
+    <version version="17">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Teradata/teradata-jdbc-17.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="Informix" version="4.10">
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxjdbc.jar"/>
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxjdbcx.jar"/>
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxlang.jar"/>
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxlsupp.jar"/>
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxsqlj.jar"/>
+    <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/ifxtools.jar"/>
+    <item type="license" url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Informix/license.txt"/>
+  </artifact>
+
+  <artifact name="Athena">
+    <version version="2.0.16">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/Athena/athena-2.0.16.jar"/>
+    </version>
+  </artifact>
+
+  <artifact name="BigQuery">
+    <version version="1.2.1">
+      <item url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/BigQuery/1.2.1.1001/bigquery-1.2.1.jar"/>
+    </version>
+    <version version="1.2.2">
+      <item name="bigquery-1.2.2.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/BigQuery/1.2.2.1004/bigquery-1.2.2.jar"
+            md5=""/>
+    </version>
+    <version version="1.2.4">
+      <item name="bigquery-1.2.4.jar"
+            url="https://cache-redirector.jetbrains.com/download.jetbrains.com/idea/jdbc-drivers/BigQuery/1.2.4.1007/bigquery-1.2.4.jar"
+            md5=""/>
+    </version>
+    <version version="1.2.12">
+      <item type="pack" url="https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.12.1015.zip"/>
+    </version>
+    <version version="1.2.14">
+      <item type="pack" url="https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.2.14.1017.zip"/>
+    </version>
+  </artifact>
+</artifacts>
