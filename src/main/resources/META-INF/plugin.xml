@@ -4,7 +4,7 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>1.0.5</version>
+    <version>2.0.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="201"/>
     <!-- 插件的描述 -->
@@ -18,35 +18,16 @@
       <br/>
       <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-47-30.jpg" width="500" height="480" alt="screenshots-balloon.png"/></p>
       <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-46-20.gif" width="500" height="200" alt="screenshots-dialog.png"/></p>
+      <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-08_16_40_11.png" width="500" height="200" alt="screenshots-dialog.png"/></p>
       <br/>
     ]]></description>
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
       <ul>
-        <p>1.0.0</p>
-        <li> 1.通过配置XML文件来描述目录树备注信息 </li>
-        <li> 1.Describes the directory tree remark information by configuring the XML file </li>
-      </ul>
-      <ul>
-        <p>1.0.1</p>
-        <li> 1.修改配置 </li>
-        <li> 1.Modify the configuration </li>
-      </ul>
-      <ul>
-        <p>1.0.2</p>
-        <li> 1.BUG:查找不到文件报错 </li>
-        <li> 1.BUG:Unable to find file error </li>
-      </ul>
-      <ul>
-        <p>1.0.3</p>
-        <li> 1.FIX:升级SDKAPI </li>
-        <li> 1.FIX:upgrade SDKAPI </li>
-      </ul>
-      <ul>
-        <p>1.0.5</p>
-        <li> 1.FIX:支持文件显示备注</li>
-        <li> 1.FIX:files show comments</li>
+        <p>2.0.0</p>
+        <li>全面重构,添加右键菜单支持</li>
+        <li>Fully refactored, adding right-click menu support</li>
       </ul>
     ]]></change-notes>
 
@@ -65,5 +46,10 @@
 
     <actions>
         <!-- Add your actions here -->
+        <action id="FirstAction" class="com.plugins.infotip.ActionDescription" text="Add Description"
+                icon="AllIcons.Actions.MenuPaste"
+                description="添加备注信息">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
+        </action>
     </actions>
 </idea-plugin>

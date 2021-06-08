@@ -27,22 +27,15 @@ package com.plugins.infotip;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
-import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.packageDependencies.ui.PackageDependenciesNode;
 import com.intellij.ui.ColoredTreeCellRenderer;
-import com.intellij.ui.SimpleTextAttributes;
-import com.intellij.util.ui.UIUtil;
-import com.plugins.infotip.parsing.model.ListTreeInfo;
-import com.plugins.infotip.parsing.model.ProjectInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
-import static com.intellij.ui.SimpleTextAttributes.STYLE_SMALLER;
 
 /**
  * 项目目录视图
@@ -52,56 +45,33 @@ import static com.intellij.ui.SimpleTextAttributes.STYLE_SMALLER;
  */
 public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
-    private static final SimpleTextAttributes GRAYED_SMALL_ATTRIBUTES = new SimpleTextAttributes(STYLE_SMALLER, UIUtil.getInactiveTextColor());
-
     public IgnoreViewNodeDecorator(@NotNull Project project) {
 
     }
 
-
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
-        //文件夹类型
-        if (node instanceof PsiDirectoryNode) {
-            ProjectInfo.getParsingConfigureXML(node.getProject());
-            List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
-            if (listTreeInfos != null) {
-                if (((PsiDirectoryNode) node).getValue() != null) {
-                    VirtualFile pdn = ((PsiDirectoryNode) node).getValue().getVirtualFile();
-                    for (ListTreeInfo listTreeInfo : listTreeInfos) {
-                        if (listTreeInfo != null) {
-                            if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                                //设置备注
-                                data.setLocationString(listTreeInfo.getTitle());
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            if (node != null && node.getValue() != null) {
-                ProjectInfo.getParsingConfigureXML(node.getProject());
-                List<ListTreeInfo> listTreeInfos = ProjectInfo.listTreeInfos;
-                Method[] methods = node.getClass().getMethods();
-                for (Method method : methods) {
-                    if ("getVirtualFile".equals(method.getName())) {
-                        method.setAccessible(true);
-                        try {
-                            Object invoke = method.invoke(node);
-                            if (invoke instanceof VirtualFile) {
-                                VirtualFile pdn = (VirtualFile) invoke;
-                                for (ListTreeInfo listTreeInfo : listTreeInfos) {
-                                    if (listTreeInfo != null) {
-                                        if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                                            //设置备注
-                                            data.setLocationString(listTreeInfo.getTitle());
-                                        }
+        if (node != null && node.getValue() != null) {
+            List<XmlEntity> xml = XmlParsing.getXml();
+            Method[] methods = node.getClass().getMethods();
+            for (Method method : methods) {
+                if ("getVirtualFile".equals(method.getName())) {
+                    method.setAccessible(true);
+                    try {
+                        Object invoke = method.invoke(node);
+                        if (invoke instanceof VirtualFile) {
+                            VirtualFile pdn = (VirtualFile) invoke;
+                            for (XmlEntity listTreeInfo : xml) {
+                                if (listTreeInfo != null) {
+                                    if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                                        //设置备注
+                                        data.setLocationString(listTreeInfo.getTitle());
                                     }
                                 }
                             }
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
                         }
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
                     }
                 }
             }
