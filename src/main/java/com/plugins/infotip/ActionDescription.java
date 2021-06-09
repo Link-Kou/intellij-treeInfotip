@@ -48,7 +48,7 @@ public class ActionDescription extends AnAction {
             for (XmlEntity x : refreshXml) {
                 if (presentableUrl.equals(x.getPath())) {
                     txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
-                            "What Needs To Be Description?", AllIcons.Actions.MenuPaste, x.getTitle(), null);
+                            "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
                     notfind = true;
                     if (null != txt) {
                         XmlParsing.modifyPath(x.getTag(), txt, project);
@@ -58,7 +58,7 @@ public class ActionDescription extends AnAction {
             }
             if (!notfind) {
                 txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
-                        "What Needs To Be Description?", AllIcons.Actions.MenuPaste, "", null);
+                        "What Needs To Be Description?", AllIcons.Actions.Menu_paste, "", null);
                 if (null != txt) {
                     XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, txt, extension);
                 }

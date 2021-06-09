@@ -6,7 +6,7 @@
     <!-- 插件版本 -->
     <version>2.0.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="201"/>
+    <idea-version since-build="191"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
       <ul>
@@ -47,7 +47,7 @@
     <actions>
         <!-- Add your actions here -->
         <action id="FirstAction" class="com.plugins.infotip.ActionDescription" text="Add Description"
-                icon="AllIcons.Actions.MenuPaste"
+                icon="AllIcons.Actions.Menu_paste"
                 description="添加备注信息">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
         </action>
