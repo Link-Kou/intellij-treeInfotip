@@ -1,6 +1,4 @@
 
-<iframe frameborder="none" width="384px" height="319px" src="https://plugins.jetbrains.com/embeddable/card/12994"></iframe>
-
 # TreeInfotip
 
 ### 2.0时代来袭,更加具备人性化。
