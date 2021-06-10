@@ -30,7 +30,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
     @Nullable
     @Override
     public Object getData(@NotNull Collection<AbstractTreeNode<?>> selected, @NotNull String dataId) {
-        for (AbstractTreeNode abstractTreeNode : selected) {
+        for (AbstractTreeNode<?> abstractTreeNode : selected) {
             psiDirectoryNode(abstractTreeNode);
         }
         return null;
@@ -41,7 +41,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
      *
      * @param abstractTreeNode 对象
      */
-    private void psiDirectoryNode(AbstractTreeNode abstractTreeNode) {
+    private void psiDirectoryNode(AbstractTreeNode<?> abstractTreeNode) {
         if (abstractTreeNode != null && abstractTreeNode.getValue() != null) {
             List<XmlEntity> xml = XmlParsing.getXml();
             Method[] methods = abstractTreeNode.getClass().getMethods();
