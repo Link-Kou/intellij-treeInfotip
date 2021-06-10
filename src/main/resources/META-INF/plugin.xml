@@ -26,8 +26,8 @@
     <change-notes><![CDATA[
       <ul>
         <p>2.0.0</p>
-        <li>全面重构,添加右键菜单支持</li>
-        <li>Fully refactored, adding right-click menu support</li>
+        <li>全面重构,添加右键菜单支持,老的格式将不在支持</li>
+        <li>Fully refactored, adding right-click menu support,The old format will no longer be supported</li>
       </ul>
     ]]></change-notes>
 
