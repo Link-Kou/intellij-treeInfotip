@@ -114,12 +114,7 @@ public class XmlParsing {
                     @Override
                     public void run() {
                         rootTag.addSubTag(childTag, false);
-                        FileDirectory.saveFileDirectoryXml(project, document.getText(), new SaveCallBack() {
-                            @Override
-                            public void onSave() {
-                                refreshPath(project);
-                            }
-                        });
+                        FileDirectory.saveFileDirectoryXml(project, document.getText());
                     }
                 });
             }
@@ -142,38 +137,6 @@ public class XmlParsing {
                 }
             });
         }
-    }
-
-    /**
-     * 修改路径
-     *
-     * @param project 项目
-     */
-    public static void refreshPath(Project project) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    XmlFile fileDirectoryXml = FileDirectory.getFileDirectoryXml(project, false);
-                    XmlDocument document = fileDirectoryXml.getDocument();
-                    if (null == document) {
-                        return;
-                    }
-                    XmlTag rootTag = document.getRootTag();
-                    if (null != rootTag) {
-                        WriteCommandAction.runWriteCommandAction(project, new Runnable() {
-                            @Override
-                            public void run() {
-                                rootTag.setAttribute("version", "2.0");
-                            }
-                        });
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
 

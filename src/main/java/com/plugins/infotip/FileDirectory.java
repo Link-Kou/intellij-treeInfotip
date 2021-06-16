@@ -32,23 +32,26 @@ public class FileDirectory {
      * @param project 项目
      * @param create  是否创建文件
      */
-    public static synchronized XmlFile getFileDirectoryXml(Project project, boolean create) {
+    public static synchronized XmlFile getFileDirectoryXml(final Project project, boolean create) {
         if (project == null) {
             return null;
         }
         //查询相关文件，与目录无关
-        PsiFile[] pfs = FilenameIndex.getFilesByName(project, getFileName(), GlobalSearchScope.allScope(project));
-        if (pfs.length == 1) {
-            //获取一个文件，如果存在多个相同的文件，取查询到第一个
-            PsiFile pf = pfs[0];
-            if (pf instanceof XmlFile) {
-                xmlFile = (XmlFile) pf;
+        try {
+            PsiFile[] pfs = FilenameIndex.getFilesByName(project, getFileName(), GlobalSearchScope.allScope(project));
+            if (pfs.length == 1) {
+                //获取一个文件，如果存在多个相同的文件，取查询到第一个
+                PsiFile pf = pfs[0];
+                if (pf instanceof XmlFile) {
+                    xmlFile = (XmlFile) pf;
+                }
+            } else if (pfs.length == 0) {
+                if (create) {
+                    xmlFile = createFileDirectoryXml(project);
+                }
             }
-        } else if (pfs.length == 0) {
-            if (create) {
-                xmlFile = createFileDirectoryXml(project);
-
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return xmlFile;
     }
@@ -78,7 +81,7 @@ public class FileDirectory {
      *
      * @param project 项目
      */
-    public static synchronized void saveFileDirectoryXml(Project project, String text, SaveCallBack saveCallBack) {
+    public static synchronized void saveFileDirectoryXml(Project project, String text) {
         if (createFile) {
             createFile = false;
             File f = new File(project.getBasePath() + File.separator + getFileName());
@@ -96,7 +99,6 @@ public class FileDirectory {
                             try {
                                 if (writer != null) {
                                     writer.close();
-                                    saveCallBack.onSave();
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
