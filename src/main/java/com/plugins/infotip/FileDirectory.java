@@ -32,7 +32,7 @@ public class FileDirectory {
      * @param project 项目
      * @param create  是否创建文件
      */
-    public static XmlFile getFileDirectoryXml(Project project, boolean create) {
+    public static synchronized XmlFile getFileDirectoryXml(Project project, boolean create) {
         if (project == null) {
             return null;
         }
