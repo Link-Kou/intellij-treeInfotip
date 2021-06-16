@@ -151,7 +151,7 @@ public class XmlParsing {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(1000);
                     XmlFile fileDirectoryXml = FileDirectory.getFileDirectoryXml(project, false);
                     XmlDocument document = fileDirectoryXml.getDocument();
                     if (null == document) {
