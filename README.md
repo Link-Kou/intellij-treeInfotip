@@ -34,7 +34,7 @@ IDEA或WebStrom -> Preferences -> Plugins -> TreeInfotip
 
 ### 手动安装
 
-[plugin.intellij.assistant-2.0.0.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.0.0.jar)
+[plugin.intellij.assistant-2.1.0.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.1.0.jar)
 
 ### 一、示列
 
