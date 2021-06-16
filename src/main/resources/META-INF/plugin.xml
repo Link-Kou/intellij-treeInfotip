@@ -4,7 +4,7 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="201"/>
     <!-- 插件的描述 -->
@@ -24,6 +24,11 @@
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+     <ul>
+        <p>2.0.1</p>
+        <li>修复路径替换失效的情况</li>
+        <li>Fix the failure of path replacement</li>
+      </ul>
       <ul>
         <p>2.0.0</p>
         <li>全面重构,添加右键菜单支持,老的格式将不在支持</li>
