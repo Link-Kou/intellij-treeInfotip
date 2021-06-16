@@ -4,7 +4,7 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>2.0.2</version>
+    <version>2.1.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="191"/>
     <!-- 插件的描述 -->
@@ -24,6 +24,11 @@
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+     <ul>
+        <p>2.1.0</p>
+        <li>修改初始化报错问题</li>
+        <li>Modify the initialization error problem</li>
+      </ul>
       <ul>
         <p>2.0.2</p>
         <li>添加备注后强制刷新</li>
