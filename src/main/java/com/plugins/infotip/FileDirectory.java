@@ -78,7 +78,7 @@ public class FileDirectory {
      *
      * @param project 项目
      */
-    public static void saveFileDirectoryXml(Project project, String text, SaveCallBack saveCallBack) {
+    public static synchronized void saveFileDirectoryXml(Project project, String text, SaveCallBack saveCallBack) {
         if (createFile) {
             createFile = false;
             File f = new File(project.getBasePath() + File.separator + getFileName());
@@ -107,8 +107,10 @@ public class FileDirectory {
                     e.printStackTrace();
                 }
             }
-
         }
+        //强制更新
+        XmlFile fileDirectoryXml = getFileDirectoryXml(project, false);
+        XmlParsing.parsing(project, fileDirectoryXml);
     }
 
 

@@ -40,6 +40,9 @@ public class XmlParsing {
      * @param xmlFile xml文件
      */
     public static void parsing(Project project, XmlFile xmlFile) {
+        if (null == xmlFile) {
+            return;
+        }
         XMLLIST.clear();
         final String presentableUrl = project.getPresentableUrl();
         if (presentableUrl == null) {
