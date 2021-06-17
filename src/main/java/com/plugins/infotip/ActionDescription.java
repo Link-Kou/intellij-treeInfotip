@@ -39,7 +39,7 @@ public class ActionDescription extends AnAction {
             String basePath = project.getPresentableUrl();
             if (null != basePath && basePath.length() > 0) {
                 //改为安长度去除
-                String presentableUrl = file.getPresentableUrl();
+                String presentableUrl = file.getCanonicalPath();
                 if (presentableUrl.length() < basePath.length()) {
                     Messages.showMessageDialog(project, "Unable to get the root path of the file", "Can't Get Path", AllIcons.Actions.Menu_paste);
                     return;
