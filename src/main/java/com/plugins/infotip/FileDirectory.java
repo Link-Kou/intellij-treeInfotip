@@ -7,6 +7,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
@@ -30,7 +31,6 @@ import java.util.List;
 public class FileDirectory {
 
     private static XmlFile xmlFile;
-    private static boolean createFile;
 
     /**
      * 获取到指定的文件
@@ -44,6 +44,7 @@ public class FileDirectory {
         }
         //查询相关文件，与目录无关
         try {
+            //git支持不友好的解决
             PsiFile[] pfs = FilenameIndex.getFilesByName(project, getFileName(), GlobalSearchScope.allScope(project));
             if (pfs.length == 1) {
                 //获取一个文件，如果存在多个相同的文件，取查询到第一个
@@ -62,7 +63,11 @@ public class FileDirectory {
         return xmlFile;
     }
 
-
+    /**
+     * 获取文件名称
+     *
+     * @return String
+     */
     private static String getFileName() {
         return "DirectoryV2.xml";
     }
@@ -78,8 +83,8 @@ public class FileDirectory {
         }
         LanguageFileType xml = (LanguageFileType) FileTypeManager.getInstance().getStdFileType("XML");
         PsiFile pf = PsiFileFactory.getInstance(project).createFileFromText(getFileName(), xml, "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \r\n <trees/>");
-        createFile = true;
-        return (XmlFile) pf;
+        saveFileDirectoryXml(project, pf.getText());
+        return xmlFile;
     }
 
     /**
@@ -88,49 +93,43 @@ public class FileDirectory {
      * @param project 项目
      */
     public static synchronized void saveFileDirectoryXml(Project project, String text) {
-        if (createFile) {
-            createFile = false;
-            File f = new File(project.getBasePath() + File.separator + getFileName());
-            if (!f.exists()) {
-                try {
-                    boolean newFile = f.createNewFile();
-                    if (newFile) {
-                        BufferedWriter writer = null;
+        File f = new File(project.getBasePath() + File.separator + getFileName());
+        if (!f.exists()) {
+            try {
+                boolean newFile = f.createNewFile();
+                if (newFile) {
+                    BufferedWriter writer = null;
+                    try {
+                        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, false), StandardCharsets.UTF_8));
+                        writer.write(text);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return;
+                    } finally {
                         try {
-                            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, false), StandardCharsets.UTF_8));
-                            writer.write(text);
+                            if (writer != null) {
+                                writer.close();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
-                        } finally {
-                            try {
-                                if (writer != null) {
-                                    writer.close();
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
                         }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
             }
         }
-        //强制更新
-        XmlFile fileDirectoryXml = getFileDirectoryXml(project, false);
-        XmlParsing.parsing(project, fileDirectoryXml);
-    }
-
-
-    private static boolean isFileName(PsiTreeChangeEvent psiTreeChangeEvent) {
-        final PsiFile file = psiTreeChangeEvent.getFile();
-        if (null != file) {
-            final VirtualFile virtualFile = file.getVirtualFile();
-            if (null != virtualFile) {
-                return virtualFile.getName().contains(getFileName());
+        VirtualFile virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(f);
+        if (null != virtualFile) {
+            virtualFile.refresh(false, true);
+            PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
+            if (file instanceof XmlFile) {
+                xmlFile = (XmlFile) file;
+                XmlParsing.parsing(project, xmlFile);
             }
         }
-        return false;
+
     }
 
     /**
@@ -212,6 +211,23 @@ public class FileDirectory {
     }
 
     /**
+     * 是否为指定的文件
+     *
+     * @param psiTreeChangeEvent 对象
+     * @return boolean
+     */
+    private static boolean isFileName(PsiTreeChangeEvent psiTreeChangeEvent) {
+        final PsiFile file = psiTreeChangeEvent.getFile();
+        if (null != file) {
+            final VirtualFile virtualFile = file.getVirtualFile();
+            if (null != virtualFile) {
+                return virtualFile.getName().contains(getFileName());
+            }
+        }
+        return false;
+    }
+
+    /**
      * 设置节点备注
      *
      * @param abstractTreeNode 对象
@@ -225,6 +241,7 @@ public class FileDirectory {
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
                 if (null != virtualFile2) {
                     setXmlToLocationString(virtualFile2, abstractTreeNode);
+                    return;
                 }
             }
             VirtualFile virtualFile1 = getVirtualFile(methods1, abstractTreeNode);
@@ -249,6 +266,7 @@ public class FileDirectory {
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
                 if (null != virtualFile2) {
                     setXmlToLocationString(virtualFile2, data);
+                    return;
                 }
             }
             VirtualFile virtualFile1 = getVirtualFile(methods1, node);
@@ -289,14 +307,10 @@ public class FileDirectory {
      * @param abstractTreeNode 对象
      */
     private static void setXmlToLocationString(VirtualFile virtualFile, AbstractTreeNode<?> abstractTreeNode) {
-        List<XmlEntity> xml = XmlParsing.getXml();
-        for (XmlEntity listTreeInfo : xml) {
-            if (listTreeInfo != null) {
-                if (virtualFile.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                    //设置备注
-                    abstractTreeNode.getPresentation().setLocationString(listTreeInfo.getTitle());
-                }
-            }
+        XmlEntity matchPath = getMatchPath(virtualFile);
+        if (null != matchPath) {
+            //设置备注
+            abstractTreeNode.getPresentation().setLocationString(matchPath.getTitle());
         }
     }
 
@@ -307,14 +321,28 @@ public class FileDirectory {
      * @param data        对象
      */
     private static void setXmlToLocationString(VirtualFile virtualFile, PresentationData data) {
+        XmlEntity matchPath = getMatchPath(virtualFile);
+        if (null != matchPath) {
+            //设置备注
+            data.setLocationString(matchPath.getTitle());
+        }
+    }
+
+    /**
+     * 匹配路径
+     *
+     * @param virtualFile 文件对象
+     * @return boolean
+     */
+    private static XmlEntity getMatchPath(VirtualFile virtualFile) {
         List<XmlEntity> xml = XmlParsing.getXml();
         for (XmlEntity listTreeInfo : xml) {
             if (listTreeInfo != null) {
                 if (virtualFile.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                    //设置备注
-                    data.setLocationString(listTreeInfo.getTitle());
+                    return listTreeInfo;
                 }
             }
         }
+        return null;
     }
 }

@@ -114,7 +114,8 @@ public class XmlParsing {
                     @Override
                     public void run() {
                         rootTag.addSubTag(childTag, false);
-                        FileDirectory.saveFileDirectoryXml(project, document.getText());
+                        XmlParsing.parsing(project, xmlFile);
+                        //FileDirectory.saveFileDirectoryXml(project, document.getText());
                     }
                 });
             }
@@ -128,12 +129,13 @@ public class XmlParsing {
      * @param title    标题
      * @param project  项目
      */
-    public static void modifyPath(XmlTag childTag, String title, Project project) {
+    public static void modifyPath(XmlTag childTag, String title, XmlFile xmlFile, Project project) {
         if (null != childTag) {
             WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                 @Override
                 public void run() {
                     childTag.setAttribute(TITLE, title);
+                    XmlParsing.parsing(project, xmlFile);
                 }
             });
         }

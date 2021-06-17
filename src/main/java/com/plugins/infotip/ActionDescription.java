@@ -54,7 +54,7 @@ public class ActionDescription extends AnAction {
                                 "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
                         notfind = true;
                         if (null != txt) {
-                            XmlParsing.modifyPath(x.getTag(), txt, project);
+                            XmlParsing.modifyPath(x.getTag(), txt, fileDirectoryXml,project);
                         }
                         break;
                     }
