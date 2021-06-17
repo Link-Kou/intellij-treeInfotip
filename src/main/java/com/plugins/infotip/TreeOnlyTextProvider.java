@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
+import static com.plugins.infotip.FileDirectory.setLocationString;
+
 /**
  * 目录树显示备注
  *
@@ -42,32 +44,7 @@ public class TreeOnlyTextProvider implements TreeStructureProvider {
      * @param abstractTreeNode 对象
      */
     private void psiDirectoryNode(AbstractTreeNode<?> abstractTreeNode) {
-        if (abstractTreeNode != null && abstractTreeNode.getValue() != null) {
-            List<XmlEntity> xml = XmlParsing.getXml();
-            Method[] methods = abstractTreeNode.getClass().getMethods();
-            for (Method method : methods) {
-                if ("getVirtualFile".equals(method.getName())) {
-                    method.setAccessible(true);
-                    try {
-                        Object invoke = method.invoke(abstractTreeNode);
-                        if (invoke instanceof VirtualFile) {
-                            VirtualFile pdn = (VirtualFile) invoke;
-                            for (XmlEntity listTreeInfo : xml) {
-                                if (listTreeInfo != null) {
-                                    if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                                        //设置备注
-                                        abstractTreeNode.getPresentation().setLocationString(listTreeInfo.getTitle());
-                                    }
-                                }
-                            }
-                        }
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+        setLocationString(abstractTreeNode);
     }
-
 
 }

@@ -1,5 +1,8 @@
 package com.plugins.infotip;
 
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.ide.projectView.ProjectViewNode;
+import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
@@ -12,7 +15,10 @@ import com.intellij.psi.xml.XmlFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * A <code>FileDirectory</code> Class
@@ -203,5 +209,112 @@ public class FileDirectory {
                     public void dispose() {
                     }
                 });
+    }
+
+    /**
+     * 设置节点备注
+     *
+     * @param abstractTreeNode 对象
+     */
+    public static void setLocationString(AbstractTreeNode<?> abstractTreeNode) {
+        if (null != abstractTreeNode) {
+            Method[] methods1 = abstractTreeNode.getClass().getMethods();
+            Object value = abstractTreeNode.getValue();
+            if (null != value) {
+                Method[] methods2 = value.getClass().getMethods();
+                VirtualFile virtualFile2 = getVirtualFile(methods2, value);
+                if (null != virtualFile2) {
+                    setXmlToLocationString(virtualFile2, abstractTreeNode);
+                }
+            }
+            VirtualFile virtualFile1 = getVirtualFile(methods1, abstractTreeNode);
+            if (null != virtualFile1) {
+                setXmlToLocationString(virtualFile1, abstractTreeNode);
+            }
+        }
+    }
+
+    /**
+     * 设置节点备注
+     *
+     * @param node 对象
+     * @param data 对象
+     */
+    public static void setLocationString(ProjectViewNode node, PresentationData data) {
+        if (null != node) {
+            Method[] methods1 = node.getClass().getMethods();
+            Object value = node.getValue();
+            if (null != value) {
+                Method[] methods2 = value.getClass().getMethods();
+                VirtualFile virtualFile2 = getVirtualFile(methods2, value);
+                if (null != virtualFile2) {
+                    setXmlToLocationString(virtualFile2, data);
+                }
+            }
+            VirtualFile virtualFile1 = getVirtualFile(methods1, node);
+            if (null != virtualFile1) {
+                setXmlToLocationString(virtualFile1, data);
+            }
+        }
+    }
+
+    /**
+     * 获取到 VirtualFile
+     *
+     * @param methods 方法
+     * @param o       对象
+     * @return VirtualFile
+     */
+    private static VirtualFile getVirtualFile(Method[] methods, Object o) {
+        for (Method method : methods) {
+            if ("getVirtualFile".equals(method.getName())) {
+                method.setAccessible(true);
+                try {
+                    Object invoke = method.invoke(o);
+                    if (invoke instanceof VirtualFile) {
+                        return (VirtualFile) invoke;
+                    }
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param virtualFile      对象
+     * @param abstractTreeNode 对象
+     */
+    private static void setXmlToLocationString(VirtualFile virtualFile, AbstractTreeNode<?> abstractTreeNode) {
+        List<XmlEntity> xml = XmlParsing.getXml();
+        for (XmlEntity listTreeInfo : xml) {
+            if (listTreeInfo != null) {
+                if (virtualFile.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                    //设置备注
+                    abstractTreeNode.getPresentation().setLocationString(listTreeInfo.getTitle());
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param virtualFile 对象
+     * @param data        对象
+     */
+    private static void setXmlToLocationString(VirtualFile virtualFile, PresentationData data) {
+        List<XmlEntity> xml = XmlParsing.getXml();
+        for (XmlEntity listTreeInfo : xml) {
+            if (listTreeInfo != null) {
+                if (virtualFile.getPresentableUrl().equals(listTreeInfo.getPath())) {
+                    //设置备注
+                    data.setLocationString(listTreeInfo.getTitle());
+                }
+            }
+        }
     }
 }
