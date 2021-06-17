@@ -338,8 +338,11 @@ public class FileDirectory {
         List<XmlEntity> xml = XmlParsing.getXml();
         for (XmlEntity listTreeInfo : xml) {
             if (listTreeInfo != null) {
-                if (virtualFile.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                    return listTreeInfo;
+                String canonicalPath = virtualFile.getCanonicalPath();
+                if (null != canonicalPath) {
+                    if (canonicalPath.equals(listTreeInfo.getPath())) {
+                        return listTreeInfo;
+                    }
                 }
             }
         }
