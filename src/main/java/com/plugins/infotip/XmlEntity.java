@@ -30,6 +30,11 @@ public class XmlEntity {
      */
     private XmlTag tag;
 
+    /**
+     * 图标
+     */
+    private String icon;
+
     //region  getset
 
     public String getPath() {
@@ -65,6 +70,15 @@ public class XmlEntity {
 
     public XmlEntity setTag(XmlTag tag) {
         this.tag = tag;
+        return this;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public XmlEntity setIcon(String icon) {
+        this.icon = icon;
         return this;
     }
 

@@ -1,18 +1,22 @@
 package com.plugins.infotip;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlFile;
+import com.plugins.infotip.ui.Icons;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -20,6 +24,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE;
+import static com.plugins.infotip.FileIcons.getAllIcons;
 
 /**
  * A <code>FileDirectory</code> Class
@@ -31,6 +38,73 @@ import java.util.List;
 public class FileDirectory {
 
     private static XmlFile xmlFile;
+
+    public interface Callback {
+        /**
+         * 修改路径
+         *
+         * @param asbbasePath      绝对路径
+         * @param x                对象
+         * @param fileDirectoryXml 对象
+         * @param project          对象
+         * @param extension        对象
+         */
+        void onModifyPath(String asbbasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension);
+
+        /**
+         * 创建路径
+         *
+         * @param asbbasePath      绝对路径
+         * @param fileDirectoryXml 对象
+         * @param project          对象
+         * @param extension        对象
+         */
+        void onCreatePath(String asbbasePath, XmlFile fileDirectoryXml, Project project, String extension);
+    }
+
+    /**
+     * 获取基础路径
+     *
+     * @param anActionEvent 对象
+     * @param callback      回调
+     */
+    public static void getBasePath(AnActionEvent anActionEvent, Callback callback) {
+        final Project project = anActionEvent.getProject();
+        if (null == project) {
+            return;
+        }
+        //获取文件、文件夹等对象
+        VirtualFile file = VIRTUAL_FILE.getData(anActionEvent.getDataContext());
+        if (null != file) {
+            XmlFile fileDirectoryXml = FileDirectory.getFileDirectoryXml(project, true);
+            List<XmlEntity> refreshXml = XmlParsing.getRefreshXml(project, fileDirectoryXml);
+            //使用相对路径
+            String basePath = project.getPresentableUrl();
+            if (null != basePath && basePath.length() > 0) {
+                //改为安长度去除
+                String presentableUrl = file.getCanonicalPath();
+                if (presentableUrl.length() < basePath.length()) {
+                    Messages.showMessageDialog(project, "Unable to get the root path of the file", "Can't Get Path", AllIcons.Actions.Menu_paste);
+                    return;
+                }
+                String asbbasePath = presentableUrl.substring(basePath.length(), presentableUrl.length());
+                String extension = file.getExtension();
+                boolean notfind = false;
+                for (XmlEntity x : refreshXml) {
+                    if (presentableUrl.equals(x.getPath())) {
+                        callback.onModifyPath(asbbasePath, x, fileDirectoryXml, project, extension);
+                        notfind = true;
+                        break;
+                    }
+                }
+                if (!notfind) {
+                    callback.onCreatePath(asbbasePath, fileDirectoryXml, project, extension);
+                }
+            }
+        } else {
+            Messages.showMessageDialog(project, "Unable to get the root path of the project", "Can't Get Path", AllIcons.Actions.Menu_paste);
+        }
+    }
 
     /**
      * 获取到指定的文件
@@ -325,6 +399,12 @@ public class FileDirectory {
         if (null != matchPath) {
             //设置备注
             data.setLocationString(matchPath.getTitle());
+            for (Icons allIcon : getAllIcons()) {
+                if (allIcon.getName().equals(matchPath.getIcon())) {
+                    data.setIcon(allIcon.getIcon());
+                    return;
+                }
+            }
         }
     }
 

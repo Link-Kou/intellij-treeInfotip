@@ -8,6 +8,7 @@ import com.intellij.psi.xml.XmlAttribute;
 import com.intellij.psi.xml.XmlDocument;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
+import com.plugins.infotip.ui.Icons;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -30,6 +31,8 @@ public class XmlParsing {
     private final static String TITLE = "title";
 
     private final static String EXTENSION = "extension";
+
+    private final static String ICONS = "icons";
 
     private final static List<XmlEntity> XMLLIST = new CopyOnWriteArrayList<>();
 
@@ -96,9 +99,10 @@ public class XmlParsing {
      * @param project   项目
      * @param path      路径
      * @param title     标题
+     * @param icon      图标
      * @param extension 类型
      */
-    public static void createPath(XmlFile xmlFile, Project project, String path, String title, String extension) {
+    public static void createPath(XmlFile xmlFile, Project project, String path, String title, Icons icon, String extension) {
         XmlDocument document = xmlFile.getDocument();
         if (null == document) {
             return;
@@ -108,7 +112,12 @@ public class XmlParsing {
             if (TAGTREES.equals(rootTag.getName())) {
                 XmlTag childTag = rootTag.createChildTag(TAGTREE, rootTag.getNamespace(), null, false);
                 childTag.setAttribute(PATH, path);
-                childTag.setAttribute(TITLE, title);
+                if (null != title) {
+                    childTag.setAttribute(TITLE, title);
+                }
+                if (null != icon) {
+                    childTag.setAttribute(ICONS, icon.getName());
+                }
                 childTag.setAttribute(EXTENSION, extension);
                 WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                     @Override
@@ -122,19 +131,26 @@ public class XmlParsing {
         }
     }
 
+
     /**
      * 修改路径
      *
      * @param childTag 标签
      * @param title    标题
+     * @param icon     图标
      * @param project  项目
      */
-    public static void modifyPath(XmlTag childTag, String title, XmlFile xmlFile, Project project) {
+    public static void modifyPath(XmlTag childTag, String title, Icons icon, XmlFile xmlFile, Project project) {
         if (null != childTag) {
             WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                 @Override
                 public void run() {
-                    childTag.setAttribute(TITLE, title);
+                    if (null != title) {
+                        childTag.setAttribute(TITLE, title);
+                    }
+                    if (null != icon) {
+                        childTag.setAttribute(ICONS, icon.getName());
+                    }
                     XmlParsing.parsing(project, xmlFile);
                 }
             });
@@ -147,13 +163,16 @@ public class XmlParsing {
         XmlAttribute xmlpath = tag.getAttribute(PATH);
         XmlAttribute xmltitle = tag.getAttribute(TITLE);
         XmlAttribute xmlextension = tag.getAttribute(EXTENSION);
+        XmlAttribute xmlicons = tag.getAttribute(ICONS);
         if (xmlpath != null) {
             String xmlextensionvalue = null != xmlextension ? xmlextension.getValue() : "";
             String xmltitlevalue = null != xmltitle ? xmltitle.getValue() : "";
             String treepath = presentableUrl + xmlpath.getValue();
+            String xmlicon = null != xmlicons ? xmlicons.getValue() : "";
             xmlEntity.setTitle(xmltitlevalue)
                     .setExtension(xmlextensionvalue)
                     .setTag(tag)
+                    .setIcon(xmlicon)
                     .setPath(treepath);
             return xmlEntity;
         }
