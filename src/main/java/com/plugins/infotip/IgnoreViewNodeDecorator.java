@@ -28,14 +28,11 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.packageDependencies.ui.PackageDependenciesNode;
 import com.intellij.ui.ColoredTreeCellRenderer;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
+import static com.plugins.infotip.FileDirectory.setLocationString;
 
 /**
  * 项目目录视图
@@ -51,31 +48,7 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
-        if (node != null && node.getValue() != null) {
-            List<XmlEntity> xml = XmlParsing.getXml();
-            Method[] methods = node.getClass().getMethods();
-            for (Method method : methods) {
-                if ("getVirtualFile".equals(method.getName())) {
-                    method.setAccessible(true);
-                    try {
-                        Object invoke = method.invoke(node);
-                        if (invoke instanceof VirtualFile) {
-                            VirtualFile pdn = (VirtualFile) invoke;
-                            for (XmlEntity listTreeInfo : xml) {
-                                if (listTreeInfo != null) {
-                                    if (pdn.getPresentableUrl().equals(listTreeInfo.getPath())) {
-                                        //设置备注
-                                        data.setLocationString(listTreeInfo.getTitle());
-                                    }
-                                }
-                            }
-                        }
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+        setLocationString(node,data);
     }
 
     @Override
