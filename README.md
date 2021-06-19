@@ -1,13 +1,11 @@
-# [![TreeInfotip](./pluginIcon.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
+# [![TreeInfotip](./pluginIcon.svg)](https://github.com/Link-Kou/intellij-treeInfotip)
 
 
-[![Jetbrains Plugins][plugin-img]][plugin]
-[![License][license-img]][license]
-[![Build Status][build-img-master]][travis-ci]
-[![GitHub release][release-img]][latest-release]
-[![Version][version-img]][plugin]
-[![Downloads][downloads-img]][plugin]
-
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Link-Kou/intellij-treeInfotip)
+![GitHub](https://img.shields.io/github/license/Link-Kou/intellij-treeInfotip)
+![GitHub issues](https://img.shields.io/github/issues/Link-Kou/intellij-treeInfotip)
+![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/12994)
+![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/12994)
 
 ### 2.0时代来袭,更加具备人性化。
 
@@ -27,6 +25,17 @@
 
 > 2、方便小白同学，我看到过些同学，入手项目看到目录就一个头大。好记忆不如烂笔头，充分发挥了知识分子的优良传统。手动写本本。
 
+
+## Sponsors
+
+<table>
+      <td>
+        <a href="https://www.jetbrains.com/?from=TreeInfotip" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/YiiGuxing/TranslationPlugin@master/images/jetbrains.svg" alt="JetBrains" title="Development powered by JetBrains.">
+        </a>
+      </td>
+</table>
+
 ### 使用环境
 
 `IntelliJ IDEA Ultimate版（172+）`
@@ -41,7 +50,12 @@
 
 ### 在线安装(搜索)
 
-IDEA或WebStrom -> Preferences -> Plugins -> TreeInfotip
+<a href="https://plugins.jetbrains.com/plugin/12994-treeinfotip" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/YiiGuxing/TranslationPlugin@master/images/button-install.png" alt="Get from Marketplace" title="Get from Marketplace">
+</a>
+
+
+IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
 
 ### 手动安装
 
