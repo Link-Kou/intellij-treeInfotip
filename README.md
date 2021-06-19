@@ -1,4 +1,4 @@
-# [![TreeInfotip](./pluginIcon.svg)](https://github.com/Link-Kou/intellij-treeInfotip)
+# [![TreeInfotip](./trees.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
 
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Link-Kou/intellij-treeInfotip)
@@ -54,6 +54,7 @@
     <img src="https://cdn.jsdelivr.net/gh/YiiGuxing/TranslationPlugin@master/images/button-install.png" alt="Get from Marketplace" title="Get from Marketplace">
 </a>
 
+<br/>
 
 IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
 
