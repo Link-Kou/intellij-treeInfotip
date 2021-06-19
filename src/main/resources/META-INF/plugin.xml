@@ -9,17 +9,28 @@
     <idea-version since-build="191"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
-      <ul>
-        <h3>English:</h3>
-        <li>Add comment information to the project directory tree</li>
-        <h3>中文：</h3>
-        <li>项目目录树添加备注信息</li>
-      </ul>
+      <p><b>TreeInfotip plugin for IntelliJ IDEs.</b></p>
       <br/>
-      <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-47-30.jpg" width="500" height="480" alt="screenshots-balloon.png"/></p>
-      <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-46-20.gif" width="500" height="200" alt="screenshots-dialog.png"/></p>
-      <p><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-08_16_40_11.png" width="534" height="543" alt="screenshots-dialog.png"/></p>
+      <p>
+          <b>
+            <a href="https://github.com/Link-Kou/intellij-treeInfotip">GitHub</a> |
+            <a href="https://github.com/Link-Kou/intellij-treeInfotip/issues">Issues</a> |
+          </b>
+      </p>
+      <p>
+          <ul>
+            <h3>English:</h3>
+            <li>Add comment information to the project directory tree</li>
+            <h3>中文：</h3>
+            <li>项目目录树添加备注信息</li>
+          </ul>
+      </p>
       <br/>
+      <p>
+        <a title="To Github" href="https://github.com/Link-Kou/intellij-treeInfotip"><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_14-39-35.png" width="532" alt="image"></a>
+      </p>
+      <br/>
+      <p><a href="https://github.com/Link-Kou/intellij-treeInfotip/issues">Send issues</a></p>
     ]]></description>
 
     <!-- 插件的功能 -->
