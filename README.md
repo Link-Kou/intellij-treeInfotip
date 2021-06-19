@@ -3,8 +3,10 @@
 
 ### 2.0时代来袭,更加具备人性化。
 
-> 通过目录树右键添加备注
+> 通过目录树右键添加备注 
+
 > 通过目录树右键添加图标
+
 > 重构代码代码结构更加合理
 
 ### TreeInfotip能做什么？
@@ -35,46 +37,12 @@ IDEA或WebStrom -> Preferences -> Plugins -> TreeInfotip
 
 ### 手动安装
 
-[plugin.intellij.assistant-2.2.0.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.0.jar)
+[plugin.intellij.assistant-2.2.1.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.1.jar)
 
 ### 一、示列
 
 > ##### 图片示列教程：（国内有些网络啊！tmd图片看不了的）
 
 
-![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-46-20.gif "样列")
-![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2020-03-18_16-47-30.jpg "样列")
-![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-08_16_40_11.png "样列")
-
-
-> ##### 说明文档：
-
-1. 1.0和2.0不兼容
-   
-2. 在项目根目录下创建DirectoryV2.xml文件(文件名称不能改变)
-
-3. 文件内容示列
-
-```xml：
-  <?xml version="1.0" encoding="UTF-8"?>
-  <trees>
-      <tree path="/src"/>
-      <tree path="/builds" title="构建文件"/>
-      <tree path="/image" title="图片示例"/>
-  </trees>
-```
-
-3. 标签说明
-
-```xml：
-
-  //trees只能有一个，所有子标签都在此标签里面
-  <trees/>
-
-  //文件夹或文件说明
-  //path 路径，MAC与Win的路径都是通用的，上下级的标签会拼接上父节点的path属性 
-  //title 显示的内容
-  //extension 后缀
-  
-  <tree path="" title=""  extension=""/> 
-```
+![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_13-38-34.gif "样列")
+![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_14-39-35.png "样列")
