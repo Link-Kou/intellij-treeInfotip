@@ -1,4 +1,4 @@
-# [![TreeInfotip](./trees.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
+# [![TreeInfotip](trees2.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
 
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Link-Kou/intellij-treeInfotip)
