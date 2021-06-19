@@ -157,6 +157,25 @@ public class XmlParsing {
         }
     }
 
+    /**
+     * 修改路径
+     *
+     * @param childTag 标签
+     * @param icon     图标
+     * @param project  项目
+     */
+    public static void modifyPath(XmlTag childTag, Icons icon, XmlFile xmlFile, Project project) {
+        if (null != childTag) {
+            WriteCommandAction.runWriteCommandAction(project, new Runnable() {
+                @Override
+                public void run() {
+                    childTag.setAttribute(ICONS, null != icon ? icon.getName() : null);
+                    XmlParsing.parsing(project, xmlFile);
+                }
+            });
+        }
+    }
+
 
     private static XmlEntity tree(XmlTag tag, String presentableUrl) {
         XmlEntity xmlEntity = new XmlEntity();

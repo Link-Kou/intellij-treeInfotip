@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.plugins.infotip.FileIcons.getAllIcons;
 
@@ -19,6 +20,7 @@ public class IconsList extends JDialog {
     private JPanel contentPane;
     private JComboBox<Icons> comboBox1;
     private JButton okButton;
+    private JButton restoreButton;
     private Icons selectedItem;
 
     public IconsList() {
@@ -28,7 +30,13 @@ public class IconsList extends JDialog {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOk();
+            }
+        });
+        restoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onRestoreButton();
             }
         });
         ComboBoxRenderer renderer = new ComboBoxRenderer();
@@ -40,8 +48,25 @@ public class IconsList extends JDialog {
         }
     }
 
-    private void onOK() {
+    public void setIcons(String name) {
+        ArrayList<Icons> allIcons = getAllIcons();
+        for (Icons allIcon : allIcons) {
+            String name1 = allIcon.getName();
+            if (null != name1) {
+                if (name1.equals(name)) {
+                    comboBox1.setSelectedItem(allIcon);
+                }
+            }
+        }
+    }
+
+    private void onOk() {
         selectedItem = (Icons) comboBox1.getSelectedItem();
+        dispose();
+    }
+
+    private void onRestoreButton() {
+        selectedItem = null;
         dispose();
     }
 

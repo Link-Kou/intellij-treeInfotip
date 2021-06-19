@@ -27,31 +27,32 @@ public class ActionDescriptionIcon extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-        IconsList dialog = new IconsList();
+        final IconsList dialog = new IconsList();
         dialog.pack();
         dialog.setTitle("Select Icons");
-        dialog.setSize(288, 100);
+        dialog.setSize(288, 120);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         Dimension dimension = new Dimension();
-        dimension.setSize(288, 100);
+        dimension.setSize(288, 120);
         dialog.setMaximumSize(dimension);
         dialog.setModal(true);
-        dialog.setVisible(true);
-        Icons icons = dialog.getIcons();
-        if (null != icons) {
-            getBasePath(anActionEvent, new FileDirectory.Callback() {
-                @Override
-                public void onModifyPath(String asbbasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
-                    XmlParsing.modifyPath(x.getTag(), null, icons, fileDirectoryXml, project);
-                }
+        getBasePath(anActionEvent, new FileDirectory.Callback() {
+            @Override
+            public void onModifyPath(String asbbasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
+                dialog.setIcons(x.getIcon());
+                dialog.setVisible(true);
+                Icons icons = dialog.getIcons();
+                XmlParsing.modifyPath(x.getTag(), icons, fileDirectoryXml, project);
+            }
 
-                @Override
-                public void onCreatePath(String asbbasePath, XmlFile fileDirectoryXml, Project project, String extension) {
-                    XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, null, icons, extension);
-                }
-            });
-        }
+            @Override
+            public void onCreatePath(String asbbasePath, XmlFile fileDirectoryXml, Project project, String extension) {
+                dialog.setVisible(true);
+                Icons icons = dialog.getIcons();
+                XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, null, icons, extension);
+            }
+        });
     }
 
 
