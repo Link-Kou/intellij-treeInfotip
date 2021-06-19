@@ -1,5 +1,13 @@
+# [![TreeInfotip](./pluginIcon.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
 
-# TreeInfotip
+
+[![Jetbrains Plugins][plugin-img]][plugin]
+[![License][license-img]][license]
+[![Build Status][build-img-master]][travis-ci]
+[![GitHub release][release-img]][latest-release]
+[![Version][version-img]][plugin]
+[![Downloads][downloads-img]][plugin]
+
 
 ### 2.0时代来袭,更加具备人性化。
 
