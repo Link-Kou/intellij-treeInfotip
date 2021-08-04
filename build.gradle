@@ -24,7 +24,7 @@ apply plugin: 'idea'
 apply plugin: 'java'
 
 group 'com.linkkou'
-version '2.2.1'
+version '2.2.2'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8

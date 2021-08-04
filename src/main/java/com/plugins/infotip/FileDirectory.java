@@ -233,10 +233,15 @@ public class FileDirectory {
                     //更新前
                     @Override
                     public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        if (isFileName(psiTreeChangeEvent)) {
-                            XmlFile fileDirectoryXml = getFileDirectoryXml(project, false);
-                            XmlParsing.parsing(project, fileDirectoryXml);
+                        final PsiElement parent = psiTreeChangeEvent.getParent();
+                        if (null != parent) {
+                            final Project project1 = parent.getProject();
+                            if (isFileName(psiTreeChangeEvent)) {
+                                XmlFile fileDirectoryXml = getFileDirectoryXml(project1, false);
+                                XmlParsing.parsing(project1, fileDirectoryXml);
+                            }
                         }
+
                     }
 
                     @Override
@@ -263,10 +268,15 @@ public class FileDirectory {
 
                     @Override
                     public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        if (isFileName(psiTreeChangeEvent)) {
-                            XmlFile fileDirectoryXml = getFileDirectoryXml(project, false);
-                            XmlParsing.parsing(project, fileDirectoryXml);
+                        final PsiElement parent = psiTreeChangeEvent.getParent();
+                        if (null != parent) {
+                            final Project project1 = parent.getProject();
+                            if (isFileName(psiTreeChangeEvent)) {
+                                XmlFile fileDirectoryXml = getFileDirectoryXml(project1, false);
+                                XmlParsing.parsing(project1, fileDirectoryXml);
+                            }
                         }
+
                     }
 
                     @Override
