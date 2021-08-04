@@ -82,6 +82,7 @@ public class FileDirectory {
             String basePath = project.getPresentableUrl();
             if (null != basePath && basePath.length() > 0) {
                 //改为安长度去除
+                //此处改进
                 String presentableUrl = file.getCanonicalPath();
                 if (presentableUrl.length() < basePath.length()) {
                     Messages.showMessageDialog(project, "Unable to get the root path of the file", "Can't Get Path", AllIcons.Actions.Menu_paste);
@@ -91,7 +92,8 @@ public class FileDirectory {
                 String extension = file.getExtension();
                 boolean notfind = false;
                 for (XmlEntity x : refreshXml) {
-                    if (presentableUrl.equals(x.getPath())) {
+                    //Messages.showMessageDialog(project, presentableUrl + ":" + x.getPath(), "Can't Get Path", AllIcons.Actions.Menu_paste);
+                    if (asbbasePath.equals(x.getPath())) {
                         callback.onModifyPath(asbbasePath, x, fileDirectoryXml, project, extension);
                         notfind = true;
                         break;
@@ -125,6 +127,8 @@ public class FileDirectory {
                 PsiFile pf = pfs[0];
                 if (pf instanceof XmlFile) {
                     xmlFile = (XmlFile) pf;
+                } else {
+                    Messages.showMessageDialog(project, "There are multiple identical files in the root directory", "Can't Get Path", AllIcons.Actions.Menu_paste);
                 }
             } else if (pfs.length == 0) {
                 if (create) {
@@ -343,13 +347,14 @@ public class FileDirectory {
                 Method[] methods2 = value.getClass().getMethods();
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
                 if (null != virtualFile2) {
-                    setXmlToLocationString(virtualFile2, data);
+                    setXmlToLocationString(node.getProject(), virtualFile2, data);
                     return;
                 }
             }
+
             VirtualFile virtualFile1 = getVirtualFile(methods1, node);
             if (null != virtualFile1) {
-                setXmlToLocationString(virtualFile1, data);
+                setXmlToLocationString(node.getProject(), virtualFile1, data);
             }
         }
     }
@@ -385,7 +390,7 @@ public class FileDirectory {
      * @param abstractTreeNode 对象
      */
     private static void setXmlToLocationString(VirtualFile virtualFile, AbstractTreeNode<?> abstractTreeNode) {
-        XmlEntity matchPath = getMatchPath(virtualFile);
+        XmlEntity matchPath = getMatchPath(virtualFile, abstractTreeNode.getProject());
         if (null != matchPath) {
             //设置备注
             abstractTreeNode.getPresentation().setLocationString(matchPath.getTitle());
@@ -398,8 +403,8 @@ public class FileDirectory {
      * @param virtualFile 对象
      * @param data        对象
      */
-    private static void setXmlToLocationString(VirtualFile virtualFile, PresentationData data) {
-        XmlEntity matchPath = getMatchPath(virtualFile);
+    private static void setXmlToLocationString(Project project, VirtualFile virtualFile, PresentationData data) {
+        XmlEntity matchPath = getMatchPath(virtualFile, project);
         if (null != matchPath) {
             //设置备注
             data.setLocationString(matchPath.getTitle());
@@ -418,15 +423,16 @@ public class FileDirectory {
      * @param virtualFile 文件对象
      * @return boolean
      */
-    private static XmlEntity getMatchPath(VirtualFile virtualFile) {
+    private static XmlEntity getMatchPath(VirtualFile virtualFile, Project project) {
         List<XmlEntity> xml = XmlParsing.getXml();
         for (XmlEntity listTreeInfo : xml) {
             if (listTreeInfo != null) {
+                String basePath = project.getPresentableUrl();
                 String canonicalPath = virtualFile.getCanonicalPath();
-                if (null != canonicalPath) {
-                    if (canonicalPath.equals(listTreeInfo.getPath())) {
-                        return listTreeInfo;
-                    }
+                String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
+                //Messages.showMessageDialog(project, presentableUrl + ":" + x.getPath(), "Can't Get Path", AllIcons.Actions.Menu_paste);
+                if (asbbasePath.equals(listTreeInfo.getPath())) {
+                    return listTreeInfo;
                 }
             }
         }

@@ -187,7 +187,8 @@ public class XmlParsing {
         if (xmlpath != null) {
             String xmlextensionvalue = null != xmlextension ? xmlextension.getValue() : "";
             String xmltitlevalue = null != xmltitle ? xmltitle.getValue() : "";
-            String treepath = presentableUrl + xmlpath.getValue();
+            //presentableUrl
+            String treepath = xmlpath.getValue();
             String xmlicon = null != xmlicons ? xmlicons.getValue() : "";
             xmlEntity.setTitle(xmltitlevalue)
                     .setExtension(xmlextensionvalue)
