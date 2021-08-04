@@ -67,6 +67,7 @@ public class XmlParsing {
                 }
             }
         });
+        System.out.println(123);
     }
 
     /**
