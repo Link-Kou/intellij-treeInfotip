@@ -1,6 +1,5 @@
 # [![TreeInfotip](trees2.svg)](https://github.com/Link-Kou/intellij-treeInfotip) TreeInfotip
 
-
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Link-Kou/intellij-treeInfotip)
 ![GitHub](https://img.shields.io/github/license/Link-Kou/intellij-treeInfotip)
 ![GitHub issues](https://img.shields.io/github/issues/Link-Kou/intellij-treeInfotip)
@@ -9,7 +8,7 @@
 
 ### 2.0时代来袭,更加具备人性化。
 
-> 通过目录树右键添加备注 
+> 通过目录树右键添加备注
 
 > 通过目录树右键添加图标
 
@@ -24,7 +23,6 @@
 > 1、用来对付一些火葬场项目用的。第一目录命名的问题，见名知其意，难度不小。英文啊！都是泥腿子。翻译器翻译的，人都闷逼了。只有求理解万岁了。
 
 > 2、方便小白同学，我看到过些同学，入手项目看到目录就一个头大。好记忆不如烂笔头，充分发挥了知识分子的优良传统。手动写本本。
-
 
 ## Sponsors
 
@@ -60,7 +58,7 @@ IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfo
 
 ### 手动安装
 
-[plugin.intellij.assistant-2.2.1.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.1.jar)
+[plugin.intellij.assistant-2.2.2.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.2.jar)
 
 ### 一、示列
 
