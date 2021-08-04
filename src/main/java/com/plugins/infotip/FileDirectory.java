@@ -233,15 +233,12 @@ public class FileDirectory {
                     //更新前
                     @Override
                     public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        final PsiElement parent = psiTreeChangeEvent.getParent();
-                        if (null != parent) {
-                            final Project project1 = parent.getProject();
-                            if (isFileName(psiTreeChangeEvent)) {
-                                XmlFile fileDirectoryXml = getFileDirectoryXml(project1, false);
-                                XmlParsing.parsing(project1, fileDirectoryXml);
+                        if (isFileName(psiTreeChangeEvent)) {
+                            final PsiFile file = psiTreeChangeEvent.getFile();
+                            if (file instanceof XmlFile) {
+                                XmlParsing.parsing(project, (XmlFile) file);
                             }
                         }
-
                     }
 
                     @Override
@@ -268,15 +265,12 @@ public class FileDirectory {
 
                     @Override
                     public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        final PsiElement parent = psiTreeChangeEvent.getParent();
-                        if (null != parent) {
-                            final Project project1 = parent.getProject();
-                            if (isFileName(psiTreeChangeEvent)) {
-                                XmlFile fileDirectoryXml = getFileDirectoryXml(project1, false);
-                                XmlParsing.parsing(project1, fileDirectoryXml);
+                        if (isFileName(psiTreeChangeEvent)) {
+                            final PsiFile file = psiTreeChangeEvent.getFile();
+                            if (file instanceof XmlFile) {
+                                XmlParsing.parsing(project, (XmlFile) file);
                             }
                         }
-
                     }
 
                     @Override
