@@ -58,7 +58,7 @@ IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfo
 
 ### 手动安装
 
-[plugin.intellij.assistant-2.2.2.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.2.jar)
+[plugin.intellij.assistant-2.2.3.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.3.jar)
 
 ### 一、示列
 
