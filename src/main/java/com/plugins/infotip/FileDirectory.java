@@ -258,7 +258,7 @@ public class FileDirectory {
                         PsiElement child = psiTreeChangeEvent.getChild();
                         if (child instanceof XmlFile) {
                             if (getFileName().equals(((XmlFile) child).getName())) {
-                                XmlParsing.clear();
+                                XmlParsing.clear(project);
                             }
                         }
                     }
@@ -424,7 +424,7 @@ public class FileDirectory {
      * @return boolean
      */
     private static XmlEntity getMatchPath(VirtualFile virtualFile, Project project) {
-        List<XmlEntity> xml = XmlParsing.getXml();
+        List<XmlEntity> xml = XmlParsing.getXml(project);
         for (XmlEntity listTreeInfo : xml) {
             if (listTreeInfo != null) {
                 String basePath = project.getPresentableUrl();

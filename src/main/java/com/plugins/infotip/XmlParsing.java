@@ -10,7 +10,9 @@ import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.plugins.infotip.ui.Icons;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -34,7 +36,7 @@ public class XmlParsing {
 
     private final static String ICONS = "icons";
 
-    private final static List<XmlEntity> XMLLIST = new CopyOnWriteArrayList<>();
+    private final static ConcurrentHashMap<Project, List<XmlEntity>> XMLLIST = new ConcurrentHashMap<>();
 
     /**
      * 解析XML
@@ -46,7 +48,15 @@ public class XmlParsing {
         if (null == xmlFile) {
             return;
         }
-        XMLLIST.clear();
+        final CopyOnWriteArrayList<XmlEntity> xmlEntities = (CopyOnWriteArrayList<XmlEntity>) XMLLIST.get(project);
+        List<XmlEntity> c;
+        if (null != xmlEntities) {
+            c = xmlEntities;
+            c.clear();
+        } else {
+            c = new CopyOnWriteArrayList<>();
+            XMLLIST.put(project, c);
+        }
         final String presentableUrl = project.getPresentableUrl();
         if (presentableUrl == null) {
             return;
@@ -61,7 +71,7 @@ public class XmlParsing {
                     if (TAGTREE.equals(tag.getName())) {
                         XmlEntity tree = tree(tag, presentableUrl);
                         if (null != tree) {
-                            XMLLIST.add(tree);
+                            c.add(tree);
                         }
                     }
                 }
@@ -78,19 +88,30 @@ public class XmlParsing {
      */
     public static List<XmlEntity> getRefreshXml(Project project, XmlFile xmlFile) {
         parsing(project, xmlFile);
-        return XMLLIST;
+        final List<XmlEntity> xmlEntities = XMLLIST.get(project);
+        if (null != xmlEntities) {
+            return xmlEntities;
+        }
+        return new CopyOnWriteArrayList<>();
     }
 
     /**
      * 解析XML
      */
-    public static List<XmlEntity> getXml() {
-        return XMLLIST;
+    public static List<XmlEntity> getXml(Project project) {
+        final List<XmlEntity> xmlEntities = XMLLIST.get(project);
+        if (null != xmlEntities) {
+            return xmlEntities;
+        }
+        return new CopyOnWriteArrayList<>();
     }
 
 
-    public static void clear() {
-        XMLLIST.clear();
+    public static void clear(Project project) {
+        final List<XmlEntity> xmlEntities = XMLLIST.get(project);
+        if (null != xmlEntities) {
+            xmlEntities.clear();
+        }
     }
 
     /**
@@ -190,11 +211,7 @@ public class XmlParsing {
             //presentableUrl
             String treepath = xmlpath.getValue();
             String xmlicon = null != xmlicons ? xmlicons.getValue() : "";
-            xmlEntity.setTitle(xmltitlevalue)
-                    .setExtension(xmlextensionvalue)
-                    .setTag(tag)
-                    .setIcon(xmlicon)
-                    .setPath(treepath);
+            xmlEntity.setTitle(xmltitlevalue).setExtension(xmlextensionvalue).setTag(tag).setIcon(xmlicon).setPath(treepath);
             return xmlEntity;
         }
         return null;
