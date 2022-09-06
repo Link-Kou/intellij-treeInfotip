@@ -10,7 +10,6 @@ import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.plugins.infotip.ui.Icons;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -150,6 +149,19 @@ public class XmlParsing {
                     }
                 });
             }
+        }
+    }
+    
+    public static void removePath(XmlTag childTag, String title, Icons icon, XmlFile xmlFile, Project project) {
+        
+        if (null != childTag) {
+            WriteCommandAction.runWriteCommandAction(project, new Runnable() {
+                @Override
+                public void run() {
+                    childTag.delete();
+                    XmlParsing.parsing(project, xmlFile);
+                }
+            });
         }
     }
 
