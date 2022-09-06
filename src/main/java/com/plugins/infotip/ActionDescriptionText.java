@@ -29,6 +29,11 @@ public class ActionDescriptionText extends AnAction {
                 String txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
                         "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
                 if (null != txt) {
+                    // 删除逻辑
+                    if ("".equals(txt)) {
+                        XmlParsing.removePath(x.getTag(), txt, null, fileDirectoryXml, project);
+                        return;
+                    }
                     XmlParsing.modifyPath(x.getTag(), txt, null, fileDirectoryXml, project);
                 }
             }
@@ -38,6 +43,9 @@ public class ActionDescriptionText extends AnAction {
                 String txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
                         "What Needs To Be Description?", AllIcons.Actions.Menu_paste, "", null);
                 if (null != txt) {
+                    if ("".equals(txt)) {
+                        return;
+                    }
                     XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, txt, null, extension);
                 }
             }
