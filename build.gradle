@@ -38,14 +38,15 @@ version '3.0.0'
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
-    implementation 'org.jetbrains:annotations:24.0.1'
+    compileOnly 'org.jetbrains:annotations:24.0.1'
 }
 
 /*https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html#intellij-platform-based-products-of-recent-ide-versions*/
+/*https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension*/
 intellij {
     pluginName = 'TreeInfotip'
-    // 开发环境运行时使用的版本
-    //version = '2022.3.2'
+    // 开发环境运行时使用的版本，不同的版本编译会采用默认支持java版本编译
+    version = '2022.2'
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     sandboxDir = "${rootProject.rootDir}/idea-sandbox"
     type = 'IU'
@@ -55,7 +56,7 @@ intellij {
     updateSinceUntilBuild = false
     downloadSources = false
     //localPath '/Applications/IntelliJ IDEA.app'
-    localPath = '/Applications/WebStorm.app/Contents'
+    //localPath = '/Applications/WebStorm.app/Contents'
 }
 
 runIde {
@@ -63,8 +64,4 @@ runIde {
             "-javaagent:/Applications/jetbra/fineagent.jar=jetbrains",
             "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED",
             "--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED"]
-}
-
-patchPluginXml {
-
 }

@@ -396,17 +396,16 @@ public class FileDirectory {
         if (null != matchPath) {
             //设置备注
             final PresentationData presentation = abstractTreeNode.getPresentation();
-            presentation.getTextAttributesKey();
             //设置背景色
-            presentation.setBackground(Color.green);
+            //presentation.setBackground(Color.green);
             //设置锚定文本
             presentation.setLocationString(matchPath.getTitle());
             //设置节点本身颜色
-            presentation.setForcedTextForeground(Color.blue);
+            //presentation.setForcedTextForeground(Color.blue);
             //设置节点本身文本
-            presentation.setPresentableText(matchPath.getTitle());
+            //presentation.setPresentableText(matchPath.getTitle());
             //设置提示
-            presentation.setTooltip(matchPath.getTitle());
+            //presentation.setTooltip(matchPath.getTitle());
         }
     }
 
@@ -440,13 +439,17 @@ public class FileDirectory {
         List<XmlEntity> xml = XmlParsing.getXml(project);
         for (XmlEntity listTreeInfo : xml) {
             if (listTreeInfo != null) {
-                String basePath = project.getPresentableUrl();
-                String canonicalPath = virtualFile.getCanonicalPath();
-                if (null != basePath && null != canonicalPath) {
-                    String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
-                    if (asbbasePath.equals(listTreeInfo.getPath())) {
-                        return listTreeInfo;
+                try {
+                    String basePath = project.getPresentableUrl();
+                    String canonicalPath = virtualFile.getCanonicalPath();
+                    if (null != basePath && null != canonicalPath) {
+                        String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
+                        if (asbbasePath.equals(listTreeInfo.getPath())) {
+                            return listTreeInfo;
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
