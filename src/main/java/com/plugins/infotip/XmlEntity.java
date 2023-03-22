@@ -3,11 +3,11 @@ package com.plugins.infotip;
 import com.intellij.psi.xml.XmlTag;
 
 /**
- * A <code>XMLEntity</code> Class
+ * XML的实体
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/7 17:11
+ * 2021/6/7 17:11
  */
 public class XmlEntity {
     /**

@@ -9,6 +9,7 @@ import com.intellij.psi.xml.XmlFile;
 import com.plugins.infotip.ui.Icons;
 import com.plugins.infotip.ui.IconsList;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.codeInsight.CodeInsightActionHandler;
 
 import java.awt.*;
 
@@ -20,7 +21,7 @@ import static com.plugins.infotip.FileDirectory.getBasePath;
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/7 14:13
+ * 2021/6/7 14:13
  */
 public class ActionDescriptionIcon extends AnAction {
 

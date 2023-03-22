@@ -11,12 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import static com.plugins.infotip.FileDirectory.getBasePath;
 
 /**
- * A <code>ActionDescription</code> Class
  * 右键菜单
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/7 14:13
+ * 2021/6/7 14:13
  */
 public class ActionDescriptionText extends AnAction {
 
@@ -44,12 +43,12 @@ public class ActionDescriptionText extends AnAction {
         });
     }
 
-
+    /**
+     * 项目构建完毕前就显示
+     * @return boolean
+     */
     @Override
-    public void update(@NotNull AnActionEvent event) {
-        //在Action显示之前,根据选中文件扩展名判定是否显示此Action
-        //this.getTemplatePresentation().setIcon(AllIcons.Actions.MenuPaste);
+    public boolean isDumbAware() {
+        return true;
     }
-
-
 }

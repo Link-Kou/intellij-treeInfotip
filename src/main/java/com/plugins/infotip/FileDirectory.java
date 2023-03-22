@@ -19,6 +19,7 @@ import com.intellij.psi.xml.XmlFile;
 import com.plugins.infotip.ui.Icons;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,11 +30,11 @@ import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE;
 import static com.plugins.infotip.FileIcons.getAllIcons;
 
 /**
- * A <code>FileDirectory</code> Class
+ * 文件目录管理
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/7 16:48
+ * 2021/6/7 16:48
  */
 public class FileDirectory {
 
@@ -384,7 +385,8 @@ public class FileDirectory {
     }
 
     /**
-     * 设置备注
+     * 设置备注-文本
+     * 核心代码实现
      *
      * @param virtualFile      对象
      * @param abstractTreeNode 对象
@@ -393,12 +395,23 @@ public class FileDirectory {
         XmlEntity matchPath = getMatchPath(virtualFile, abstractTreeNode.getProject());
         if (null != matchPath) {
             //设置备注
-            abstractTreeNode.getPresentation().setLocationString(matchPath.getTitle());
+            final PresentationData presentation = abstractTreeNode.getPresentation();
+            presentation.getTextAttributesKey();
+            //设置背景色
+            presentation.setBackground(Color.green);
+            //设置锚定文本
+            presentation.setLocationString(matchPath.getTitle());
+            //设置节点本身颜色
+            presentation.setForcedTextForeground(Color.blue);
+            //设置节点本身文本
+            presentation.setPresentableText(matchPath.getTitle());
+            //设置提示
+            presentation.setTooltip(matchPath.getTitle());
         }
     }
 
     /**
-     * 设置备注
+     * 设置备注-图标
      *
      * @param virtualFile 对象
      * @param data        对象
@@ -429,10 +442,11 @@ public class FileDirectory {
             if (listTreeInfo != null) {
                 String basePath = project.getPresentableUrl();
                 String canonicalPath = virtualFile.getCanonicalPath();
-                String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
-                //Messages.showMessageDialog(project, presentableUrl + ":" + x.getPath(), "Can't Get Path", AllIcons.Actions.Menu_paste);
-                if (asbbasePath.equals(listTreeInfo.getPath())) {
-                    return listTreeInfo;
+                if (null != basePath && null != canonicalPath) {
+                    String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
+                    if (asbbasePath.equals(listTreeInfo.getPath())) {
+                        return listTreeInfo;
+                    }
                 }
             }
         }

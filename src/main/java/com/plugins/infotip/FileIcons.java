@@ -7,11 +7,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
- * A <code>FileIcons</code> Class
+ * 获取IDEA内默认的所有图标
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/18 20:09
+ * 2021/6/18 20:09
  */
 public class FileIcons {
 

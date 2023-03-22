@@ -10,17 +10,16 @@ import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.plugins.infotip.ui.Icons;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * A <code>XmlParsing</code> Class
+ * XML的解析
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/7 17:12
+ * 2021/6/7 17:12
  */
 public class XmlParsing {
 
@@ -77,7 +76,6 @@ public class XmlParsing {
                 }
             }
         });
-        System.out.println(123);
     }
 
     /**

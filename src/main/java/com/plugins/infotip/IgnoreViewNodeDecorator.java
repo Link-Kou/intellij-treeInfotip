@@ -42,16 +42,9 @@ import static com.plugins.infotip.FileDirectory.setLocationString;
  */
 public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
-    public IgnoreViewNodeDecorator(@NotNull Project project) {
-
-    }
-
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
         setLocationString(node,data);
     }
 
-    @Override
-    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {
-    }
 }
