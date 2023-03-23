@@ -443,9 +443,13 @@ public class FileDirectory {
                     String basePath = project.getPresentableUrl();
                     String canonicalPath = virtualFile.getCanonicalPath();
                     if (null != basePath && null != canonicalPath) {
-                        String asbbasePath = canonicalPath.substring(basePath.length(), canonicalPath.length());
-                        if (asbbasePath.equals(listTreeInfo.getPath())) {
-                            return listTreeInfo;
+                        int beginIndex = basePath.length();
+                        int endIndex = canonicalPath.length();
+                        if (beginIndex <= endIndex) {
+                            String asbbasePath = canonicalPath.substring(beginIndex, endIndex);
+                            if (asbbasePath.equals(listTreeInfo.getPath())) {
+                                return listTreeInfo;
+                            }
                         }
                     }
                 } catch (Exception e) {

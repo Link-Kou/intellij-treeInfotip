@@ -43,7 +43,7 @@ public class XmlParsing {
      * @param project 项目
      * @param xmlFile xml文件
      */
-    public static void parsing(Project project, XmlFile xmlFile) {
+    public static synchronized void parsing(Project project, XmlFile xmlFile) {
         if (null == xmlFile) {
             return;
         }
@@ -122,7 +122,7 @@ public class XmlParsing {
      * @param icon      图标
      * @param extension 类型
      */
-    public static void createPath(XmlFile xmlFile, Project project, String path, String title, Icons icon, String extension) {
+    public static synchronized void createPath(XmlFile xmlFile, Project project, String path, String title, Icons icon, String extension) {
         XmlDocument document = xmlFile.getDocument();
         if (null == document) {
             return;
@@ -184,7 +184,7 @@ public class XmlParsing {
      * @param icon     图标
      * @param project  项目
      */
-    public static void modifyPath(XmlTag childTag, Icons icon, XmlFile xmlFile, Project project) {
+    public static synchronized void modifyPath(XmlTag childTag, Icons icon, XmlFile xmlFile, Project project) {
         if (null != childTag) {
             WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                 @Override
