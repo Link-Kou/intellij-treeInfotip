@@ -27,6 +27,8 @@ package com.plugins.infotip;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
+import com.intellij.packageDependencies.ui.PackageDependenciesNode;
+import com.intellij.ui.ColoredTreeCellRenderer;
 
 import static com.plugins.infotip.FileDirectory.setLocationString;
 
@@ -43,4 +45,14 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
         setLocationString(node,data);
     }
 
+    /**
+     * 向下兼容本身无具体作用
+     * @param node
+     * @param cellRenderer
+     * @deprecated
+     */
+    @Override
+    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {
+        //
+    }
 }

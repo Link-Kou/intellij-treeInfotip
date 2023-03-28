@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/com/plugins/infotip/FileDirectory.java" title="文件夹管理" extension="java"/>
+ </trees>
