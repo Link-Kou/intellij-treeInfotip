@@ -16,10 +16,10 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlFile;
+import com.intellij.ui.SimpleTextAttributes;
 import com.plugins.infotip.ui.Icons;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -348,14 +348,14 @@ public class FileDirectory {
                 Method[] methods2 = value.getClass().getMethods();
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
                 if (null != virtualFile2) {
-                    setXmlToLocationString(node.getProject(), virtualFile2, data);
+                    setXmlToLocationIcons(node.getProject(), virtualFile2, data);
                     return;
                 }
             }
 
             VirtualFile virtualFile1 = getVirtualFile(methods1, node);
             if (null != virtualFile1) {
-                setXmlToLocationString(node.getProject(), virtualFile1, data);
+                setXmlToLocationIcons(node.getProject(), virtualFile1, data);
             }
         }
     }
@@ -392,18 +392,23 @@ public class FileDirectory {
      * @param abstractTreeNode 对象
      */
     private static void setXmlToLocationString(VirtualFile virtualFile, AbstractTreeNode<?> abstractTreeNode) {
+        String name = abstractTreeNode.getName();
         XmlEntity matchPath = getMatchPath(virtualFile, abstractTreeNode.getProject());
         if (null != matchPath) {
+
             //设置备注
             final PresentationData presentation = abstractTreeNode.getPresentation();
             //设置背景色
             //presentation.setBackground(Color.green);
             //设置锚定文本
             presentation.setLocationString(matchPath.getTitle());
-            //设置节点本身颜色
-            //presentation.setForcedTextForeground(Color.blue);
+            presentation.clearText();
             //设置节点本身文本
             //presentation.setPresentableText(matchPath.getTitle());
+            //设置文本颜色
+            presentation.addText(name, SimpleTextAttributes.ERROR_ATTRIBUTES);
+            //设置节点本身颜色
+            //presentation.setForcedTextForeground(Color.blue);
             //设置提示
             //presentation.setTooltip(matchPath.getTitle());
         }
@@ -415,7 +420,7 @@ public class FileDirectory {
      * @param virtualFile 对象
      * @param data        对象
      */
-    private static void setXmlToLocationString(Project project, VirtualFile virtualFile, PresentationData data) {
+    private static void setXmlToLocationIcons(Project project, VirtualFile virtualFile, PresentationData data) {
         XmlEntity matchPath = getMatchPath(virtualFile, project);
         if (null != matchPath) {
             //设置备注
