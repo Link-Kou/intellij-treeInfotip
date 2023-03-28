@@ -52,7 +52,5 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
      * @deprecated
      */
     @Override
-    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {
-        //
-    }
+    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {}
 }

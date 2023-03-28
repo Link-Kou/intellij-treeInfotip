@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static com.plugins.infotip.FileIcons.getAllIcons;
 
@@ -14,7 +13,7 @@ import static com.plugins.infotip.FileIcons.getAllIcons;
  *
  * @author lk
  * @version 1.0
- * @date 2021/6/18 13:11
+ * 2021/6/18 13:11
  */
 public class IconsList extends JDialog {
     private JPanel contentPane;
@@ -24,7 +23,8 @@ public class IconsList extends JDialog {
     private Icons selectedItem;
 
     public IconsList() {
-        setContentPane(contentPane);
+        super();
+        setContentPane(this.contentPane);
         setModal(true);
         getRootPane().setDefaultButton(okButton);
         okButton.addActionListener(new ActionListener() {

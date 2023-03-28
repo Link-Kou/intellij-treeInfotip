@@ -28,6 +28,10 @@ public class ActionDescriptionIcon extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
+        final Project project = anActionEvent.getProject();
+        if (null == project) {
+            return;
+        }
         final IconsList dialog = new IconsList();
         dialog.pack();
         dialog.setTitle("Select Icons");
@@ -61,6 +65,16 @@ public class ActionDescriptionIcon extends AnAction {
     public void update(@NotNull AnActionEvent event) {
         //在Action显示之前,根据选中文件扩展名判定是否显示此Action
         //this.getTemplatePresentation().setIcon(AllIcons.Actions.MenuPaste);
+    }
+
+
+    /**
+     * 项目构建完毕前就显示
+     * @return boolean
+     */
+    @Override
+    public boolean isDumbAware() {
+        return super.isDumbAware();
     }
 
 

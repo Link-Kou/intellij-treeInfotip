@@ -51,7 +51,7 @@ java {
 intellij {
     pluginName = 'TreeInfotip'
     // 开发环境运行时使用的版本，不同的版本编译会采用默认支持java版本编译
-    //version = '2022.3.2'
+    version = '2022.3.2'
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     sandboxDir = "${rootProject.rootDir}/idea-sandbox"
     type = 'IU'
@@ -60,7 +60,7 @@ intellij {
     //Disables updating since-build attribute in plugin.xml
     updateSinceUntilBuild = false
     downloadSources = false
-    localPath = '/Applications/IntelliJ IDEA.app/Contents'
+    //localPath = '/Applications/IntelliJ IDEA.app/Contents'
     //localPath = '/Applications/WebStorm.app/Contents'
 }
 

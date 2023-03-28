@@ -45,10 +45,11 @@ public class ActionDescriptionText extends AnAction {
 
     /**
      * 项目构建完毕前就显示
+     * 强烈建议不要覆盖,
      * @return boolean
      */
     @Override
     public boolean isDumbAware() {
-        return true;
+        return super.isDumbAware();
     }
 }
