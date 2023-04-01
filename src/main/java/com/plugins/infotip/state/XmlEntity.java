@@ -35,6 +35,11 @@ public class XmlEntity {
      */
     private String icon;
 
+    /**
+     * 颜色
+     */
+    private String color;
+
     //region  getset
 
     public String getPath() {
@@ -79,6 +84,15 @@ public class XmlEntity {
 
     public XmlEntity setIcon(String icon) {
         this.icon = icon;
+        return this;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public XmlEntity setColor(String color) {
+        this.color = color;
         return this;
     }
 

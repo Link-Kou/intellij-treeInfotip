@@ -16,14 +16,19 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlFile;
+import com.intellij.ui.SimpleTextAttributes;
+import com.intellij.util.ui.NamedColorUtil;
+import com.plugins.infotip.ui.Colors;
 import com.plugins.infotip.ui.Icons;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE;
 import static com.plugins.infotip.ui.FileIcons.getAllIcons;
@@ -339,22 +344,22 @@ public class FileDirectory {
      * @param node 对象
      * @param data 对象
      */
-    public static void setLocationIcons(ProjectViewNode node, PresentationData data) {
+    public static void setLocationIconsOrColor(ProjectViewNode node, PresentationData data) {
         if (null != node) {
             Method[] methods1 = node.getClass().getMethods();
             Object value = node.getValue();
+            final String name = node.getName();
             if (null != value) {
                 Method[] methods2 = value.getClass().getMethods();
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
                 if (null != virtualFile2) {
-                    setXmlToLocationIcons(node.getProject(), virtualFile2, data);
+                    setXmlToLocationIconsOrColor(node.getProject(), name, virtualFile2, data);
                     return;
                 }
             }
-
             VirtualFile virtualFile1 = getVirtualFile(methods1, node);
             if (null != virtualFile1) {
-                setXmlToLocationIcons(node.getProject(), virtualFile1, data);
+                setXmlToLocationIconsOrColor(node.getProject(), name, virtualFile1, data);
             }
         }
     }
@@ -396,19 +401,7 @@ public class FileDirectory {
         if (null != matchPath) {
             //设置备注
             final PresentationData presentation = abstractTreeNode.getPresentation();
-            //设置锚定文本
-            presentation.setLocationString(matchPath.getTitle());
-            //presentation.clearText();
-            //设置节点本身文本
-            //presentation.setPresentableText(matchPath.getTitle());
-            //设置文本颜色
-            //presentation.addText(name, SimpleTextAttributes.ERROR_ATTRIBUTES);
-            //设置节点本身颜色
-            //presentation.setForcedTextForeground(Color.blue);
-            //设置背景色
-            //presentation.setBackground(Color.green);
-            //设置提示
-            //presentation.setTooltip(matchPath.getTitle());
+            setStyle(presentation, matchPath, name);
         }
     }
 
@@ -418,18 +411,38 @@ public class FileDirectory {
      * @param virtualFile 对象
      * @param data        对象
      */
-    private static void setXmlToLocationIcons(Project project, VirtualFile virtualFile, PresentationData data) {
+    private static void setXmlToLocationIconsOrColor(Project project, String name, VirtualFile virtualFile, PresentationData data) {
         XmlEntity matchPath = getMatchPath(virtualFile, project);
         if (null != matchPath) {
-            //设置备注
-            data.setLocationString(matchPath.getTitle());
-            for (Icons allIcon : getAllIcons()) {
-                if (allIcon.getName().equals(matchPath.getIcon())) {
-                    data.setIcon(allIcon.getIcon());
-                    return;
-                }
+            setStyle(data, matchPath, name);
+        }
+    }
+
+    private static void setStyle(final PresentationData presentation, XmlEntity matchPath, String name) {
+        //设置图标
+        for (Icons allIcon : getAllIcons()) {
+            if (allIcon.getName().equals(matchPath.getIcon())) {
+                presentation.setIcon(allIcon.getIcon());
             }
         }
+        //设置锚定文本
+        presentation.setLocationString(matchPath.getTitle());
+        final Colors colors = Colors.toColors(matchPath.getColor());
+        if (null != colors) {
+            if (null == colors.getTextcolor()) {
+                //设置文本颜色
+                presentation.clearText();
+                presentation.addText(name, new SimpleTextAttributes(0, colors.getTextcolor()));
+            }
+            //设置节点本身颜色
+            presentation.setForcedTextForeground(null == colors.getForcedtextcolor() ? presentation.getForcedTextForeground() : colors.getForcedtextcolor());
+            //设置背景色
+            presentation.setBackground(colors.getBackgroundcolor());
+        }
+        //设置节点本身文本
+        //presentation.setPresentableText(matchPath.getTitle());
+        //设置提示
+        //presentation.setTooltip(matchPath.getTitle());
     }
 
     /**

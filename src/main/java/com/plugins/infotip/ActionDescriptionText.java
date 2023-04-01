@@ -40,7 +40,7 @@ public class ActionDescriptionText extends AnAction {
                 String txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
                         "What Needs To Be Description?", AllIcons.Actions.Menu_paste, "", null);
                 if (null != txt) {
-                    XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, txt, null, extension);
+                    XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, txt, null, null, extension);
                 }
             }
         });
@@ -49,6 +49,7 @@ public class ActionDescriptionText extends AnAction {
     /**
      * 项目构建完毕前就显示
      * 强烈建议不要覆盖,
+     *
      * @return boolean
      */
     @Override

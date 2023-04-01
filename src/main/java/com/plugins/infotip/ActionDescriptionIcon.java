@@ -55,7 +55,7 @@ public class ActionDescriptionIcon extends AnAction {
             public void onCreatePath(String asbbasePath, XmlFile fileDirectoryXml, Project project, String extension) {
                 dialog.setVisible(true);
                 Icons icons = dialog.getIcons();
-                XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, null, icons, extension);
+                XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, null, icons, null, extension);
             }
         });
     }
@@ -70,6 +70,7 @@ public class ActionDescriptionIcon extends AnAction {
 
     /**
      * 项目构建完毕前就显示
+     *
      * @return boolean
      */
     @Override

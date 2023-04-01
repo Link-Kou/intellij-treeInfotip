@@ -30,7 +30,7 @@ import com.intellij.ide.projectView.ProjectViewNodeDecorator;
 import com.intellij.packageDependencies.ui.PackageDependenciesNode;
 import com.intellij.ui.ColoredTreeCellRenderer;
 
-import static com.plugins.infotip.state.FileDirectory.setLocationIcons;
+import static com.plugins.infotip.state.FileDirectory.setLocationIconsOrColor;
 
 /**
  * 项目目录视图
@@ -42,7 +42,7 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
-        setLocationIcons(node,data);
+        setLocationIconsOrColor(node,data);
     }
 
     /**

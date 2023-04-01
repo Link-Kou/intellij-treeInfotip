@@ -110,6 +110,9 @@
             <action id="FirstAction2" class="com.plugins.infotip.ActionDescriptionIcon" text="Add Icons"
                     description="添加图标信息">
             </action>
+            <action id="FirstAction3" class="com.plugins.infotip.ActionDescriptionColor" text="Add Color"
+                    description="添加节点色">
+            </action>
         </group>
 
     </actions>

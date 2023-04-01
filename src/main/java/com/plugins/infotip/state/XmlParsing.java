@@ -8,9 +8,12 @@ import com.intellij.psi.xml.XmlAttribute;
 import com.intellij.psi.xml.XmlDocument;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
+import com.plugins.infotip.ui.Colors;
 import com.plugins.infotip.ui.Icons;
 
+import java.awt.*;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -34,6 +37,8 @@ public class XmlParsing {
     private final static String EXTENSION = "extension";
 
     private final static String ICONS = "icons";
+
+    private final static String COLOR = "color";
 
     private final static ConcurrentHashMap<Project, List<XmlEntity>> XMLLIST = new ConcurrentHashMap<>();
 
@@ -122,7 +127,7 @@ public class XmlParsing {
      * @param icon      图标
      * @param extension 类型
      */
-    public static synchronized void createPath(XmlFile xmlFile, Project project, String path, String title, Icons icon, String extension) {
+    public static synchronized void createPath(XmlFile xmlFile, Project project, String path, String title, Icons icon, Map<String, Color> color, String extension) {
         XmlDocument document = xmlFile.getDocument();
         if (null == document) {
             return;
@@ -134,6 +139,12 @@ public class XmlParsing {
                 childTag.setAttribute(PATH, path);
                 if (null != title) {
                     childTag.setAttribute(TITLE, title);
+                }
+                if (null != icon) {
+                    childTag.setAttribute(ICONS, icon.getName());
+                }
+                if (null != color) {
+                    childTag.setAttribute(COLOR, Colors.getColorSting(color));
                 }
                 childTag.setAttribute(EXTENSION, extension);
                 WriteCommandAction.runWriteCommandAction(project, new Runnable() {
@@ -189,6 +200,25 @@ public class XmlParsing {
         }
     }
 
+    /**
+     * 修改路径
+     *
+     * @param childTag 标签
+     * @param color    颜色
+     * @param project  项目
+     */
+    public static synchronized void modifyPath(XmlTag childTag, Map<String, Color> color, XmlFile xmlFile, Project project) {
+        if (null != childTag) {
+            WriteCommandAction.runWriteCommandAction(project, new Runnable() {
+                @Override
+                public void run() {
+                    childTag.setAttribute(COLOR, null != color ? Colors.getColorSting(color) : null);
+                    XmlParsing.parsing(project, xmlFile);
+                }
+            });
+        }
+    }
+
 
     private static XmlEntity tree(XmlTag tag, String presentableUrl) {
         XmlEntity xmlEntity = new XmlEntity();
@@ -196,13 +226,20 @@ public class XmlParsing {
         XmlAttribute xmltitle = tag.getAttribute(TITLE);
         XmlAttribute xmlextension = tag.getAttribute(EXTENSION);
         XmlAttribute xmlicons = tag.getAttribute(ICONS);
+        XmlAttribute xmlcolors = tag.getAttribute(COLOR);
         if (xmlpath != null) {
             String xmlextensionvalue = null != xmlextension ? xmlextension.getValue() : "";
             String xmltitlevalue = null != xmltitle ? xmltitle.getValue() : "";
             //presentableUrl
             String treepath = xmlpath.getValue();
             String xmlicon = null != xmlicons ? xmlicons.getValue() : "";
-            xmlEntity.setTitle(xmltitlevalue).setExtension(xmlextensionvalue).setTag(tag).setIcon(xmlicon).setPath(treepath);
+            String xmlcolor = null != xmlcolors ? xmlcolors.getValue() : "";
+            xmlEntity.setTitle(xmltitlevalue)
+                    .setExtension(xmlextensionvalue)
+                    .setTag(tag)
+                    .setIcon(xmlicon)
+                    .setColor(xmlcolor)
+                    .setPath(treepath);
             return xmlEntity;
         }
         return null;
