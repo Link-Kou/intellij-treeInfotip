@@ -14,7 +14,6 @@ import java.util.List;
 public class Colors {
 
     private Color textcolor;
-    private Color forcedtextcolor;
     private Color backgroundcolor;
 
 
@@ -38,7 +37,7 @@ public class Colors {
         if (null == color) {
             return null;
         }
-        return String.format("%s,%s,%s", color.getRed(), color.getBlue(), color.getGreen());
+        return String.format("%s,%s,%s", color.getRed(), color.getGreen(), color.getBlue());
     }
 
     public static Map<String, Color> toMapColor(String color) {
@@ -70,9 +69,6 @@ public class Colors {
                     case "textcolor":
                         colors.setTextcolor(toColor(split1[1]));
                         break;
-                    case "forcedtextcolor":
-                        colors.setForcedtextcolor(toColor(split1[1]));
-                        break;
                     case "backgroundcolor":
                         colors.setBackgroundcolor(toColor(split1[1]));
                         break;
@@ -97,15 +93,6 @@ public class Colors {
 
     public Colors setTextcolor(Color textcolor) {
         this.textcolor = textcolor;
-        return this;
-    }
-
-    public Color getForcedtextcolor() {
-        return forcedtextcolor;
-    }
-
-    public Colors setForcedtextcolor(Color forcedtextcolor) {
-        this.forcedtextcolor = forcedtextcolor;
         return this;
     }
 

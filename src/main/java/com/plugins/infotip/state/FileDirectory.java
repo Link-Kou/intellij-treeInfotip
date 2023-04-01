@@ -429,15 +429,15 @@ public class FileDirectory {
         presentation.setLocationString(matchPath.getTitle());
         final Colors colors = Colors.toColors(matchPath.getColor());
         if (null != colors) {
-            if (null == colors.getTextcolor()) {
+            if (null != colors.getTextcolor()) {
                 //设置文本颜色
                 presentation.clearText();
                 presentation.addText(name, new SimpleTextAttributes(0, colors.getTextcolor()));
             }
-            //设置节点本身颜色
-            presentation.setForcedTextForeground(null == colors.getForcedtextcolor() ? presentation.getForcedTextForeground() : colors.getForcedtextcolor());
-            //设置背景色
-            presentation.setBackground(colors.getBackgroundcolor());
+            if (null != colors.getBackgroundcolor()) {
+                //设置背景色
+                presentation.setBackground(colors.getBackgroundcolor());
+            }
         }
         //设置节点本身文本
         //presentation.setPresentableText(matchPath.getTitle());

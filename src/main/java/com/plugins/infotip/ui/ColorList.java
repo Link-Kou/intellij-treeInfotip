@@ -17,12 +17,10 @@ public class ColorList extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JPanel jpanel_textcolor;
-    private JPanel jpanel_forcedtextcolor;
     private JPanel jpanel_backgroundcolor;
 
     Map<String, Pair<MyColorButton, Color>> mapColor = new HashMap<String, Pair<MyColorButton, Color>>() {{
         put("textcolor", null);
-        put("forcedtextcolor", null);
         put("backgroundcolor", null);
     }};
 
@@ -42,9 +40,6 @@ public class ColorList extends JDialog {
                 switch (next.getKey()) {
                     case "textcolor":
                         this.jpanel_textcolor.add(myColorButton);
-                        break;
-                    case "forcedtextcolor":
-                        this.jpanel_forcedtextcolor.add(myColorButton);
                         break;
                     case "backgroundcolor":
                         this.jpanel_backgroundcolor.add(myColorButton);
