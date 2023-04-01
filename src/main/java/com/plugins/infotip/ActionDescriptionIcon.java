@@ -1,19 +1,19 @@
 package com.plugins.infotip;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.xml.XmlFile;
+import com.plugins.infotip.state.FileDirectory;
+import com.plugins.infotip.state.XmlEntity;
+import com.plugins.infotip.state.XmlParsing;
 import com.plugins.infotip.ui.Icons;
 import com.plugins.infotip.ui.IconsList;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.codeInsight.CodeInsightActionHandler;
 
 import java.awt.*;
 
-import static com.plugins.infotip.FileDirectory.getBasePath;
+import static com.plugins.infotip.state.FileDirectory.getBasePath;
 
 /**
  * A <code>ActionDescription</code> Class

@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static com.plugins.infotip.FileIcons.getAllIcons;
+import static com.plugins.infotip.ui.FileIcons.getAllIcons;
 
 /**
  * A <code>iconsList</code> Class

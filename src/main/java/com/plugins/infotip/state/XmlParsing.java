@@ -1,4 +1,4 @@
-package com.plugins.infotip;
+package com.plugins.infotip.state;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
@@ -135,9 +135,6 @@ public class XmlParsing {
                 if (null != title) {
                     childTag.setAttribute(TITLE, title);
                 }
-                if (null != icon) {
-                    childTag.setAttribute(ICONS, icon.getName());
-                }
                 childTag.setAttribute(EXTENSION, extension);
                 WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                     @Override
@@ -157,19 +154,15 @@ public class XmlParsing {
      *
      * @param childTag 标签
      * @param title    标题
-     * @param icon     图标
      * @param project  项目
      */
-    public static void modifyPath(XmlTag childTag, String title, Icons icon, XmlFile xmlFile, Project project) {
+    public static synchronized void modifyPath(XmlTag childTag, String title, XmlFile xmlFile, Project project) {
         if (null != childTag) {
             WriteCommandAction.runWriteCommandAction(project, new Runnable() {
                 @Override
                 public void run() {
                     if (null != title) {
                         childTag.setAttribute(TITLE, title);
-                    }
-                    if (null != icon) {
-                        childTag.setAttribute(ICONS, icon.getName());
                     }
                     XmlParsing.parsing(project, xmlFile);
                 }

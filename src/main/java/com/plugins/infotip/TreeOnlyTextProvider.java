@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
-import static com.plugins.infotip.FileDirectory.setLocationString;
+import static com.plugins.infotip.state.FileDirectory.setLocationString;
 
 /**
  * 目录树显示备注

@@ -1,4 +1,4 @@
-package com.plugins.infotip;
+package com.plugins.infotip.ui;
 
 import com.plugins.infotip.ui.Icons;
 

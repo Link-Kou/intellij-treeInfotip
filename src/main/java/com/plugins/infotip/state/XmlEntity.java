@@ -1,4 +1,4 @@
-package com.plugins.infotip;
+package com.plugins.infotip.state;
 
 import com.intellij.psi.xml.XmlTag;
 

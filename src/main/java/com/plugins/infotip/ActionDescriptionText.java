@@ -6,9 +6,12 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.xml.XmlFile;
+import com.plugins.infotip.state.FileDirectory;
+import com.plugins.infotip.state.XmlEntity;
+import com.plugins.infotip.state.XmlParsing;
 import org.jetbrains.annotations.NotNull;
 
-import static com.plugins.infotip.FileDirectory.getBasePath;
+import static com.plugins.infotip.state.FileDirectory.getBasePath;
 
 /**
  * 右键菜单
@@ -28,7 +31,7 @@ public class ActionDescriptionText extends AnAction {
                 String txt = Messages.showInputDialog(project, "Input Your " + asbbasePath + "  Description",
                         "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
                 if (null != txt) {
-                    XmlParsing.modifyPath(x.getTag(), txt, null, fileDirectoryXml, project);
+                    XmlParsing.modifyPath(x.getTag(), txt, fileDirectoryXml, project);
                 }
             }
 

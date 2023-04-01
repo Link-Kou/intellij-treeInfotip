@@ -1,4 +1,4 @@
-package com.plugins.infotip;
+package com.plugins.infotip.state;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.projectView.PresentationData;
@@ -16,7 +16,6 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.xml.XmlFile;
-import com.intellij.ui.SimpleTextAttributes;
 import com.plugins.infotip.ui.Icons;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE;
-import static com.plugins.infotip.FileIcons.getAllIcons;
+import static com.plugins.infotip.ui.FileIcons.getAllIcons;
 
 /**
  * 文件目录管理
@@ -335,12 +334,12 @@ public class FileDirectory {
     }
 
     /**
-     * 设置节点备注
+     * 设置节点图标
      *
      * @param node 对象
      * @param data 对象
      */
-    public static void setLocationString(ProjectViewNode node, PresentationData data) {
+    public static void setLocationIcons(ProjectViewNode node, PresentationData data) {
         if (null != node) {
             Method[] methods1 = node.getClass().getMethods();
             Object value = node.getValue();
@@ -395,20 +394,19 @@ public class FileDirectory {
         String name = abstractTreeNode.getName();
         XmlEntity matchPath = getMatchPath(virtualFile, abstractTreeNode.getProject());
         if (null != matchPath) {
-
             //设置备注
             final PresentationData presentation = abstractTreeNode.getPresentation();
-            //设置背景色
-            //presentation.setBackground(Color.green);
             //设置锚定文本
             presentation.setLocationString(matchPath.getTitle());
-            presentation.clearText();
+            //presentation.clearText();
             //设置节点本身文本
             //presentation.setPresentableText(matchPath.getTitle());
             //设置文本颜色
-            presentation.addText(name, SimpleTextAttributes.ERROR_ATTRIBUTES);
+            //presentation.addText(name, SimpleTextAttributes.ERROR_ATTRIBUTES);
             //设置节点本身颜色
             //presentation.setForcedTextForeground(Color.blue);
+            //设置背景色
+            //presentation.setBackground(Color.green);
             //设置提示
             //presentation.setTooltip(matchPath.getTitle());
         }

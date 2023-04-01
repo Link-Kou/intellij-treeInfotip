@@ -3,6 +3,8 @@ package com.plugins.infotip;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.psi.xml.XmlFile;
+import com.plugins.infotip.state.FileDirectory;
+import com.plugins.infotip.state.XmlParsing;
 import org.jetbrains.annotations.NotNull;
 
 /**
