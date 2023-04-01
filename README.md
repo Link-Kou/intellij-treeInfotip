@@ -6,9 +6,11 @@
 ![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/12994)
 ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/12994)
 
-### 2.0时代来袭,更加具备人性化。
+### 3.0时代来袭,更加具备人性化。
 
 > 通过目录树右键添加备注
+> 
+> 通过目录树右键添加颜色
 
 > 通过目录树右键添加图标
 
@@ -36,9 +38,9 @@
 
 ### 使用环境
 
-`IntelliJ IDEA Ultimate版（172+）`
+`IntelliJ IDEA Ultimate版（2021+）`
 
-`WebStrom（172+）`
+`WebStrom（2021+）`
 
 ### 源代码构建
 
@@ -48,17 +50,7 @@
 
 ### 在线安装(搜索)
 
-<a href="https://plugins.jetbrains.com/plugin/12994-treeinfotip" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/YiiGuxing/TranslationPlugin@master/images/button-install.png" alt="Get from Marketplace" title="Get from Marketplace">
-</a>
-
-<br/>
-
 IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
-
-### 手动安装
-
-[plugin.intellij.assistant-2.2.3.jar](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/plugin/plugin.intellij.assistant-2.2.3.jar)
 
 ### 一、示列
 
