@@ -6,7 +6,7 @@
     <!-- 插件版本 -->
     <version>3.0.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="191"/>
+    <idea-version since-build="212"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
       <p><b>TreeInfotip plugin for IntelliJ IDEs.</b></p>
