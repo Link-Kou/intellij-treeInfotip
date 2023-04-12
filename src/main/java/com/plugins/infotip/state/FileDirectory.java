@@ -3,6 +3,7 @@ package com.plugins.infotip.state;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
+import com.intellij.ide.projectView.impl.nodes.AbstractPsiBasedNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -221,80 +222,78 @@ public class FileDirectory {
      * @param project 项目
      */
     public static void treeChangeListener(Project project) {
-        PsiManager.getInstance(project).addPsiTreeChangeListener(
-                new PsiTreeChangeListener() {
-                    @Override
-                    public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+        PsiManager.getInstance(project).addPsiTreeChangeListener(new PsiTreeChangeListener() {
+            @Override
+            public void beforeChildAddition(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void beforeChildRemoval(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void beforeChildReplacement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void beforeChildMovement(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    //更新前
-                    @Override
-                    public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        if (isFileName(psiTreeChangeEvent)) {
-                            final PsiFile file = psiTreeChangeEvent.getFile();
-                            if (file instanceof XmlFile) {
-                                XmlParsing.parsing(project, (XmlFile) file);
-                            }
-                        }
+            //更新前
+            @Override
+            public void beforeChildrenChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                if (isFileName(psiTreeChangeEvent)) {
+                    final PsiFile file = psiTreeChangeEvent.getFile();
+                    if (file instanceof XmlFile) {
+                        XmlParsing.parsing(project, (XmlFile) file);
                     }
+                }
+            }
 
-                    @Override
-                    public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void beforePropertyChange(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void childAdded(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        PsiElement child = psiTreeChangeEvent.getChild();
-                        if (child instanceof XmlFile) {
-                            if (getFileName().equals(((XmlFile) child).getName())) {
-                                XmlParsing.clear(project);
-                            }
-                        }
+            @Override
+            public void childRemoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                PsiElement child = psiTreeChangeEvent.getChild();
+                if (child instanceof XmlFile) {
+                    if (getFileName().equals(((XmlFile) child).getName())) {
+                        XmlParsing.clear(project);
                     }
+                }
+            }
 
-                    @Override
-                    public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void childReplaced(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                        if (isFileName(psiTreeChangeEvent)) {
-                            final PsiFile file = psiTreeChangeEvent.getFile();
-                            if (file instanceof XmlFile) {
-                                XmlParsing.parsing(project, (XmlFile) file);
-                            }
-                        }
+            @Override
+            public void childrenChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+                if (isFileName(psiTreeChangeEvent)) {
+                    final PsiFile file = psiTreeChangeEvent.getFile();
+                    if (file instanceof XmlFile) {
+                        XmlParsing.parsing(project, (XmlFile) file);
                     }
+                }
+            }
 
-                    @Override
-                    public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
+            @Override
+            public void childMoved(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
 
-                    @Override
-                    public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
-                    }
-                },
-                new Disposable() {
-                    @Override
-                    public void dispose() {
-                    }
-                });
+            @Override
+            public void propertyChanged(@NotNull PsiTreeChangeEvent psiTreeChangeEvent) {
+            }
+        }, new Disposable() {
+            @Override
+            public void dispose() {
+            }
+        });
     }
 
     /**
@@ -326,15 +325,18 @@ public class FileDirectory {
             if (null != value) {
                 Method[] methods2 = value.getClass().getMethods();
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
-                if (null != virtualFile2) {
-                    setXmlToLocationString(virtualFile2, abstractTreeNode);
-                    return;
+                if (null == virtualFile2) {
+                    if (abstractTreeNode instanceof AbstractPsiBasedNode) {
+                        final AbstractPsiBasedNode abstractTreeNode1 = (AbstractPsiBasedNode) abstractTreeNode;
+                        Method[] methods3 = AbstractPsiBasedNode.class.getDeclaredMethods();
+                        virtualFile2 = getVirtualFileForValue(methods3, abstractTreeNode1);
+                    }
                 }
+                setXmlToLocationString(virtualFile2, abstractTreeNode);
+                return;
             }
             VirtualFile virtualFile1 = getVirtualFile(methods1, abstractTreeNode);
-            if (null != virtualFile1) {
-                setXmlToLocationString(virtualFile1, abstractTreeNode);
-            }
+            setXmlToLocationString(virtualFile1, abstractTreeNode);
         }
     }
 
@@ -352,10 +354,8 @@ public class FileDirectory {
             if (null != value) {
                 Method[] methods2 = value.getClass().getMethods();
                 VirtualFile virtualFile2 = getVirtualFile(methods2, value);
-                if (null != virtualFile2) {
-                    setXmlToLocationIconsOrColor(node.getProject(), name, virtualFile2, data);
-                    return;
-                }
+                setXmlToLocationIconsOrColor(node.getProject(), name, virtualFile2, data);
+                return;
             }
             VirtualFile virtualFile1 = getVirtualFile(methods1, node);
             if (null != virtualFile1) {
@@ -388,6 +388,23 @@ public class FileDirectory {
         return null;
     }
 
+    private static VirtualFile getVirtualFileForValue(Method[] methods, Object o) {
+        for (Method method : methods) {
+            if ("getVirtualFileForValue".equals(method.getName())) {
+                method.setAccessible(true);
+                try {
+                    Object invoke = method.invoke(o);
+                    if (invoke instanceof VirtualFile) {
+                        return (VirtualFile) invoke;
+                    }
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * 设置备注-文本
      * 核心代码实现
@@ -396,6 +413,9 @@ public class FileDirectory {
      * @param abstractTreeNode 对象
      */
     private static void setXmlToLocationString(VirtualFile virtualFile, AbstractTreeNode<?> abstractTreeNode) {
+        if (virtualFile == null) {
+            return;
+        }
         String name = abstractTreeNode.getName();
         XmlEntity matchPath = getMatchPath(virtualFile, abstractTreeNode.getProject());
         if (null != matchPath) {
