@@ -4,7 +4,7 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="212"/>
     <!-- 插件的描述 -->
@@ -35,6 +35,21 @@
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+     <ul>
+        <p>3.0.3</p>
+        <li>项目优化兼容</li>
+        <li>Fixed reuse of overridden configurations in projects</li>
+      </ul>
+     <ul>
+        <p>3.0.2</p>
+        <li>项目优化兼容</li>
+        <li>Fixed reuse of overridden configurations in projects</li>
+      </ul>
+    <ul>
+        <p>3.0.1</p>
+        <li>项目优化兼容</li>
+        <li>Fixed reuse of overridden configurations in projects</li>
+      </ul>
     <ul>
         <p>3.0.0</p>
         <li>项目优化兼容</li>
