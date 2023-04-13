@@ -34,7 +34,7 @@ allprojects {
 }
 
 group 'com.linkkou'
-version '3.0.3(191)'
+version '3.0.3(212)'
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
