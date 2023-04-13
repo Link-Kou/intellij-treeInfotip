@@ -9,6 +9,8 @@ import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.gui.ColorsUtils;
 import com.plugins.infotip.gui.entity.IconEntity;
 
+import java.awt.*;
+
 /**
  * A <code>TreesStyle</code> Class
  *
@@ -54,17 +56,16 @@ public class TreesStyle {
         }
         //设置锚定文本
         presentation.setLocationString(xmlEntity.getTitle());
-        final ColorsUtils colorsUtils = ColorsUtils.toColors(xmlEntity.getBackgroundColor());
-        if (null != colorsUtils) {
-            if (null != colorsUtils.getTextcolor()) {
-                //设置文本颜色
-                presentation.clearText();
-                presentation.addText(name, new SimpleTextAttributes(0, colorsUtils.getTextcolor()));
-            }
-            if (null != colorsUtils.getBackgroundcolor()) {
-                //设置背景色
-                presentation.setBackground(colorsUtils.getBackgroundcolor());
-            }
+        final Color backgroundColor = ColorsUtils.toColor(xmlEntity.getBackgroundColor());
+        final Color textColor = ColorsUtils.toColor(xmlEntity.getTextColor());
+        if (null != textColor) {
+            //设置文本颜色
+            presentation.clearText();
+            presentation.addText(name, new SimpleTextAttributes(0, textColor));
+        }
+        if (null != backgroundColor) {
+            //设置背景色
+            presentation.setBackground(backgroundColor);
         }
         //设置节点本身文本
         //presentation.setPresentableText(matchPath.getTitle());

@@ -42,7 +42,9 @@ public class MyColorButton extends JButton {
         this.myColor = myColor;
     }
 
-
+    public Color getColor() {
+        return this.myColor;
+    }
     @Override
     public Dimension getMinimumSize() {
         return getPreferredSize();

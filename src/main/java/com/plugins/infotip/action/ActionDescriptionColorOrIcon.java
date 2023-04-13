@@ -47,14 +47,21 @@ public class ActionDescriptionColorOrIcon extends AnAction {
                 dialog.setTextColor(x.getTextColor());
                 dialog.setBackgroundColor(x.getBackgroundColor());
                 dialog.setVisible(true);
-                //dialog.get
+                x.setIcon(dialog.getIcons());
+                x.setTextColor(dialog.getTextColor());
+                x.setBackgroundColor(dialog.getBackgroundColor());
                 XmlStorage.modify(project, x);
             }
 
             @Override
             public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
                 dialog.setVisible(true);
-                XmlStorage.create(fileDirectoryXml, project, new XmlEntity().setPath(asBasePath));
+                final XmlEntity x = new XmlEntity()
+                        .setPath(asBasePath);
+                x.setIcon(dialog.getIcons());
+                x.setTextColor(dialog.getTextColor());
+                x.setBackgroundColor(dialog.getBackgroundColor());
+                XmlStorage.create(fileDirectoryXml, project, x);
             }
         });
     }

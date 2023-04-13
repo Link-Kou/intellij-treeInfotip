@@ -5,13 +5,11 @@ import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.DumbAware;
 import com.plugins.infotip.trees.TreesStyle;
-import kotlin.reflect.jvm.internal.impl.load.kotlin.KotlinClassFinder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
-import static com.plugins.infotip.state.FileDirectory.setLocationString;
 
 /**
  * 目录树显示备注

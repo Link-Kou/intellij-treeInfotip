@@ -24,6 +24,11 @@ public class SelectColorIconsView extends JDialog {
     private JPanel jpanel_text_color;
     private JPanel jpanel_background_color;
 
+    private String iconsName;
+    private Color backgroundColor;
+
+    private Color textColor;
+
     Map<String, Pair<MyColorButton, Color>> mapColor = new HashMap<String, Pair<MyColorButton, Color>>() {{
         put(ColorsUtils.COLOR_TEXT_COLOR_NAME, null);
         put(ColorsUtils.COLOR_BACKGROUND_COLOR, null);
@@ -109,50 +114,80 @@ public class SelectColorIconsView extends JDialog {
             String name1 = allIcon.getName();
             if (null != name1) {
                 if (name1.equals(name)) {
+                    this.iconsName = name;
                     comboBox_icon.setSelectedItem(allIcon);
                 }
             }
         }
     }
 
+    public String getIcons() {
+        return this.iconsName;
+    }
+
     public void setBackgroundColor(String colorname) {
         final Color color = ColorsUtils.toColor(colorname);
-        if (null == color) {
-            return;
-        }
-        for (Map.Entry<String, Pair<MyColorButton, Color>> next : mapColor.entrySet()) {
-            if (ColorsUtils.COLOR_BACKGROUND_COLOR.equals(next.getKey())) {
-                final Pair<MyColorButton, Color> value = next.getValue();
-                final MyColorButton value0 = value.getValue0();
-                value0.setColor(color);
-                mapColor.put(next.getKey(), Pair.with(value0, color));
+        if (null != color) {
+            for (Map.Entry<String, Pair<MyColorButton, Color>> next : mapColor.entrySet()) {
+                if (ColorsUtils.COLOR_BACKGROUND_COLOR.equals(next.getKey())) {
+                    final Pair<MyColorButton, Color> value = next.getValue();
+                    final MyColorButton value0 = value.getValue0();
+                    value0.setColor(color);
+                    this.backgroundColor = color;
+                    mapColor.put(next.getKey(), Pair.with(value0, color));
+                }
             }
         }
+
+    }
+
+    public String getBackgroundColor() {
+        return ColorsUtils.toRBGStr(this.backgroundColor);
     }
 
     public void setTextColor(String colorname) {
         final Color color = ColorsUtils.toColor(colorname);
-        if (null == color) {
-            return;
-        }
-        for (Map.Entry<String, Pair<MyColorButton, Color>> next : mapColor.entrySet()) {
-            if (ColorsUtils.COLOR_TEXT_COLOR_NAME.equals(next.getKey())) {
-                final Pair<MyColorButton, Color> value = next.getValue();
-                final MyColorButton value0 = value.getValue0();
-                value0.setColor(color);
-                mapColor.put(next.getKey(), Pair.with(value0, color));
+        if (null != color) {
+            for (Map.Entry<String, Pair<MyColorButton, Color>> next : mapColor.entrySet()) {
+                if (ColorsUtils.COLOR_TEXT_COLOR_NAME.equals(next.getKey())) {
+                    final Pair<MyColorButton, Color> value = next.getValue();
+                    final MyColorButton value0 = value.getValue0();
+                    value0.setColor(color);
+                    this.textColor = color;
+                    mapColor.put(next.getKey(), Pair.with(value0, color));
+                }
             }
         }
     }
 
+    public String getTextColor() {
+        return ColorsUtils.toRBGStr(this.textColor);
+    }
+
     private void onOK() {
         // add your code here
-        //selectedItem = (IconEntity) comboBox1.getSelectedItem();
+        IconEntity selectedItem = (IconEntity) comboBox_icon.getSelectedItem();
+        if (null != selectedItem) {
+            this.iconsName = selectedItem.getName();
+        }
+        for (Map.Entry<String, Pair<MyColorButton, Color>> next : mapColor.entrySet()) {
+            final Pair<MyColorButton, Color> value = next.getValue();
+            final MyColorButton value0 = value.getValue0();
+            switch (next.getKey()) {
+                case ColorsUtils.COLOR_TEXT_COLOR_NAME:
+                    this.textColor = value0.getColor();
+                    break;
+                case ColorsUtils.COLOR_BACKGROUND_COLOR:
+                    this.backgroundColor = value0.getColor();
+                    break;
+                default:
+                    break;
+            }
+        }
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
