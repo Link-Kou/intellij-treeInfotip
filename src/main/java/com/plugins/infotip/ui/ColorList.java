@@ -20,7 +20,6 @@ public class ColorList extends JDialog {
 
     Map<String, Pair<MyColorButton, Color>> mapColor = new HashMap<String, Pair<MyColorButton, Color>>() {{
         put("textcolor", null);
-        put("forcedtextcolor", null);
     }};
 
     public ColorList(Project project) {

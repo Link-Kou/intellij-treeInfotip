@@ -46,7 +46,9 @@ public class Colors {
             Map<String, Color> colors = new HashMap<String, Color>();
             for (String s : split) {
                 final String[] split1 = s.split(":");
-                colors.put(split1[0], toColor(split1[1]));
+                if (split1.length == 2) {
+                    colors.put(split1[0], toColor(split1[1]));
+                }
             }
             return colors;
         }
@@ -76,8 +78,13 @@ public class Colors {
     }
 
     public static Color toColor(String rgb) {
-        final String[] split = rgb.split(",");
-        return new Color(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+        if (null != rgb) {
+            final String[] split = rgb.split(",");
+            if (split.length == 3) {
+                return new Color(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+            }
+        }
+        return null;
     }
 
     //region getst

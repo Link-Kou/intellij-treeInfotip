@@ -439,6 +439,9 @@ public class FileDirectory {
     }
 
     private static void setStyle(final PresentationData presentation, XmlEntity matchPath, String name) {
+        if (null == presentation || null == matchPath) {
+            return;
+        }
         //设置图标
         for (Icons allIcon : getAllIcons()) {
             if (allIcon.getName().equals(matchPath.getIcon())) {
