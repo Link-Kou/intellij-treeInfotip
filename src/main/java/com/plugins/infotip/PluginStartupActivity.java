@@ -3,8 +3,9 @@ package com.plugins.infotip;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.psi.xml.XmlFile;
-import com.plugins.infotip.state.FileDirectory;
-import com.plugins.infotip.state.XmlParsing;
+import com.plugins.infotip.storage.XmlChangeListener;
+import com.plugins.infotip.storage.XmlFileUtils;
+import com.plugins.infotip.storage.XmlStorage;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,11 +18,9 @@ public class PluginStartupActivity implements StartupActivity {
 
     @Override
     public void runActivity(@NotNull Project project) {
-        XmlFile fileDirectoryXml = FileDirectory.getFileDirectoryXml(project, false);
-        if (null != fileDirectoryXml) {
-            XmlParsing.parsing(project, fileDirectoryXml);
-        }
-        FileDirectory.treeChangeListener(project);
+        final XmlFile xmlFile = XmlFileUtils.loadXmlFile(project);
+        XmlStorage.parsing(project, xmlFile);
+        XmlChangeListener.run(project);
     }
 
 }

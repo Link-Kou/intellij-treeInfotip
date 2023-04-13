@@ -1,4 +1,4 @@
-package com.plugins.infotip.ui.compone;
+package com.plugins.infotip.gui.compone;
 
 import com.intellij.openapi.util.SystemInfo;
 
@@ -33,6 +33,7 @@ public class MyColorButton extends JButton {
         if (myColor != null) {
             g.setColor(myColor);
         }
+        g.drawString("X", width / 2, height / 2);
         g.fillRect(0, 0, width, height);
         g.setColor(color);
     }

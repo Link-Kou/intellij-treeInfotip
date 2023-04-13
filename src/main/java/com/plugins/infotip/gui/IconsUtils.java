@@ -1,6 +1,6 @@
-package com.plugins.infotip.ui;
+package com.plugins.infotip.gui;
 
-import com.plugins.infotip.ui.Icons;
+import com.plugins.infotip.gui.entity.IconEntity;
 
 import javax.swing.*;
 import java.lang.reflect.Field;
@@ -13,14 +13,16 @@ import java.util.ArrayList;
  * @version 1.0
  * 2021/6/18 20:09
  */
-public class FileIcons {
+public class IconsUtils {
 
-    private static final ArrayList<Icons> icons = new ArrayList<>();
+    private static final ArrayList<IconEntity> ICONS = new ArrayList<>();
+
+    private static final String classname = "com.intellij.icons.AllIcons";
 
     static {
         ArrayList<Class<?>> classArrayList = new ArrayList<>();
         try {
-            Class<?> aClass1 = Class.forName(getNames());
+            Class<?> aClass1 = Class.forName(classname);
             Class<?>[] classes = aClass1.getClasses();
             getClasss(classes, classArrayList);
             for (Class<?> aClass : classArrayList) {
@@ -30,10 +32,10 @@ public class FileIcons {
                     if (field.getType().equals(Icon.class)) {
                         Icon icon = (Icon) field.get(null);
                         int length1 = aClass.getName().length();
-                        int length2 = getNames().length();
+                        int length2 = classname.length();
                         if (length1 > length2) {
                             String substring = aClass.getName().substring(length2, length1).replaceAll("\\$", "");
-                            icons.add(new Icons()
+                            ICONS.add(new IconEntity()
                                     .setIcon(icon)
                                     .setName(substring + field.getName()));
                         }
@@ -45,12 +47,8 @@ public class FileIcons {
         }
     }
 
-    public static ArrayList<Icons> getAllIcons() {
-        return icons;
-    }
-
-    private static String getNames() {
-        return "com.intellij.icons.AllIcons";
+    public static ArrayList<IconEntity> getAllIcons() {
+        return ICONS;
     }
 
     private static void getClasss(Class<?>[] classes, ArrayList<Class<?>> arrayListclasses) {

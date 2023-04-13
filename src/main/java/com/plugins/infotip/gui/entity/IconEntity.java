@@ -1,4 +1,4 @@
-package com.plugins.infotip.ui;
+package com.plugins.infotip.gui.entity;
 
 import javax.swing.*;
 
@@ -9,7 +9,7 @@ import javax.swing.*;
  * @version 1.0
  * @date 2021/6/18 19:59
  */
-public class Icons {
+public class IconEntity {
     Icon icon;
     String name;
 
@@ -17,7 +17,7 @@ public class Icons {
         return icon;
     }
 
-    public Icons setIcon(Icon icon) {
+    public IconEntity setIcon(Icon icon) {
         this.icon = icon;
         return this;
     }
@@ -26,7 +26,7 @@ public class Icons {
         return name;
     }
 
-    public Icons setName(String name) {
+    public IconEntity setName(String name) {
         this.name = name;
         return this;
     }

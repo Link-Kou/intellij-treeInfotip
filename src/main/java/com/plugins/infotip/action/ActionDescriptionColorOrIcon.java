@@ -1,23 +1,16 @@
-package com.plugins.infotip;
+package com.plugins.infotip.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.xml.XmlFile;
-import com.plugins.infotip.state.FileDirectory;
-import com.plugins.infotip.state.XmlEntity;
-import com.plugins.infotip.state.XmlParsing;
-import com.plugins.infotip.ui.ColorList;
-import com.plugins.infotip.ui.Icons;
-import com.plugins.infotip.ui.IconsList;
-import com.plugins.infotip.ui.compone.MyColorButton;
-import org.javatuples.Pair;
+import com.plugins.infotip.gui.view.SelectColorIconsView;
+import com.plugins.infotip.storage.XmlEntity;
+import com.plugins.infotip.storage.XmlFileUtils;
+import com.plugins.infotip.storage.XmlStorage;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.Map;
-
-import static com.plugins.infotip.state.FileDirectory.getBasePath;
 
 /**
  * A <code>ActionDescription</code> Class
@@ -27,7 +20,7 @@ import static com.plugins.infotip.state.FileDirectory.getBasePath;
  * @version 1.0
  * 2021/6/7 14:13
  */
-public class ActionDescriptionColor extends AnAction {
+public class ActionDescriptionColorOrIcon extends AnAction {
 
 
     @Override
@@ -36,30 +29,32 @@ public class ActionDescriptionColor extends AnAction {
         if (null == project) {
             return;
         }
-        final ColorList dialog = new ColorList(project);
+        final SelectColorIconsView dialog = new SelectColorIconsView();
         dialog.pack();
-        dialog.setTitle("Select Color");
-        dialog.setSize(235, 135);
+        dialog.setTitle("Select Icon Or Color");
+        dialog.setSize(288, 120);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         Dimension dimension = new Dimension();
         dimension.setSize(288, 120);
         dialog.setMaximumSize(dimension);
         dialog.setModal(true);
-        getBasePath(anActionEvent, new FileDirectory.Callback() {
+
+        XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
-            public void onModifyPath(String asbbasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
-                dialog.setColor(x.getColor());
+            public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
+                dialog.setIcons(x.getIcon());
+                dialog.setTextColor(x.getTextColor());
+                dialog.setBackgroundColor(x.getBackgroundColor());
                 dialog.setVisible(true);
-                final Map<String, Color> color = dialog.getColor();
-                XmlParsing.modifyPath(x.getTag(), color, fileDirectoryXml, project);
+                //dialog.get
+                XmlStorage.modify(project, x);
             }
 
             @Override
-            public void onCreatePath(String asbbasePath, XmlFile fileDirectoryXml, Project project, String extension) {
+            public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
                 dialog.setVisible(true);
-                final Map<String, Color> color = dialog.getColor();
-                XmlParsing.createPath(fileDirectoryXml, project, asbbasePath, null, null, color, extension);
+                XmlStorage.create(fileDirectoryXml, project, new XmlEntity().setPath(asBasePath));
             }
         });
     }

@@ -124,15 +124,13 @@
         <!-- Add your actions here -->
         <group id="StudyAction.MyGroup" text="Add Description" popup="true" icon="AllIcons.Actions.Menu_paste">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
-            <action id="FirstAction" class="com.plugins.infotip.ActionDescriptionText" text="Add Text"
-                    description="添加备注信息">
-            </action>
-            <action id="FirstAction2" class="com.plugins.infotip.ActionDescriptionIcon" text="Add Icons"
-                    description="添加图标信息">
-            </action>
-            <action id="FirstAction3" class="com.plugins.infotip.ActionDescriptionColor" text="Add Color"
-                    description="添加节点色">
-            </action>
+            <action id="FirstAction" class="com.plugins.infotip.action.ActionDescriptionText" text="Add Text Remarks"
+                    description="添加备注信息"/>
+            <action id="FirstAction2" class="com.plugins.infotip.action.ActionDescriptionColorOrIcon" text="Add Color Or Icons"
+                    description="添加图标信息"/>
+            <separator/>
+            <action id="FirstAction5" class="com.plugins.infotip.action.ActionDescriptionClearAll" text="Clear All"
+                    description="清理节点设置"/>
         </group>
 
     </actions>

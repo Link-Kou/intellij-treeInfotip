@@ -27,8 +27,7 @@ package com.plugins.infotip;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
-
-import static com.plugins.infotip.state.FileDirectory.setLocationIconsOrColor;
+import com.plugins.infotip.trees.TreesStyle;
 
 /**
  * 项目目录视图
@@ -39,11 +38,12 @@ import static com.plugins.infotip.state.FileDirectory.setLocationIconsOrColor;
 public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
-    public void decorate(ProjectViewNode node, PresentationData data) {
-        setLocationIconsOrColor(node,data);
+    public void decorate(ProjectViewNode node, PresentationData presentation) {
+        TreesStyle.setStyle(node, presentation);
     }
 
     /**
+     * 此类只有222以上要注释掉
      * 向下兼容本身无具体作用
      * @param node
      * @param cellRenderer
