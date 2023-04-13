@@ -14,11 +14,8 @@ import java.util.List;
 public class Colors {
 
     private Color textcolor;
-    private Color backgroundcolor;
-
 
     public static String getColorSting(Map<String, Color> colorMap) {
-        //String.format("textcolor:%s|forcedtextcolor:%s|backgroundcolor:%s")
         final Iterator<Map.Entry<String, Color>> iterator = colorMap.entrySet().iterator();
         List<String> colorlist = new ArrayList<String>();
         while (iterator.hasNext()) {
@@ -69,9 +66,6 @@ public class Colors {
                     case "textcolor":
                         colors.setTextcolor(toColor(split1[1]));
                         break;
-                    case "backgroundcolor":
-                        colors.setBackgroundcolor(toColor(split1[1]));
-                        break;
                     default:
                         break;
                 }
@@ -96,13 +90,5 @@ public class Colors {
         return this;
     }
 
-    public Color getBackgroundcolor() {
-        return backgroundcolor;
-    }
-
-    public Colors setBackgroundcolor(Color backgroundcolor) {
-        this.backgroundcolor = backgroundcolor;
-        return this;
-    }
     //endregion
 }

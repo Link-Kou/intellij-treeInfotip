@@ -39,7 +39,7 @@ public class ActionDescriptionColor extends AnAction {
         final ColorList dialog = new ColorList(project);
         dialog.pack();
         dialog.setTitle("Select Color");
-        dialog.setSize(235, 135);
+        dialog.setSize(235, 105);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         Dimension dimension = new Dimension();

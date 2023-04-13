@@ -4,9 +4,9 @@
     <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
 
     <!-- 插件版本 -->
-    <version>3.0.3(212)</version>
+    <version>3.0.3(191)</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="212"/>
+    <idea-version since-build="191"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
       <p><b>TreeInfotip plugin for IntelliJ IDEs.</b></p>

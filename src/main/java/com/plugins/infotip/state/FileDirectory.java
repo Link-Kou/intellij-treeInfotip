@@ -454,10 +454,11 @@ public class FileDirectory {
                 presentation.clearText();
                 presentation.addText(name, new SimpleTextAttributes(0, colors.getTextcolor()));
             }
-            if (null != colors.getBackgroundcolor()) {
+            //TODO 212以上才能使用
+            /*if (null != colors.getBackgroundcolor()) {
                 //设置背景色
                 presentation.setBackground(colors.getBackgroundcolor());
-            }
+            }*/
         }
         //设置节点本身文本
         //presentation.setPresentableText(matchPath.getTitle());
