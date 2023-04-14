@@ -8,9 +8,11 @@ import com.plugins.infotip.gui.view.SelectColorIconsView;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlFileUtils;
 import com.plugins.infotip.storage.XmlStorage;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * A <code>ActionDescription</code> Class
@@ -41,26 +43,30 @@ public class ActionDescriptionColorOrIcon extends AnAction {
 
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
-            public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
-                dialog.setIcons(x.getIcon());
-                dialog.setTextColor(x.getTextColor());
-                dialog.setBackgroundColor(x.getBackgroundColor());
+            public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntitys, XmlFile fileDirectoryXml, Project project) {
+                final XmlEntity xmlEntity = xmlEntitys.get(0);
+                dialog.setIcons(xmlEntity.getIcon());
+                dialog.setTextColor(xmlEntity.getTextColor());
+                dialog.setBackgroundColor(xmlEntity.getBackgroundColor());
                 dialog.setVisible(true);
-                x.setIcon(dialog.getIcons());
-                x.setTextColor(dialog.getTextColor());
-                x.setBackgroundColor(dialog.getBackgroundColor());
-                XmlStorage.modify(project, fileDirectoryXml, x);
+                for (XmlEntity entity : xmlEntitys) {
+                    entity.setIcon(dialog.getIcons());
+                    entity.setTextColor(dialog.getTextColor());
+                    entity.setBackgroundColor(dialog.getBackgroundColor());
+                    XmlStorage.modify(project, fileDirectoryXml, entity);
+                }
             }
 
             @Override
-            public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
+            public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
                 dialog.setVisible(true);
-                final XmlEntity x = new XmlEntity()
-                        .setPath(asBasePath);
-                x.setIcon(dialog.getIcons());
-                x.setTextColor(dialog.getTextColor());
-                x.setBackgroundColor(dialog.getBackgroundColor());
-                XmlStorage.create(project,fileDirectoryXml, x);
+                for (Pair<String, String> pair : asBasePathOrExtension) {
+                    final XmlEntity x = new XmlEntity().setPath(pair.getValue0());
+                    x.setIcon(dialog.getIcons());
+                    x.setTextColor(dialog.getTextColor());
+                    x.setBackgroundColor(dialog.getBackgroundColor());
+                    XmlStorage.create(project, fileDirectoryXml, x);
+                }
             }
         });
     }

@@ -9,7 +9,10 @@ import com.intellij.psi.xml.XmlFile;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlFileUtils;
 import com.plugins.infotip.storage.XmlStorage;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * 右键菜单
@@ -25,15 +28,17 @@ public class ActionDescriptionClearAll extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
-            public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
+            public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final int i = Messages.showDialog(project, "Whether to delete or not", "Delete", new String[]{"OK", "Cancel"}, 1, Messages.getInformationIcon());
                 if (i == 0) {
-                    XmlStorage.remove(fileDirectoryXml, project, x);
+                    for (XmlEntity xmlEntity : xmlEntities) {
+                        XmlStorage.remove(fileDirectoryXml, project, xmlEntity);
+                    }
                 }
             }
 
             @Override
-            public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
+            public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
 
             }
         });

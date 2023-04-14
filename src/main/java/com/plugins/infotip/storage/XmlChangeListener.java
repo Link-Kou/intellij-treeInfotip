@@ -44,6 +44,7 @@ public class XmlChangeListener {
                 if (XmlFileUtils.isFileName(psiTreeChangeEvent)) {
                     final PsiFile file = psiTreeChangeEvent.getFile();
                     if (file instanceof XmlFile) {
+                        XmlFileUtils.loadXmlFile(project);
                         XmlStorage.parsing(project, (XmlFile) file);
                     }
                 }

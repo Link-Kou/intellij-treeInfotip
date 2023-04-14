@@ -9,7 +9,10 @@ import com.intellij.psi.xml.XmlFile;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlFileUtils;
 import com.plugins.infotip.storage.XmlStorage;
+import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * 右键菜单
@@ -24,18 +27,23 @@ public class ActionDescriptionText extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
-            public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
-                String txt = Messages.showInputDialog(project, "Input Your " + asBasePath + "  Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
+            public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
+                final XmlEntity xmlEntity = xmlEntities.get(0);
+                String txt = Messages.showInputDialog(project, "Input Your Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, xmlEntity.getTitle(), null);
                 if (null != txt) {
-                    XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
+                    for (XmlEntity x : xmlEntities) {
+                        XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
+                    }
                 }
             }
 
             @Override
-            public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
-                String txt = Messages.showInputDialog(project, "Input Your " + asBasePath + "  Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, "", null);
+            public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
+                String txt = Messages.showInputDialog(project, "Input Your Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, "", null);
                 if (null != txt) {
-                    XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(asBasePath).setTitle(txt));
+                    for (Pair<String, String> pair : asBasePathOrExtension) {
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTitle(txt));
+                    }
                 }
             }
         });

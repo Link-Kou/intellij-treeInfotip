@@ -59,11 +59,9 @@ public class XmlStorage {
         if (null == xmlFile) {
             return;
         }
-        final CopyOnWriteArrayList<XmlEntity> xmlEntities = XML_STORAGE_LIST.get(project);
-        final CopyOnWriteArrayList<XmlEntity> xmlEntities_clone = xmlEntities == null ? new CopyOnWriteArrayList<>() : xmlEntities;
-        if (null == xmlEntities) {
-            XML_STORAGE_LIST.put(project, xmlEntities_clone);
-        }
+        XML_STORAGE_LIST.remove(project);
+        final CopyOnWriteArrayList<XmlEntity> xmlEntities_clone = new CopyOnWriteArrayList<>();
+        XML_STORAGE_LIST.put(project, xmlEntities_clone);
         final String presentableUrl = project.getPresentableUrl();
         if (presentableUrl == null) {
             return;

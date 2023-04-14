@@ -10,14 +10,13 @@ import com.intellij.ui.content.ContentManagerListener;
 import com.intellij.ui.treeStructure.Tree;
 import com.plugins.infotip.gui.compone.MyTreeNode;
 import com.plugins.infotip.storage.XmlEntity;
+import com.plugins.infotip.storage.XmlFileUtils;
 import com.plugins.infotip.storage.XmlStorage;
 import com.plugins.infotip.trees.TreesStyle;
 import com.plugins.infotip.trees.TreesUtils;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
+import javax.swing.tree.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -40,8 +39,7 @@ public class NoteTreeView extends Tree implements ToolWindowFactory {
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        NoteTreeView noteTreeView = new NoteTreeView();
-        final DefaultMutableTreeNode root = (DefaultMutableTreeNode) noteTreeView.getModel().getRoot();
+        final NoteTreeView noteTreeView = new NoteTreeView();
         noteTreeView.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -54,17 +52,20 @@ public class NoteTreeView extends Tree implements ToolWindowFactory {
                 }
             }
         });
-        TreesStyle.ListenerStyle(project, () -> {
+        XmlFileUtils.ListenerSave(project, () -> {
+            DefaultTreeModel model = (DefaultTreeModel) noteTreeView.getModel();
+            final DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
             root.removeAllChildren();
+            model.reload();
             final List<XmlEntity> xmlEntity = XmlStorage.getXmlEntity(project);
             if (null != xmlEntity) {
                 for (XmlEntity entity : xmlEntity) {
-                    final MyTreeNode defaultMutableTreeNode = new MyTreeNode(entity.getTitle());
+                    final MyTreeNode defaultMutableTreeNode = new MyTreeNode(new String(entity.getTitle()));
                     defaultMutableTreeNode.setUserEntity(entity);
                     root.add(defaultMutableTreeNode);
-                    for (int i = 0; i < root.getChildCount(); i++) {
-                        noteTreeView.expandRow(i);
-                    }
+                }
+                for (int i = 0; i <= root.getChildCount(); i++) {
+                    noteTreeView.expandRow(i);
                 }
             }
         });
