@@ -9,7 +9,7 @@
 ### 3.0时代来袭,更加具备人性化。
 
 > 通过目录树右键添加备注
-> 
+
 > 通过目录树右键添加颜色
 
 > 通过目录树右键添加图标
@@ -52,10 +52,12 @@
 
 IDEA或WebStrom -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
 
+![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2023-04-14_14.54.35.png "样列")
+
+
 ### 一、示列
 
-> ##### 图片示列教程：（国内有些网络啊！tmd图片看不了的）
+> ##### 图片示列：
 
-
-![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_13-38-34.gif "样列")
-![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_14-39-35.png "样列")
+![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2023-04-14_14.51.58.png "样列")
+![样列](https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2023-04-14_14.52.35.png "样列")

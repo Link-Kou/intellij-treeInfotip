@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/com/plugins/infotip/gui" title="界面"/>
+     <tree path="/src/main/java/com/plugins/infotip/storage" icon="XmlBrowsersCanary" textColor="255,0,15"
+           backgroundColor="0,255,123"/>
+     <tree path="/src/main/java/com/plugins/infotip/trees" icon="XmlBrowsersEdge"/>
+ </trees>
