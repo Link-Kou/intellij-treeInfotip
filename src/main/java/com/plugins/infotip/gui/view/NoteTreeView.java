@@ -8,6 +8,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.ui.content.ContentManagerListener;
 import com.intellij.ui.treeStructure.Tree;
+import com.plugins.infotip.PluginStartupActivity;
 import com.plugins.infotip.gui.compone.MyTreeNode;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlFileUtils;
@@ -40,19 +41,7 @@ public class NoteTreeView extends Tree implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         final NoteTreeView noteTreeView = new NoteTreeView();
-        noteTreeView.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    final MyTreeNode lastSelectedPathComponent = (MyTreeNode) noteTreeView.getLastSelectedPathComponent();
-                    final XmlEntity userEntity = (XmlEntity) lastSelectedPathComponent.getUserEntity();
-                    if (null != userEntity) {
-                        TreesUtils.Navigation(project, userEntity.getPath());
-                    }
-                }
-            }
-        });
-        XmlFileUtils.ListenerSave(project, () -> {
+        XmlFileUtils.SaveCallback saveCallback = () -> {
             DefaultTreeModel model = (DefaultTreeModel) noteTreeView.getModel();
             final DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
             root.removeAllChildren();
@@ -68,7 +57,32 @@ public class NoteTreeView extends Tree implements ToolWindowFactory {
                     noteTreeView.expandRow(i);
                 }
             }
+        };
+        PluginStartupActivity.RunCallback runCallback = () -> {
+            saveCallback.run();
+        };
+        noteTreeView.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    final Object component = noteTreeView.getLastSelectedPathComponent();
+                    if (component instanceof MyTreeNode) {
+                        final MyTreeNode lastSelectedPathComponent = (MyTreeNode) noteTreeView.getLastSelectedPathComponent();
+                        if (null != lastSelectedPathComponent) {
+                            final XmlEntity userEntity = (XmlEntity) lastSelectedPathComponent.getUserEntity();
+                            if (null != userEntity) {
+                                TreesUtils.Navigation(project, userEntity.getPath());
+                            }
+                        }
+                    } else {
+                        saveCallback.run();
+                    }
+                }
+            }
         });
+        PluginStartupActivity.ListenerRun(project, runCallback);
+        XmlFileUtils.ListenerSave(project, saveCallback);
+        saveCallback.run();
         final ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(noteTreeView, "", false);
         toolWindow.getContentManager().addContent(content);
