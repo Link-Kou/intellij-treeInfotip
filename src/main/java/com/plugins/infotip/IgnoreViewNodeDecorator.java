@@ -27,6 +27,8 @@ package com.plugins.infotip;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
+import com.intellij.packageDependencies.ui.PackageDependenciesNode;
+import com.intellij.ui.ColoredTreeCellRenderer;
 import com.plugins.infotip.trees.TreesStyle;
 
 /**
@@ -49,6 +51,6 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
      * @param cellRenderer
      * @deprecated
      */
-   /* @Override
-    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {}*/
+    @Override
+    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {}
 }
