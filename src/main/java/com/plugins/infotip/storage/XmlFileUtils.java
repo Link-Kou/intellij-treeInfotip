@@ -92,6 +92,9 @@ public class XmlFileUtils {
                     if (null == xmlEntity) {
                         XmlStorage.parsing(project, fileXml);
                     }
+                    if (null != xmlEntity && xmlEntity.size() == 0) {
+                        callback.onModifyPath(asBasePath, new XmlEntity(), fileXml, project, extension);
+                    }
                     for (XmlEntity x : xmlEntity) {
                         if (asBasePath.equals(x.getPath())) {
                             callback.onModifyPath(asBasePath, x, fileXml, project, extension);

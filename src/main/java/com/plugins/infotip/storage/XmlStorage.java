@@ -104,21 +104,25 @@ public class XmlStorage {
      * @param project   项目
      * @param xmlEntity 目录对象
      */
-    public static synchronized void modify(Project project, XmlEntity xmlEntity) {
+    public static synchronized void modify(Project project, XmlFile fileDirectoryXml, XmlEntity xmlEntity) {
         final XmlFile xmlFile = XmlFileUtils.getXmlFile(project);
         if (null != xmlFile && null != xmlEntity) {
             final XmlTag childTag = xmlEntity.getTag();
-            WriteCommandAction.runWriteCommandAction(project, () -> {
-                childTag.setAttribute(PATH, xmlEntity.getPath());
-                childTag.setAttribute(TITLE, xmlEntity.getTitle());
-                childTag.setAttribute(EXTENSION, xmlEntity.getExtension());
-                childTag.setAttribute(PRESENTABLE_TEXT, xmlEntity.getPresentableText());
-                childTag.setAttribute(TOOLTIP_TITLE, xmlEntity.getTooltipTitle());
-                childTag.setAttribute(ICON, xmlEntity.getIcon());
-                childTag.setAttribute(TEXT_COLOR, xmlEntity.getTextColor());
-                childTag.setAttribute(BACKGROUND_COLOR, xmlEntity.getBackgroundColor());
-                XmlFileUtils.saveFileXml(project);
-            });
+            if (null == childTag) {
+                create(project, fileDirectoryXml, xmlEntity);
+            } else {
+                WriteCommandAction.runWriteCommandAction(project, () -> {
+                    childTag.setAttribute(PATH, xmlEntity.getPath());
+                    childTag.setAttribute(TITLE, xmlEntity.getTitle());
+                    childTag.setAttribute(EXTENSION, xmlEntity.getExtension());
+                    childTag.setAttribute(PRESENTABLE_TEXT, xmlEntity.getPresentableText());
+                    childTag.setAttribute(TOOLTIP_TITLE, xmlEntity.getTooltipTitle());
+                    childTag.setAttribute(ICON, xmlEntity.getIcon());
+                    childTag.setAttribute(TEXT_COLOR, xmlEntity.getTextColor());
+                    childTag.setAttribute(BACKGROUND_COLOR, xmlEntity.getBackgroundColor());
+                    XmlFileUtils.saveFileXml(project);
+                });
+            }
         }
     }
 
@@ -139,7 +143,10 @@ public class XmlStorage {
                         XmlEntity tree = tree(tag);
                         if (null != tree) {
                             if (xmlEntity.getPath().equals(tree.getPath())) {
-                                tag.delete();
+                                WriteCommandAction.runWriteCommandAction(project, () -> {
+                                    tag.delete();
+                                    XmlFileUtils.saveFileXml(project);
+                                });
                             }
                         }
                     }
@@ -156,7 +163,7 @@ public class XmlStorage {
      * @param project   项目
      * @param xmlEntity 类型
      */
-    public static synchronized void create(XmlFile xmlFile, Project project, XmlEntity xmlEntity) {
+    public static synchronized void create(Project project, XmlFile xmlFile, XmlEntity xmlEntity) {
         XmlDocument document = xmlFile.getDocument();
         if (null == document) {
             return;

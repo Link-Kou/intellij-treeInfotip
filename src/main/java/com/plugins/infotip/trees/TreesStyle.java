@@ -56,7 +56,11 @@ public class TreesStyle {
      * @param name         节点名称
      */
     public static void setStyle(final PresentationData presentation, XmlEntity xmlEntity, String name) {
-        if (null == presentation || null == xmlEntity) {
+        if (null == presentation) {
+            return;
+        }
+        if (null == xmlEntity) {
+            //presentation.clear();
             return;
         }
         //设置图标

@@ -26,15 +26,15 @@ public class ActionDescriptionClearAll extends AnAction {
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
             public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
-                String txt = Messages.showInputDialog(project, "Input Your " + asBasePath + "  Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
-                if (null != txt) {
-                    XmlStorage.modify(project, x.setTitle(txt));
+                final int i = Messages.showDialog(project, "Whether to delete or not", "Delete", new String[]{"OK", "Cancel"}, 1, Messages.getInformationIcon());
+                if (i == 0) {
+                    XmlStorage.remove(fileDirectoryXml, project, x);
                 }
             }
 
             @Override
             public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
-                
+
             }
         });
     }

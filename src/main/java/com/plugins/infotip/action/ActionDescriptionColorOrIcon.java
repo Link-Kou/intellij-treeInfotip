@@ -49,7 +49,7 @@ public class ActionDescriptionColorOrIcon extends AnAction {
                 x.setIcon(dialog.getIcons());
                 x.setTextColor(dialog.getTextColor());
                 x.setBackgroundColor(dialog.getBackgroundColor());
-                XmlStorage.modify(project, x);
+                XmlStorage.modify(project, fileDirectoryXml, x);
             }
 
             @Override
@@ -60,7 +60,7 @@ public class ActionDescriptionColorOrIcon extends AnAction {
                 x.setIcon(dialog.getIcons());
                 x.setTextColor(dialog.getTextColor());
                 x.setBackgroundColor(dialog.getBackgroundColor());
-                XmlStorage.create(fileDirectoryXml, project, x);
+                XmlStorage.create(project,fileDirectoryXml, x);
             }
         });
     }
