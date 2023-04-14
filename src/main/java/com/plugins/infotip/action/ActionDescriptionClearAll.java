@@ -1,7 +1,14 @@
 package com.plugins.infotip.action;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.psi.xml.XmlFile;
+import com.plugins.infotip.storage.XmlEntity;
+import com.plugins.infotip.storage.XmlFileUtils;
+import com.plugins.infotip.storage.XmlStorage;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,22 +23,20 @@ public class ActionDescriptionClearAll extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-
-        /*final Project project = anActionEvent.getProject();
-        if (project != null) {
-            final ProjectViewImpl instance = (ProjectViewImpl) ProjectView.getInstance(project);
-            final VirtualFile file = VfsUtil.findFile(new File(project.getBasePath() + "/src/main/java/com/linkkou/mybatis").toPath(), false);
-            if (null != file) {
-                final PsiManager instance1 = PsiManager.getInstance(project);
-                if (file.isDirectory()) {
-                    final PsiDirectory directory = instance1.findDirectory(file);
-                    instance.selectPsiElement(directory, true);
-                } else {
-                    final PsiFile file1 = instance1.findFile(file);
-                    instance.selectPsiElement(file1, true);
+        XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
+            @Override
+            public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
+                String txt = Messages.showInputDialog(project, "Input Your " + asBasePath + "  Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
+                if (null != txt) {
+                    XmlStorage.modify(project, x.setTitle(txt));
                 }
             }
-        }*/
+
+            @Override
+            public void onCreatePath(String asBasePath, XmlFile fileDirectoryXml, Project project, String extension) {
+                
+            }
+        });
     }
 
     /**

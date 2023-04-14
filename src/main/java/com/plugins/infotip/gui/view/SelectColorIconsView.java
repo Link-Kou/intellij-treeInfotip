@@ -190,11 +190,4 @@ public class SelectColorIconsView extends JDialog {
     private void onCancel() {
         dispose();
     }
-
-    public static void main(String[] args) {
-        SelectColorIconsView dialog = new SelectColorIconsView();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

@@ -10,6 +10,8 @@ import com.plugins.infotip.gui.ColorsUtils;
 import com.plugins.infotip.gui.entity.IconEntity;
 
 import java.awt.*;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A <code>TreesStyle</code> Class
@@ -20,6 +22,15 @@ import java.awt.*;
  */
 public class TreesStyle {
 
+    private static final Map<Object, Callback> callbackList = new ConcurrentHashMap<Object, Callback>();
+
+    public interface Callback {
+        void change();
+    }
+
+    public static void ListenerStyle(Object id, Callback callback) {
+        callbackList.put(id, callback);
+    }
 
     public static void setStyle(final AbstractTreeNode<?> abstractTreeNode) {
         final VirtualFile virtualFile = TreesUtils.getVirtualFile(abstractTreeNode);
@@ -66,6 +77,10 @@ public class TreesStyle {
         if (null != backgroundColor) {
             //设置背景色
             presentation.setBackground(backgroundColor);
+        }
+        for (Map.Entry<Object, Callback> objectCallbackEntry : callbackList.entrySet()) {
+            final Callback value = objectCallbackEntry.getValue();
+            value.change();
         }
         //设置节点本身文本
         //presentation.setPresentableText(matchPath.getTitle());

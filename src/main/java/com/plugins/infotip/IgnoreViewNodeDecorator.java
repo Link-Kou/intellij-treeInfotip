@@ -38,7 +38,7 @@ import com.plugins.infotip.trees.TreesStyle;
 public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
 
     @Override
-    public void decorate(ProjectViewNode node, PresentationData presentation) {
+    public void decorate(ProjectViewNode<?> node, PresentationData presentation) {
         TreesStyle.setStyle(node, presentation);
     }
 

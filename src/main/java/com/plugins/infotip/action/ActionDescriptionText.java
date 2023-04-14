@@ -27,7 +27,7 @@ public class ActionDescriptionText extends AnAction {
             public void onModifyPath(String asBasePath, XmlEntity x, XmlFile fileDirectoryXml, Project project, String extension) {
                 String txt = Messages.showInputDialog(project, "Input Your " + asBasePath + "  Description", "What Needs To Be Description?", AllIcons.Actions.Menu_paste, x.getTitle(), null);
                 if (null != txt) {
-                    XmlStorage.modify(project, x);
+                    XmlStorage.modify(project, x.setTitle(txt));
                 }
             }
 

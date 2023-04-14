@@ -1,5 +1,6 @@
 package com.plugins.infotip.gui;
 
+import com.intellij.openapi.util.IconLoader;
 import com.plugins.infotip.gui.entity.IconEntity;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ public class IconsUtils {
     private static final ArrayList<IconEntity> ICONS = new ArrayList<>();
 
     private static final String classname = "com.intellij.icons.AllIcons";
+
+    public static final Icon MyBatisIcon = IconLoader.getIcon("/icons/mybatis.png", IconsUtils.class);
 
     static {
         ArrayList<Class<?>> classArrayList = new ArrayList<>();

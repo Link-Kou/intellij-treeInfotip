@@ -1,6 +1,7 @@
 package com.plugins.infotip.gui.compone;
 
 import com.intellij.openapi.util.SystemInfo;
+import com.plugins.infotip.gui.IconsUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,10 @@ public class MyColorButton extends JButton {
         setFocusable(false);
         setDefaultCapable(false);
         setFocusable(false);
+        setColor(myColor);
+        setSize(new Dimension(45, 45));
+        setPreferredSize(new Dimension(45, 45));
+        setPressedIcon(IconsUtils.MyBatisIcon);
         if (SystemInfo.isMac) {
             putClientProperty("JButton.buttonType", "square");
         }
@@ -27,15 +32,15 @@ public class MyColorButton extends JButton {
 
     @Override
     public void paint(Graphics g) {
-        final Color color = g.getColor();
         int width = getWidth();
         int height = getHeight();
         if (myColor != null) {
             g.setColor(myColor);
+            g.fillRect(0, 0, width, height);
+        } else {
+            g.setColor(Color.WHITE);
+            g.drawRect(0, 0, width, height);
         }
-        g.drawString("X", width / 2, height / 2);
-        g.fillRect(0, 0, width, height);
-        g.setColor(color);
     }
 
     public void setColor(Color myColor) {
@@ -45,6 +50,7 @@ public class MyColorButton extends JButton {
     public Color getColor() {
         return this.myColor;
     }
+
     @Override
     public Dimension getMinimumSize() {
         return getPreferredSize();

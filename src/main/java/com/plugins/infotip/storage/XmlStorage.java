@@ -123,6 +123,32 @@ public class XmlStorage {
     }
 
 
+    public static synchronized void remove(XmlFile xmlFile, Project project, XmlEntity xmlEntity) {
+        XmlDocument document = xmlFile.getDocument();
+        if (null == document || null == xmlEntity) {
+            return;
+        }
+        xmlFile.accept(new XmlRecursiveElementVisitor() {
+            @Override
+            public void visitElement(final @NotNull PsiElement element) {
+                super.visitElement(element);
+                if (element instanceof XmlTag) {
+                    //针对节点执行不同的解析方案
+                    XmlTag tag = (XmlTag) element;
+                    if (TREE.equals(tag.getName())) {
+                        XmlEntity tree = tree(tag);
+                        if (null != tree) {
+                            if (xmlEntity.getPath().equals(tree.getPath())) {
+                                tag.delete();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
     /**
      * 创建新标签
      *

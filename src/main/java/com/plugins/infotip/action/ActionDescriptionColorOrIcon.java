@@ -32,12 +32,11 @@ public class ActionDescriptionColorOrIcon extends AnAction {
         final SelectColorIconsView dialog = new SelectColorIconsView();
         dialog.pack();
         dialog.setTitle("Select Icon Or Color");
-        dialog.setSize(288, 120);
+        dialog.setPreferredSize(new Dimension(380, 200));
+        dialog.setSize(380, 200);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
-        Dimension dimension = new Dimension();
-        dimension.setSize(288, 120);
-        dialog.setMaximumSize(dimension);
+        //dialog.setMaximumSize(new Dimension(380, 250));
         dialog.setModal(true);
 
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {

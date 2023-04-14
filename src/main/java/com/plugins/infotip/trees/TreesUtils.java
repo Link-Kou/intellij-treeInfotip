@@ -1,13 +1,20 @@
 package com.plugins.infotip.trees;
 
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.ProjectViewNode;
+import com.intellij.ide.projectView.impl.ProjectViewImpl;
 import com.intellij.ide.projectView.impl.nodes.AbstractPsiBasedNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlStorage;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -29,27 +36,46 @@ public class TreesUtils {
      */
     public static XmlEntity getMatchPath(VirtualFile virtualFile, Project project) {
         List<XmlEntity> xml = XmlStorage.getXmlEntity(project);
-        for (XmlEntity listTreeInfo : xml) {
-            if (listTreeInfo != null) {
-                try {
-                    String basePath = project.getPresentableUrl();
-                    String canonicalPath = virtualFile.getCanonicalPath();
-                    if (null != basePath && null != canonicalPath) {
-                        int beginIndex = basePath.length();
-                        int endIndex = canonicalPath.length();
-                        if (beginIndex <= endIndex) {
-                            String subBasePath = canonicalPath.substring(beginIndex, endIndex);
-                            if (subBasePath.equals(listTreeInfo.getPath())) {
-                                return listTreeInfo;
+        if (null != xml && null != virtualFile) {
+            for (XmlEntity listTreeInfo : xml) {
+                if (listTreeInfo != null) {
+                    try {
+                        String basePath = project.getPresentableUrl();
+                        String canonicalPath = virtualFile.getCanonicalPath();
+                        if (null != basePath && null != canonicalPath) {
+                            int beginIndex = basePath.length();
+                            int endIndex = canonicalPath.length();
+                            if (beginIndex <= endIndex) {
+                                String subBasePath = canonicalPath.substring(beginIndex, endIndex);
+                                if (subBasePath.equals(listTreeInfo.getPath())) {
+                                    return listTreeInfo;
+                                }
                             }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
         return null;
+    }
+
+    public static void Navigation(Project project, String path) {
+        if (project != null) {
+            final ProjectViewImpl instance = (ProjectViewImpl) ProjectView.getInstance(project);
+            final VirtualFile file = VfsUtil.findFile(new File(project.getBasePath() + path).toPath(), false);
+            if (null != file) {
+                final PsiManager instance1 = PsiManager.getInstance(project);
+                if (file.isDirectory()) {
+                    final PsiDirectory directory = instance1.findDirectory(file);
+                    instance.selectPsiElement(directory, true);
+                } else {
+                    final PsiFile file1 = instance1.findFile(file);
+                    instance.selectPsiElement(file1, true);
+                }
+            }
+        }
     }
 
     /**
