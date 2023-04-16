@@ -6,7 +6,7 @@
 ![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/12994)
 ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/12994)
 
-### 3.0时代来袭,更加具备人性化。
+### 5.0时代来袭,更加具备人性化。
 
 > 通过目录树右键添加备注
 
@@ -15,6 +15,12 @@
 > 通过目录树右键添加图标
 
 > 重构代码代码结构更加合理
+
+> 支持通过侧边栏窗口进行导航
+
+### 升级注意
+
+5.0与3.0不兼容。升级后请重新进行添加备注等说明。
 
 ### TreeInfotip能做什么？
 

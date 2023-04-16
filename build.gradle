@@ -2,6 +2,7 @@ buildscript {
     repositories {
         maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
         maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url "https://maven.hq.hydraulic.software" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
@@ -26,6 +27,7 @@ allprojects {
         maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
         maven { url 'https://maven.aliyun.com/repository/public/' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://maven.hq.hydraulic.software" }
         maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
         google()
@@ -35,7 +37,7 @@ allprojects {
 }
 
 group 'com.linkkou'
-version '5.0.0'
+version '5.0.1'
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
