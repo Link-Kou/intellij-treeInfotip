@@ -1,0 +1,99 @@
+name: Release
+
+# 推送 v* 标签即发版，例如：git tag v5.0.2 && git push origin v5.0.2
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      publish_marketplace:
+        description: '同时发布到 JetBrains Marketplace（需要配置 JETBRAINS_MARKETPLACE_TOKEN）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+env:
+  JETBRAINS_MARKETPLACE_TOKEN: ${{ secrets.JETBRAINS_MARKETPLACE_TOKEN }}
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '7.6.4'
+
+      # 标签与 gradle.properties 中的版本必须一致，避免发出版本号不符的包
+      - name: Resolve and check version
+        id: meta
+        run: |
+          version="$(sed -n 's/^pluginVersion=//p' gradle.properties | tr -d '[:space:]')"
+          if [ -z "$version" ]; then
+            echo "::error::pluginVersion not found in gradle.properties"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            tag="${GITHUB_REF_NAME#v}"
+            if [ "$tag" != "$version" ]; then
+              echo "::error::Tag v$tag does not match pluginVersion $version in gradle.properties"
+              exit 1
+            fi
+          fi
+          echo "Releasing TreeInfotip $version"
+
+      - name: Build plugin
+        run: gradle --no-daemon clean buildPlugin verifyPlugin
+
+      - name: Locate artifact
+        id: artifact
+        run: |
+          zip="$(ls build/distributions/*.zip | head -n 1)"
+          if [ -z "$zip" ]; then
+            echo "::error::No plugin zip produced in build/distributions"
+            exit 1
+          fi
+          echo "path=$zip" >> "$GITHUB_OUTPUT"
+          ls -lh build/distributions
+
+      - name: Create GitHub Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "${{ steps.artifact.outputs.path }}" \
+            --title "TreeInfotip ${{ steps.meta.outputs.version }}" \
+            --generate-notes
+
+      - name: Upload artifact (manual run)
+        if: github.ref_type != 'tag'
+        uses: actions/upload-artifact@v4
+        with:
+          name: TreeInfotip-${{ steps.meta.outputs.version }}
+          path: build/distributions/*.zip
+          if-no-files-found: error
+
+      # 只有配置了 Marketplace token 才会执行；手动触发时还需勾选开关
+      - name: Publish to JetBrains Marketplace
+        if: >-
+          env.JETBRAINS_MARKETPLACE_TOKEN != '' &&
+          (github.ref_type == 'tag' || inputs.publish_marketplace)
+        run: gradle --no-daemon publishPlugin

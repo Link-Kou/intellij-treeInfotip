@@ -6,7 +6,6 @@ import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.DumbAware;
 import com.plugins.infotip.trees.TreesStyle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
@@ -25,14 +24,10 @@ public class TreeOnlyTextProvider implements TreeStructureProvider, DumbAware {
         return collection;
     }
 
-    @Nullable
-    @Override
-    public Object getData(@NotNull Collection<AbstractTreeNode<?>> selected, @NotNull String dataId) {
-        for (AbstractTreeNode<?> abstractTreeNode : selected) {
-            psiDirectoryNode(abstractTreeNode);
-        }
-        return TreeStructureProvider.super.getData(selected, dataId);
-    }
+    //原来这里还覆盖了 getData(Collection, String)，在里面对选中的节点再 setStyle 一遍。
+    //那个方法被标了 @ApiStatus.ScheduledForRemoval，Marketplace 的 Plugin Verifier 会报出来，
+    //而且它做的事本来就是多余的：样式在 modify 里已经对全部节点应用过，
+    //另一个入口 IgnoreViewNodeDecorator 也会再兜一遍，删掉不影响渲染。
 
     /**
      * 获取遍历目录

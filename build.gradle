@@ -1,12 +1,9 @@
 buildscript {
     repositories {
-        maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url "https://maven.hq.hydraulic.software" }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
-        google()
+        maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         gradlePluginPortal()
         mavenLocal()
     }
@@ -14,6 +11,10 @@ buildscript {
 
 plugins {
     id 'java'
+    // Kotlin/Java 混编：新代码可以直接写 .kt，老的 .java 不用动。
+    // 版本必须 <= 最低支持 IDE 自带的 Kotlin（2022.3 是 1.7.21 / 1.8.x），
+    // 因为运行时用的是 IDE 里那份 kotlin-stdlib，不是我们打包的。
+    id 'org.jetbrains.kotlin.jvm' version '1.8.10'
     id 'org.jetbrains.intellij' version '1.13.2'
     // Gradle Changelog Plugin
     id 'org.jetbrains.changelog' version "1.3.1"
@@ -24,54 +25,130 @@ plugins {
 
 allprojects {
     repositories {
-        maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://maven.hq.hydraulic.software" }
-        maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
-        google()
+        maven { url "https://www.jetbrains.com/intellij-repository/releases/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         gradlePluginPortal()
         mavenLocal()
     }
 }
 
-group 'com.linkkou'
-version '5.0.1'
+group 'com.github.yc556'
+version = project.property('pluginVersion').toString()
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
     implementation 'org.javatuples:javatuples:1.2'
     compileOnly 'org.jetbrains:annotations:24.0.1'
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    // 只在编译期需要：运行时用 IDE 自带的 kotlin-stdlib，
+    // 配合 gradle.properties 里的 kotlin.stdlib.default.dependency=false，
+    // 避免插件里塞一份 stdlib 和 IDE 的那份打架。
+    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
 }
 
 java {
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+    // 与 platformVersion(2022.3.2)对齐：2022.3 起所有 IntelliJ 系 IDE 都要求 JDK 17 才能启动，
+    // 因此字节码可以直接出 17，不必再迁就 Java 8。不要再往上提到 21，
+    // 2022.3 自带的 JBR 是 17，21 的字节码在沙箱和用户机器上都加载不了。
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        // 和 java 块的 targetCompatibility 保持一致，否则混编时 javac 报版本不匹配
+        jvmTarget = "17"
+        // since-build=223 覆盖到 2022.3.0，那个版本自带的 Kotlin 是 1.7.21。
+        // 压到 1.7 是为了让编译器拦住只有新 stdlib 才有的函数，
+        // 否则要到用户的老 IDE 上才会炸 NoSuchMethodError。
+        // apiVersion / languageVersion 只认两段式。verifyPluginConfiguration 会提示
+        // "requires apiVersion=1.7.0"，那是它按字符串比对的误报——真填 1.7.0，
+        // Kotlin 编译器直接报 "Unknown Kotlin version: 1.7.0"。这条告警可以忽略。
+        apiVersion = "1.7"
+        languageVersion = "1.7"
+    }
 }
 
 /*https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html#intellij-platform-based-products-of-recent-ide-versions*/
 /*https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension*/
 intellij {
-    pluginName = 'TreeInfotip'
+    // 这个名字就是 zip 里的根目录名，也就是 IDE 装完后 plugins/ 下的目录名。
+    // 原版用的是 TreeInfotip，复刻版必须换一个，否则两个插件会抢同一个安装目录，
+    // 后装的那个直接把前一个的目录覆盖掉。产物名跟着变成 TreeInfotip-Notes-<版本>.zip。
+    pluginName = 'TreeInfotip-Notes'
     // 开发环境运行时使用的版本，不同的版本编译会采用默认支持java版本编译
-    version = '2022.3.2'
+    version = project.property('platformVersion').toString()
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     sandboxDir = "${rootProject.rootDir}/idea-sandbox"
-    type = 'IU'
+    type = project.property('platformType').toString()
     // 依赖的插件
     //plugins = ['DatabaseTools', 'Velocity']
-    //Disables updating since-build attribute in plugin.xml
+    // 保持 plugin.xml 中的 since-build="223" 且不写入 until-build，
+    // 否则会给插件加上兼容性上限，导致新版本 IDE 无法安装。
     updateSinceUntilBuild = false
     downloadSources = false
-    //localPath = '/Applications/IntelliJ IDEA.app/Contents'
-    //localPath = '/Applications/WebStorm.app/Contents'
+}
+
+patchPluginXml {
+    // 让打包产物中的 <version> 始终与 gradle.properties 中的 pluginVersion 一致
+    version = project.version.toString()
 }
 
 runIde {
-    jvmArgs = [
-            "-javaagent:/Applications/jetbra/fineagent.jar=jetbrains",
+    // 该 javaagent 只存在于作者本机（macOS），其他机器与 CI 上不存在，
+    // 因此按文件是否存在动态添加，避免 runIde 直接启动失败。
+    def agent = file('/Applications/jetbra/fineagent.jar')
+    def extraJvmArgs = [
             "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED",
             "--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED"]
+    if (agent.exists()) {
+        extraJvmArgs.add(0, "-javaagent:${agent.absolutePath}=jetbrains".toString())
+    }
+    jvmArgs = extraJvmArgs
+}
+
+// 兼容性校验：可通过 -PverifierIdeVersions=IU-2022.3.2,IU-2026.2 覆盖，
+// 也可以用 -PverifierLocalPaths="D:/app/JetBrains/IntelliJ IDEA 2026.2.1" 直接指向本机
+// 已装好的 IDE——ideVersions 每个版本都要下载 1~2GB 的完整包，本机有就别再下一遍。
+// 注意这个任务要联网取 verifier CLI，不能加 --offline。
+runPluginVerifier {
+    def localIdes = (project.findProperty('verifierLocalPaths') ?: '')
+            .toString().split(',').collect { it.trim() }.findAll { it }
+    if (localIdes) {
+        localPaths = localIdes.collect { file(it) }
+    } else {
+        def versions = (project.findProperty('verifierIdeVersions') ?: 'IU-2022.3.2')
+                .toString().split(',').collect { it.trim() }.findAll { it }
+        ideVersions = versions
+    }
+    // 不指定 runtimeDir 时插件会联网去下 JBR，国内网络下直接 Connection timed out，
+    // 所以本机跑一定要传 -PverifierRuntimeDir=<某个 JDK 或 IDE 自带的 jbr 目录>。
+    def rt = project.findProperty('verifierRuntimeDir')
+    if (rt) {
+        runtimeDir = rt.toString()
+    }
+    // verifierVersion 默认是 "latest"，解析它要访问 api.github.com，国内同样超时。
+    // 传 -PverifierVersion=1.410 这类具体版本号，就改从 maven（含 aliyun 镜像）拉。
+    def vv = project.findProperty('verifierVersion')
+    if (vv) {
+        verifierVersion = vv.toString()
+    }
+}
+
+publishPlugin {
+    // 通过环境变量注入，不要把 token 写进仓库
+    def marketplaceToken = System.getenv('JETBRAINS_MARKETPLACE_TOKEN')
+    if (marketplaceToken) {
+        token = marketplaceToken
+    }
+    def ch = System.getenv('JETBRAINS_MARKETPLACE_CHANNEL')
+    if (ch) {
+        channels = [ch]
+    }
 }

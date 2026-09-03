@@ -29,7 +29,7 @@ public class ActionDescriptionClearAll extends AnAction {
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
-                final int i = Messages.showDialog(project, "Whether to delete or not", "Delete", new String[]{"OK", "Cancel"}, 1, Messages.getInformationIcon());
+                final int i = Messages.showDialog(project, "确定要清除选中节点的全部设置吗？", "清除设置", new String[]{"确定", "取消"}, 1, Messages.getInformationIcon());
                 if (i == 0) {
                     for (XmlEntity xmlEntity : xmlEntities) {
                         XmlStorage.remove(fileDirectoryXml, project, xmlEntity);

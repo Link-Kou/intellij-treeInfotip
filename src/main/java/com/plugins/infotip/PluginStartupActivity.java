@@ -40,6 +40,8 @@ public class PluginStartupActivity implements StartupActivity {
             objectRunCallbackEntry.getValue().run();
         }
         XmlChangeListener.run(project);
+        // 放在最后：提示只是锦上添花，装饰功能优先跑完
+        OldPluginConflictNotifier.checkAndNotify(project);
     }
 
 }

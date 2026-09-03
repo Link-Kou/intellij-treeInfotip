@@ -3,7 +3,6 @@ package com.plugins.infotip.action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.xml.XmlFile;
 import com.plugins.infotip.storage.XmlEntity;
 import com.plugins.infotip.storage.XmlFileUtils;
@@ -14,35 +13,32 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * 右键菜单
+ * 右键菜单：给节点文本添加/取消删除线
  *
  * @author lk
  * @version 1.0
- * 2021/6/7 14:13
  */
-public class ActionDescriptionText extends AnAction {
+public class ActionDescriptionStrikethrough extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         XmlFileUtils.runActionType(anActionEvent, new XmlFileUtils.Callback() {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
-                final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), xmlEntity.getTitle(), null);
-                if (null != txt) {
-                    for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
-                    }
+                //以第一个选中节点的当前状态取反，作为本次批量操作的目标状态，
+                //这样多选时行为一致，不会出现有的加上有的取消。
+                final boolean enable = !xmlEntities.get(0).isStrikethroughEnabled();
+                for (XmlEntity x : xmlEntities) {
+                    XmlStorage.modify(project, fileDirectoryXml, x.setStrikethrough(enable ? "true" : null));
                 }
             }
 
             @Override
             public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), "", null);
-                if (null != txt) {
-                    for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTitle(txt));
-                    }
+                //尚无任何配置时，直接为选中节点建立带删除线的配置
+                for (Pair<String, String> pair : asBasePathOrExtension) {
+                    XmlStorage.create(project, fileDirectoryXml,
+                            new XmlEntity().setPath(pair.getValue0()).setStrikethrough("true"));
                 }
             }
         });
@@ -50,7 +46,6 @@ public class ActionDescriptionText extends AnAction {
 
     /**
      * 项目构建完毕前就显示
-     * 强烈建议不要覆盖,
      *
      * @return boolean
      */

@@ -14,13 +14,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * 右键菜单
+ * 右键菜单：覆盖节点显示名称
+ * <p>
+ * 与「添加文字备注」不同，这里改的是节点自身的名字，留空则恢复成文件的真实名称。
+ * </p>
  *
  * @author lk
  * @version 1.0
- * 2021/6/7 14:13
  */
-public class ActionDescriptionText extends AnAction {
+public class ActionDescriptionPresentableText extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
@@ -28,20 +30,20 @@ public class ActionDescriptionText extends AnAction {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), xmlEntity.getTitle(), null);
+                String txt = Messages.showInputDialog(project, "请输入要显示的名称，留空则恢复文件原名", "覆盖显示名称", Messages.getQuestionIcon(), xmlEntity.getPresentableText(), null);
                 if (null != txt) {
                     for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
+                        XmlStorage.modify(project, fileDirectoryXml, x.setPresentableText(txt));
                     }
                 }
             }
 
             @Override
             public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), "", null);
+                String txt = Messages.showInputDialog(project, "请输入要显示的名称，留空则恢复文件原名", "覆盖显示名称", Messages.getQuestionIcon(), "", null);
                 if (null != txt) {
                     for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTitle(txt));
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setPresentableText(txt));
                     }
                 }
             }
@@ -50,7 +52,6 @@ public class ActionDescriptionText extends AnAction {
 
     /**
      * 项目构建完毕前就显示
-     * 强烈建议不要覆盖,
      *
      * @return boolean
      */

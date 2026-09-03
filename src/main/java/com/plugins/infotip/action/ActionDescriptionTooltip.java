@@ -14,13 +14,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * 右键菜单
+ * 右键菜单：设置鼠标悬浮提示
  *
  * @author lk
  * @version 1.0
- * 2021/6/7 14:13
  */
-public class ActionDescriptionText extends AnAction {
+public class ActionDescriptionTooltip extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
@@ -28,20 +27,20 @@ public class ActionDescriptionText extends AnAction {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), xmlEntity.getTitle(), null);
+                String txt = Messages.showInputDialog(project, "请输入鼠标悬浮时显示的提示内容", "设置悬浮提示", Messages.getQuestionIcon(), xmlEntity.getTooltipTitle(), null);
                 if (null != txt) {
                     for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
+                        XmlStorage.modify(project, fileDirectoryXml, x.setTooltipTitle(txt));
                     }
                 }
             }
 
             @Override
             public void onCreatePath(List<Pair<String, String>> asBasePathOrExtension, XmlFile fileDirectoryXml, Project project) {
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), "", null);
+                String txt = Messages.showInputDialog(project, "请输入鼠标悬浮时显示的提示内容", "设置悬浮提示", Messages.getQuestionIcon(), "", null);
                 if (null != txt) {
                     for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTitle(txt));
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTooltipTitle(txt));
                     }
                 }
             }
@@ -50,7 +49,6 @@ public class ActionDescriptionText extends AnAction {
 
     /**
      * 项目构建完毕前就显示
-     * 强烈建议不要覆盖,
      *
      * @return boolean
      */

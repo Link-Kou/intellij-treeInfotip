@@ -1,5 +1,6 @@
 package com.plugins.infotip.gui.compone;
 
+import com.plugins.infotip.gui.IconsUtils;
 import com.plugins.infotip.gui.entity.IconEntity;
 
 import javax.swing.*;
@@ -16,7 +17,8 @@ public class MyComboBoxRenderer extends JLabel implements ListCellRenderer<IconE
 
     @Override
     public Component getListCellRendererComponent(JList list, IconEntity value, int index, boolean isSelected, boolean cellHasFocus) {
-        setIcon(value.getIcon());
+        //和树里保持一致:下拉框预览也缩到 16,免得选的时候看着一个大小、设上去又是另一个大小
+        setIcon(IconsUtils.fit(value.getIcon()));
         setText(value.getName());
         return this;
     }

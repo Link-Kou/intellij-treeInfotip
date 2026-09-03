@@ -1,5 +1,6 @@
 package com.plugins.infotip.gui.compone;
 
+import javax.swing.Icon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -12,6 +13,20 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class MyTreeNode extends DefaultMutableTreeNode {
     private Object UserEntity;
 
+    /**
+     * 列表左侧显示的图标
+     * <p>
+     * 在构建节点时算好而不是渲染时现算：渲染器每帧对每个可见行都要调一次，
+     * 而算图标要碰 VFS 和 FileTypeManager。
+     * </p>
+     */
+    private Icon icon;
+
+    /**
+     * 规则指向的路径在磁盘上已经不存在，渲染时整行标红
+     */
+    private boolean missing;
+
     public MyTreeNode(Object userObject) {
         super(userObject);
     }
@@ -22,6 +37,24 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     public MyTreeNode setUserEntity(Object userEntity) {
         UserEntity = userEntity;
+        return this;
+    }
+
+    public Icon getIcon() {
+        return icon;
+    }
+
+    public MyTreeNode setIcon(Icon icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    public boolean isMissing() {
+        return missing;
+    }
+
+    public MyTreeNode setMissing(boolean missing) {
+        this.missing = missing;
         return this;
     }
 }

@@ -1,20 +1,30 @@
 <idea-plugin>
-    <id>com.linkkou.plugin.intellij.assistant</id>
-    <name>TreeInfotip</name>
-    <vendor email="chinacclk@gmail.com" url="https://github.com/Link-Kou/intellij-treeInfotip">linkkou</vendor>
+    <!-- 复刻版独立的插件 id，不能和原版 com.linkkou.plugin.intellij.assistant 相同：
+         IDE 的更新检查是按 id 去 Marketplace 查的，沿用原 id 会被原版的构建"更新"掉 -->
+    <id>com.github.yc556.treeinfotip</id>
+    <!-- 首次上传 Marketplace 时名字只能用拉丁字符：会校验 name，允许的只有字母、数字、空格和
+         .,+_-/:()#'&[]| 这几个符号，中日韩文字直接被拒（Plugin Verifier 1.393 起明确写成
+         "Plugin name must be in Latin characters"）。
+         条目建起来之后可以再改成带中文的「TreeInfotip Notes / 目录树备注」——作者另一个插件
+         sql-heading-folding 就是先纯英文首发建条目，再改中英文名靠 CI publishPlugin 发上去的，
+         详见 CLAUDE.md 的「Marketplace 的描述符校验」一节。所以现在这个纯拉丁名是为了过首传，
+         别在条目还没建出来之前就改回中文。
+         另外这里不能只写 TreeInfotip，Marketplace 的条目名要和原版区分开 -->
+    <name>TreeInfotip Notes</name>
+    <vendor url="https://github.com/yc-2018/intellij-treeInfotip">yc-2018</vendor>
 
-    <!-- 插件版本 -->
-    <version>5.0.1</version>
+    <!-- 插件版本（打包时由 gradle.properties 中的 pluginVersion 覆盖） -->
+    <version>5.3.2</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="212"/>
+    <idea-version since-build="223"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
       <p><b>TreeInfotip plugin for IntelliJ IDEs.</b></p>
       <br/>
       <p>
           <b>
-            <a href="https://github.com/Link-Kou/intellij-treeInfotip">GitHub</a> |
-            <a href="https://github.com/Link-Kou/intellij-treeInfotip/issues">Issues</a> |
+            <a href="https://github.com/yc-2018/intellij-treeInfotip">GitHub</a> |
+            <a href="https://github.com/yc-2018/intellij-treeInfotip/issues">Issues</a> |
           </b>
       </p>
       <p>
@@ -27,14 +37,107 @@
       </p>
       <br/>
       <p>
-        <a title="To Github" href="https://github.com/Link-Kou/intellij-treeInfotip"><img src="https://raw.githubusercontent.com/Link-Kou/intellij-treeInfotip/master/image/2021-06-19_14-39-35.png" width="532" alt="image"></a>
+        <a title="To Github" href="https://github.com/yc-2018/intellij-treeInfotip"><img src="https://raw.githubusercontent.com/yc-2018/intellij-treeInfotip/master/image/2023-04-14_14.51.58.png" width="532" alt="image"></a>
       </p>
       <br/>
-      <p><a href="https://github.com/Link-Kou/intellij-treeInfotip/issues">Send issues</a></p>
+      <p><a href="https://github.com/yc-2018/intellij-treeInfotip/issues">Send issues</a></p>
+      <br/>
+      <p>
+        This is a maintained fork of <a href="https://github.com/Link-Kou/intellij-treeInfotip">Link-Kou/intellij-treeInfotip</a>.
+        Please uninstall the original <b>TreeInfotip</b> before using this one — running both decorates the tree twice.
+      </p>
+      <p>
+        本插件是 <a href="https://github.com/Link-Kou/intellij-treeInfotip">Link-Kou/intellij-treeInfotip</a> 的复刻续维护版本。
+        请先卸载原版 <b>TreeInfotip</b> 再使用，两个一起装会重复装饰目录树。
+      </p>
     ]]></description>
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+       <ul>
+        <p>5.3.2</p>
+        <li>清掉 Marketplace 的 Plugin Verifier 报出的全部 9 处问题（5 处待删除 API、2 处已废弃 API、2 处内部 API），上传 5.3.1 时就是被这些卡住的</li>
+        <li>不再引用内部 API：冲突检测从 PluginManagerCore.getPlugin 换成 isPluginInstalled + isDisabled，通知里的「打开插件管理」按 configurable id 定位，不再直接用 PluginManagerConfigurable 类</li>
+        <li>ContentFactory.SERVICE 换成 ContentFactory.getInstance()，ColorChooser 换成 ColorChooserService，ReadAction.run(ThrowableRunnable) 换成 Application.runReadAction</li>
+        <li>删掉两个已废弃且没有实际作用的覆盖方法：ProjectViewNodeDecorator 的 PackageDependenciesNode 重载和 TreeStructureProvider.getData，渲染行为不变</li>
+        <li>Fixed all 9 issues reported by the Marketplace Plugin Verifier (5 scheduled-for-removal, 2 deprecated, 2 internal API usages) that blocked the 5.3.1 upload</li>
+        <li>Dropped internal API usage: conflict detection now uses PluginManagerCore.isPluginInstalled/isDisabled, and the notification action locates the plugin page by configurable id instead of referencing PluginManagerConfigurable</li>
+        <li>Replaced ContentFactory.SERVICE with getInstance(), ColorChooser with ColorChooserService, and ReadAction.run(ThrowableRunnable) with Application.runReadAction</li>
+        <li>Removed two deprecated no-op overrides (ProjectViewNodeDecorator's PackageDependenciesNode overload and TreeStructureProvider.getData); rendering is unchanged</li>
+      </ul>
+       <ul>
+        <p>5.3.1</p>
+        <li>插件名从「TreeInfotip 目录树备注」改为「TreeInfotip Notes」：Marketplace 上传时校验 plugin.xml 的 name，只放行字母、数字、空格和 .,+_-/:()#'&amp;[]|，中文字符会被拒（Plugin Verifier 1.393 起写明必须是拉丁字符）</li>
+        <li>Marketplace 的插件名只能由 plugin.xml 驱动、网页后台改不了；条目上架之后可以再改成带中文的名字，这一版先用纯拉丁名把条目建起来</li>
+        <li>Renamed the plugin to "TreeInfotip Notes": Marketplace validates the plugin.xml name against letters, digits, spaces and .,+_-/:()#'&amp;[]| only, and rejects CJK characters</li>
+        <li>The Marketplace display name comes from plugin.xml and cannot be overridden on the listing page; a bilingual name can be restored on a later version once the listing exists</li>
+      </ul>
+       <ul>
+        <p>5.3.0</p>
+        <li>修复在 2024.1 及更新的 IDE（含 2026.x）上双击备注列表跳转时崩溃：报错是「Read access is allowed from inside read-action only」，新版平台的 EDT 不再隐式持有读锁，PSI 查找现在包在 ReadAction 里</li>
+        <li>备注列表加上滚动条，条目超过窗口高度时不再只能看到前面几条</li>
+        <li>备注列表检查配置的路径是否还存在，已被删除或改名的整行标红并标注「路径已失效」</li>
+        <li>备注前面加上类型图标：目录是文件夹图标，文件按文件类型显示，按扩展名批量设置的规则显示对应类型的图标，路径失效的显示错误图标</li>
+        <li>双击备注列表的根节点可以重新检查所有路径（在 IDE 外面删文件不会触发自动刷新）</li>
+        <li>Fixed a crash when double-clicking an entry in the note list on 2024.1+ IDEs including 2026.x ("Read access is allowed from inside read-action only"): the EDT no longer holds an implicit read lock, so PSI lookups are now wrapped in a ReadAction</li>
+        <li>The note list is scrollable now, so entries below the tool window height are reachable</li>
+        <li>The note list checks whether each configured path still exists and paints deleted or renamed ones red with a "路径已失效" marker</li>
+        <li>Type icons in front of each note: a folder icon for directories, the file type icon for files and for extension rules, an error icon for dead paths</li>
+        <li>Double-clicking the note list root re-checks every path, since deleting files outside the IDE triggers no refresh</li>
+      </ul>
+       <ul>
+        <p>5.2.0</p>
+        <li>插件改用独立身份发布：id 换成 com.github.yc556.treeinfotip，名称改为「TreeInfotip 目录树备注」，与原版并存不再互相顶掉更新</li>
+        <li>启动时检测原版 TreeInfotip 是否还装着，装着就弹一次提示并给出「打开插件管理」入口，避免两份插件重复装饰目录树</li>
+        <li>重命名了所有全局注册的 id（右键菜单组、7 个菜单项、2 个工具窗口），加上 TreeInfotip 前缀，不再占用 FirstAction、StudyAction.MyGroup、XmlEditor 这类通用名字</li>
+        <li>XML 编辑窗口的标签由「XmlEditor」改为「TreeInfotip XML」，备注窗口改为「TreeInfotip 备注」；窗口位置和大小需要重新拖一次</li>
+        <li>The plugin now ships under its own identity: id com.github.yc556.treeinfotip, renamed to "TreeInfotip 目录树备注", so it no longer collides with the original listing</li>
+        <li>Detects the original TreeInfotip at startup and shows a one-off notification with a shortcut to the plugin manager, since running both decorates the tree twice</li>
+        <li>All globally registered ids were namespaced under TreeInfotip (menu group, 7 actions, 2 tool windows), freeing generic names like FirstAction, StudyAction.MyGroup and XmlEditor</li>
+        <li>Tool window labels are now "TreeInfotip 备注" and "TreeInfotip XML"; their position and size need to be set once more</li>
+      </ul>
+       <ul>
+        <p>5.1.2</p>
+        <li>修复部分图标设置后把目录树行高撑高的问题：可选图标里有 50 个长边超过 16（20×20、24×24、32×32、最大 48×48），现在会等比缩到一行的高度，小图标保持原样不放大</li>
+        <li>颜色/图标对话框的下拉框预览同步缩放，选的时候看到的大小就是设上去的大小</li>
+        <li>Fixed oversized icons inflating the tree row height: 50 of the selectable icons have a long edge above 16 (20×20, 24×24, 32×32, up to 48×48) and are now scaled down to fit a single row, while smaller icons are left untouched</li>
+        <li>The icon dropdown preview is scaled the same way, so the size you pick is the size you get</li>
+      </ul>
+       <ul>
+        <p>5.1.1</p>
+        <li>引入 Kotlin/Java 混编，颜色转换、图标列表等内部工具类改用 Kotlin 重写，插件不额外打包 kotlin-stdlib</li>
+        <li>颜色字符串解析遇到非法数字时返回空值而不再抛异常，配置文件手写错误不会再中断渲染</li>
+        <li>图标列表初始化改为兜住 Error：新版 IDE 若删改 AllIcons 字段，最坏只是"没有图标可选"，不会导致插件加载失败</li>
+        <li>Added Kotlin/Java mixed compilation; internal utilities are now written in Kotlin without bundling kotlin-stdlib</li>
+        <li>Malformed color strings now degrade to no-op instead of throwing, so a hand-edited config can no longer break rendering</li>
+        <li>Icon list initialization now also catches Errors, so AllIcons changes in newer IDEs can no longer fail plugin loading</li>
+      </ul>
+       <ul>
+        <p>5.1.0</p>
+        <li>字节码目标从 Java 8 提升到 Java 17，与编译平台 2022.3 对齐</li>
+        <li>最低支持版本随之从 2021.2（since-build 212）提高到 2022.3（since-build 223）；2022.2 及更早的 IDE 请继续使用 5.0.4</li>
+        <li>Raised the bytecode target from Java 8 to Java 17 to match the 2022.3 build platform</li>
+        <li>Minimum supported IDE is now 2022.3 (since-build 223) instead of 2021.2; stay on 5.0.4 for 2022.2 and earlier</li>
+      </ul>
+       <ul>
+        <p>5.0.4</p>
+        <li>新增「按扩展名批量设置」菜单：一条规则命中一批同扩展名的文件，范围可限定为当前目录（含子目录）或整个项目</li>
+        <li>新增「覆盖显示名称」菜单：用自定义名称替换节点显示的文件名，留空恢复原名</li>
+        <li>新增「设置悬浮提示」菜单：自定义鼠标悬停在节点上时显示的内容</li>
+        <li>新增 XML 编辑工具窗口，可直接查看与编辑配置文件</li>
+        <li>右键菜单全面中文化，新增「添加/取消删除线」</li>
+        <li>保存配置时自动清理空属性，配置文件更干净</li>
+        <li>Added "batch by file extension" rule: one rule matches all files with the same extension, scoped to the current directory (including subdirectories) or the whole project</li>
+        <li>Added "override display name" and "custom tooltip" menu entries</li>
+        <li>Added an XML editor tool window for viewing and editing the configuration file</li>
+        <li>Localized the context menu into Chinese and added strikethrough support</li>
+        <li>Empty attributes are now dropped when saving the configuration</li>
+      </ul>
+       <ul>
+        <p>5.0.2</p>
+        <li>修复在新版本 IDE（2026.2 等）上右键菜单弹出时报 "Icon cannot be found in 'AllIcons.Actions.Menu_paste'" 导致菜单不可用的问题</li>
+        <li>Fixed "Icon cannot be found in 'AllIcons.Actions.Menu_paste'" which broke the project view context menu on recent IDEs (2026.2+)</li>
+      </ul>
        <ul>
         <p>5.0.0</p>
         <li>项目重构，支持更多菜单树样式设置</li>
@@ -119,26 +222,48 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <toolWindow id="TreeInfotip" secondary="true" icon="AllIcons.General.Note" anchor="right"
+        <!-- 工具窗口 id 是 IDE 全局的，同时也是侧边栏上显示的文字：
+             平台按 toolwindow.stripe.<id> 去资源包找标题，找不到就直接拿 id 当标题
+             （com.intellij.toolWindow.ToolwindowKt#getStripeTitleSupplier）。
+             所以这里的 id 既要唯一、又要能直接读，带空格是平台自己也在用的写法（如 Version Control） -->
+        <toolWindow id="TreeInfotip 备注" secondary="true" icon="AllIcons.General.Note" anchor="right"
                     factoryClass="com.plugins.infotip.gui.view.NoteTreeView"/>
+        <toolWindow id="TreeInfotip XML" secondary="true" icon="AllIcons.FileTypes.Xml" anchor="bottom"
+                    factoryClass="com.plugins.infotip.gui.view.XmlEditorToolWindow"/>
+        <notificationGroup id="TreeInfotip" displayType="STICKY_BALLOON"/>
         <postStartupActivity implementation="com.plugins.infotip.PluginStartupActivity"/>
         <treeStructureProvider implementation="com.plugins.infotip.TreeOnlyTextProvider"/>
         <projectViewNodeDecorator implementation="com.plugins.infotip.IgnoreViewNodeDecorator"/>
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
-        <group id="StudyAction.MyGroup" text="Add Description" popup="true" icon="AllIcons.Actions.Menu_paste">
+        <!-- action / group 的 id 也是 IDE 全局的，重名会被 ActionManager 拒绝注册；
+             这些 id 不对用户显示（菜单文字来自 text 属性），所以统一加 TreeInfotip 前缀 -->
+        <group id="TreeInfotip.MenuGroup" text="目录备注" popup="true" icon="AllIcons.Actions.MenuPaste">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
-            <action id="FirstAction" class="com.plugins.infotip.action.ActionDescriptionText" text="Add Text Remarks"
-                    description="添加备注信息"/>
-            <action id="FirstAction2" class="com.plugins.infotip.action.ActionDescriptionColorOrIcon"
-                    text="Add Color Or Icons"
-                    description="添加图标信息"/>
+            <action id="TreeInfotip.DescriptionText" class="com.plugins.infotip.action.ActionDescriptionText"
+                    text="添加文字备注"
+                    description="给选中的文件或目录添加备注信息"/>
+            <action id="TreeInfotip.PresentableText" class="com.plugins.infotip.action.ActionDescriptionPresentableText"
+                    text="覆盖显示名称"
+                    description="用自定义名称替换节点显示的文件名,留空则恢复原名"/>
+            <action id="TreeInfotip.Tooltip" class="com.plugins.infotip.action.ActionDescriptionTooltip"
+                    text="设置悬浮提示"
+                    description="设置鼠标悬停在节点上时显示的提示内容"/>
+            <action id="TreeInfotip.ColorOrIcon" class="com.plugins.infotip.action.ActionDescriptionColorOrIcon"
+                    text="添加颜色或图标"
+                    description="给选中的文件或目录设置图标、文字颜色与背景色"/>
+            <action id="TreeInfotip.Strikethrough" class="com.plugins.infotip.action.ActionDescriptionStrikethrough"
+                    text="添加/取消删除线"
+                    description="给选中的文件或目录名称添加或取消删除线"/>
             <separator/>
-            <action id="FirstAction5" class="com.plugins.infotip.action.ActionDescriptionClearAll" text="Clear All"
-                    description="清理节点设置"/>
+            <action id="TreeInfotip.Extension" class="com.plugins.infotip.action.ActionDescriptionExtension"
+                    text="按扩展名批量设置"
+                    description="一条规则命中一批同扩展名的文件,范围可限定为当前目录或整个项目"/>
+            <separator/>
+            <action id="TreeInfotip.ClearAll" class="com.plugins.infotip.action.ActionDescriptionClearAll"
+                    text="清除全部设置"
+                    description="清理选中节点的全部备注与样式设置"/>
         </group>
 
     </actions>

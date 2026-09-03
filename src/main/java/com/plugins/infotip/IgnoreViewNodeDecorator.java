@@ -27,8 +27,6 @@ package com.plugins.infotip;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
-import com.intellij.packageDependencies.ui.PackageDependenciesNode;
-import com.intellij.ui.ColoredTreeCellRenderer;
 import com.plugins.infotip.trees.TreesStyle;
 
 /**
@@ -44,13 +42,8 @@ public class IgnoreViewNodeDecorator implements ProjectViewNodeDecorator {
         TreesStyle.setStyle(node, presentation);
     }
 
-    /**
-     * 此类只有222以上要注释掉
-     * 向下兼容本身无具体作用
-     * @param node
-     * @param cellRenderer
-     * @deprecated
-     */
-    @Override
-    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {}
+    //原来这里还覆盖了 decorate(PackageDependenciesNode, ColoredTreeCellRenderer) 的空实现，
+    //那是给 2022.2 之前的 IDE 兜底用的——那时它是抽象方法，不实现编译不过。
+    //since-build 已经提到 223（2022.3），接口里它是 default 方法，覆盖没有任何作用，
+    //而且被标了 @Deprecated，Marketplace 的 Plugin Verifier 会报 "deprecated API"，所以删掉。
 }

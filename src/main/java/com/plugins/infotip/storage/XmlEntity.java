@@ -51,8 +51,22 @@ public class XmlEntity {
     private String backgroundColor;
 
     /**
+     * 删除线，取值 "true" 表示开启；null 或其他值表示关闭
+     */
+    private String strikethrough;
+
+    /**
      * XMl
      */
     private XmlTag tag;
+
+    /**
+     * 是否开启了删除线
+     *
+     * @return true 表示需要给节点文本加删除线
+     */
+    public boolean isStrikethroughEnabled() {
+        return "true".equalsIgnoreCase(strikethrough);
+    }
 
 }

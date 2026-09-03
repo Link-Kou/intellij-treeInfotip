@@ -1,6 +1,7 @@
 package com.plugins.infotip.gui.view;
 
-import com.intellij.ui.ColorChooser;
+import com.intellij.openapi.project.Project;
+import com.intellij.ui.ColorChooserService;
 import com.plugins.infotip.gui.ColorsUtils;
 import com.plugins.infotip.gui.IconsUtils;
 import com.plugins.infotip.gui.compone.MyComboBoxRenderer;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,12 +31,18 @@ public class SelectColorIconsView extends JDialog {
 
     private Color textColor;
 
+    /**
+     * 只用来传给颜色选择器，让它拿到项目上下文；允许为 null
+     */
+    private final Project project;
+
     Map<String, Pair<MyColorButton, Color>> mapColor = new HashMap<String, Pair<MyColorButton, Color>>() {{
         put(ColorsUtils.COLOR_TEXT_COLOR_NAME, null);
         put(ColorsUtils.COLOR_BACKGROUND_COLOR, null);
     }};
 
-    public SelectColorIconsView() {
+    public SelectColorIconsView(Project project) {
+        this.project = project;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -96,7 +104,17 @@ public class SelectColorIconsView extends JDialog {
 
 
     private void onColor(String type, MyColorButton myColorButton) {
-        Color newColor = ColorChooser.chooseColor(this, "Choose Color", Color.white, true);
+        //原来用的 com.intellij.ui.ColorChooser 已标 @ApiStatus.ScheduledForRemoval，
+        //换成 ColorChooserService（2022.3 就有）。
+        //必须用带 Project 的 7 参重载：不带 Project 的 6 参那个在 2022.3 就已经
+        //@Deprecated forRemoval（虽然 2026.2 又不带标记了），编译期会报 [removal] 告警。
+        //7 参这个两个版本都是干净的。参数要写全，可省的那两个是 Kotlin 默认值，
+        //Java 侧只有 6 参和 7 参两个签名；后两个与原来 chooseColor(c, caption, color, true)
+        //的默认值一致——监听器列表为空、opacityInPercent=false。
+        //project 传 null 也合法（2022.3 的形参没标 @NotNull，2026.2 的 Kotlin 实现
+        //也只对 parent 和 listeners 做非空检查）。
+        Color newColor = ColorChooserService.getInstance()
+                .showDialog(this.project, this, "选择颜色", Color.white, true, Collections.emptyList(), false);
         if (null != newColor) {
             myColorButton.setColor(newColor);
             this.mapColor.put(type, Pair.with(myColorButton, newColor));

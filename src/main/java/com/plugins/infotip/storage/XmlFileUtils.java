@@ -1,6 +1,5 @@
 package com.plugins.infotip.storage;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
@@ -91,7 +90,7 @@ public class XmlFileUtils {
                 for (VirtualFile file : files) {
                     String presentableUrl = file.getCanonicalPath();
                     if (presentableUrl.length() < basePath.length()) {
-                        Messages.showMessageDialog(project, "Unable to get the root path of the file", "Can't Get Path", AllIcons.Actions.Menu_paste);
+                        Messages.showMessageDialog(project, "无法获取该文件的根路径", "获取路径失败", Messages.getErrorIcon());
                         break;
                     }
                     String asBasePath = presentableUrl.substring(basePath.length(), presentableUrl.length());
@@ -116,7 +115,7 @@ public class XmlFileUtils {
                             for (Pair<String, String> pair : pathInfo) {
                                 boolean find = false;
                                 for (XmlEntity x : xmlEntitys) {
-                                    if (pair.getValue0().equals(x.getPath())) {
+                                    if (isPathRule(x) && pair.getValue0().equals(x.getPath())) {
                                         find = true;
                                         newXmlEntity.add(x);
                                     }
@@ -131,12 +130,24 @@ public class XmlFileUtils {
                 }
             }
         } else {
-            Messages.showMessageDialog(project, "Unable to get the root path of the project", "Can't Get Path", AllIcons.Actions.Menu_paste);
+            Messages.showMessageDialog(project, "无法获取项目的根路径", "获取路径失败", Messages.getErrorIcon());
         }
     }
 
     public static void ListenerSave(Object id, SaveCallback callback) {
         callbackList.put(id, callback);
+    }
+
+    /**
+     * 是否为「路径规则」，即只绑定单个文件或目录的那种。
+     * <p>
+     * 带 extension 的是「类型规则」，一条会命中一批同扩展名的文件。针对单个节点的菜单
+     * 不能顺手把它改掉，否则改一个文件的备注会连带影响整批文件，所以匹配时要排除。
+     * </p>
+     */
+    private static boolean isPathRule(XmlEntity xmlEntity) {
+        final String extension = xmlEntity.getExtension();
+        return null == extension || extension.trim().isEmpty();
     }
 
     /**
