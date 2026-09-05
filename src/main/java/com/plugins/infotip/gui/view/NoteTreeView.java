@@ -17,6 +17,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.psi.xml.XmlTag;
 import com.intellij.ui.ColoredTreeCellRenderer;
+import com.intellij.ui.JBColor;
 import com.intellij.ui.PopupHandler;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.components.JBScrollPane;
@@ -655,8 +656,17 @@ public class NoteTreeView extends Tree {
                 append(text, SimpleTextAttributes.ERROR_ATTRIBUTES);
                 append("  路径已失效（双击定位到 XML）", SimpleTextAttributes.GRAYED_ATTRIBUTES);
             } else if (node.isShadowed()) {
-                append(text, SimpleTextAttributes.GRAYED_ATTRIBUTES);
-                append("  被前面同路径的规则盖住，不生效", SimpleTextAttributes.GRAYED_ATTRIBUTES);
+                //规则文字本身加灰色和删除线，标记为"作废"状态
+                final SimpleTextAttributes strikethroughGray = new SimpleTextAttributes(
+                        SimpleTextAttributes.STYLE_STRIKEOUT, SimpleTextAttributes.GRAYED_ATTRIBUTES.getFgColor());
+                append(text, strikethroughGray);
+                //提示文字用橙色，"不生效"也加删除线
+                final SimpleTextAttributes warning = new SimpleTextAttributes(
+                        SimpleTextAttributes.STYLE_PLAIN, new JBColor(0xCC7832, 0xCC7832));
+                final SimpleTextAttributes strikeoutWarning = new SimpleTextAttributes(
+                        SimpleTextAttributes.STYLE_STRIKEOUT, new JBColor(0xCC7832, 0xCC7832));
+                append("  被前面同路径的规则盖住，", warning);
+                append("不生效", strikeoutWarning);
             } else {
                 append(text, SimpleTextAttributes.REGULAR_ATTRIBUTES);
             }
