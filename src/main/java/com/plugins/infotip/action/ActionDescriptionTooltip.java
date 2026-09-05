@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 右键菜单：设置鼠标悬浮提示
  *
- * @author lk
+ * @author yc556&claude-opus-5
  * @version 1.0
  */
 public class ActionDescriptionTooltip extends AnAction {

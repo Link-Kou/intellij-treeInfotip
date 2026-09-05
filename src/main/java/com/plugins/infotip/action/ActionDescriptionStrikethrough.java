@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 右键菜单：给节点文本添加/取消删除线
  *
- * @author lk
+ * @author yc556&claude-opus-5
  * @version 1.0
  */
 public class ActionDescriptionStrikethrough extends AnAction {

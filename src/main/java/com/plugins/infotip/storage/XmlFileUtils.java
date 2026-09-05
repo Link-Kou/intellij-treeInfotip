@@ -151,6 +151,43 @@ public class XmlFileUtils {
     }
 
     /**
+     * 新项目第一次配置时写出去的 {@code DirectoryV3.xml} 模板
+     * <p>
+     * {@code <trees>} 下面那段注释是给手改文件的人看的。这个文件躺在项目根目录，用户迟早会点开它，
+     * 而 {@code presentableText}、{@code tooltipTitle} 这些参数名单看名字猜不全，更猜不出命中优先级。
+     * </p>
+     * <p>
+     * 注释里有三样东西不能出现，都会被「TreeInfotip XML」窗口的「格式化」误伤：{@code <trees>} 和
+     * {@code </trees>}（会被塞进换行）、带空格的 {@code <tree }（会被缩进四格）、以及行尾的
+     * {@code >} 紧接下一行开头的 {@code <}（{@code >\s*<} 会被压成一个换行）。另外 XML 注释本身
+     * 不允许出现连续两个减号。
+     * </p>
+     */
+    private static final String XML_TEMPLATE = String.join("\r\n",
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "<trees>",
+            "    <!--",
+            "      TreeInfotip 的配置文件：一条 <tree> 就是一条规则，存盘立刻生效，不用重启 IDE。",
+            "      平时不用手写，右键项目树上的文件或目录，走「目录备注」菜单加就行。",
+            "",
+            "      参数全是可选的，按需要写几个：",
+            "        path             相对项目根目录的路径，以 / 开头；只写 / 表示整个项目",
+            "        extension        扩展名，不带点，只作用于文件；和 path 一起写表示该目录连子目录下的这类文件",
+            "        title            备注文字，灰色跟在节点名后面",
+            "        presentableText  覆盖节点显示的名字",
+            "        tooltipTitle     鼠标悬浮时的提示，可以写多行",
+            "        icon             换图标，填 AllIcons 里的字段路径，例如 Nodes.Folder",
+            "        textColor        文字颜色，十进制 r,g,b，例如 255,0,0",
+            "        backgroundColor  背景色，写法同上",
+            "        strikethrough    填 true 给节点加删除线",
+            "",
+            "      命中优先级：path 全等的最高，其次 path 加 extension（path 更长的赢），",
+            "      最后是只写 extension 的全项目规则。同优先级时写在前面的那条赢，所以侧边栏",
+            "      「目录备注」里的「置顶」是真的把标签挪到文件最前面。",
+            "    -->",
+            "</trees>");
+
+    /**
      * 创建文件
      *
      * @param project 项目
@@ -161,7 +198,7 @@ public class XmlFileUtils {
             return null;
         }
         LanguageFileType xml = (LanguageFileType) FileTypeManager.getInstance().getStdFileType("XML");
-        PsiFile pf = PsiFileFactory.getInstance(project).createFileFromText(XMLFileName, xml, "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \r\n <trees/>");
+        PsiFile pf = PsiFileFactory.getInstance(project).createFileFromText(XMLFileName, xml, XML_TEMPLATE);
         return loadSaveFileXml(project, pf.getText());
     }
 

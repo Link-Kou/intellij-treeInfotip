@@ -7,7 +7,10 @@ import java.awt.Color
  *
  * XML 里颜色统一存成 `"255,128,0"` 这种十进制三元组，这里是唯一的转换入口。
  *
+ * 逻辑来自 lk 的 Java 版，5.1.1 改写成 Kotlin。
+ *
  * @author lk
+ * @author yc556&claude-opus-5
  */
 object ColorsUtils {
 

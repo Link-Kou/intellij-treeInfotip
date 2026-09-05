@@ -1,0 +1,12 @@
+<!-- treeNote.svg 的深色主题版，只有描边色不同（#FFFFFF）。
+     文件名的 _dark 后缀是平台约定，不用在 plugin.xml 里声明。
+     改图形时两个文件都要改，否则换主题会看到两个不一样的图标。 -->
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.6 3v10"/>
+    <path d="M2.6 8h2.1M2.6 13h2.1"/>
+    <rect x="4.9" y="1.4" width="8.6" height="3.2" rx="1"/>
+    <rect x="4.9" y="6.4" width="6.1" height="3.2" rx="1"/>
+    <rect x="4.9" y="11.4" width="9.4" height="3.2" rx="1"/>
+  </g>
+</svg>

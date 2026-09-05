@@ -17,6 +17,9 @@ import java.io.File;
 
 /**
  * DirectoryV3.xml 文件管理工具窗口
+ *
+ * @author yc556&claude-opus-5
+ * @version 1.0
  */
 public class XmlEditorToolWindow implements ToolWindowFactory {
 

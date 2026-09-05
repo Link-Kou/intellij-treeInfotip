@@ -16,6 +16,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A <code>TreesUtils</code> Class
@@ -90,6 +91,35 @@ public class TreesUtils {
 
     private static boolean isNotEmpty(String value) {
         return null != value && !value.trim().isEmpty();
+    }
+
+    /**
+     * 规则的「身份」：两条键相同的规则在 {@link #getMatchPath} 眼里完全无法区分，文件里靠前的
+     * 那条永远赢，靠后的一辈子都不会生效
+     * <p>
+     * 三类规则都是先到先得：路径规则全等即 {@code return}；目录级类型规则的判据是
+     * {@code rulePath.length() > matchedScopeLength} 严格大于，同一个范围时后来的顶不掉先来的；
+     * 全项目类型规则只在还没命中过时兜底。所以键相同的第二条不是「部分生效」，是完全没用——
+     * 哪怕它多配了一个先来那条没有的属性，也不会被读到。
+     * </p>
+     * <p>
+     * 归一化必须和匹配时一致，否则会漏判：路径去掉末尾多写的斜杠（{@code /src/} 和 {@code /src}
+     * 是同一条规则，见 {@link #trimTrailingSlash}），扩展名 trim 后转小写（匹配用的是
+     * {@code equalsIgnoreCase}）。
+     * </p>
+     *
+     * @param entity 一条规则
+     * @return 用 {@code \0} 隔开的「路径 + 扩展名」。用 {@code \0} 而不是斜杠之类的可见字符，
+     * 是因为它不可能出现在属性值里，不会把两条不同的规则拼成同一个键
+     */
+    public static String ruleKey(XmlEntity entity) {
+        if (null == entity) {
+            return null;
+        }
+        final String path = trimTrailingSlash(entity.getPath());
+        final String extension = entity.getExtension();
+        return (null == path ? "" : path) + '\0'
+                + (null == extension ? "" : extension.trim().toLowerCase(Locale.ROOT));
     }
 
     /**

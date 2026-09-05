@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * 另一边靠 PSI 监听重新解析。真正的代价是每次重绘都算两遍，而且两个装饰入口的执行
  * 顺序不定，旧版跑在后面时会把新版才有的悬浮提示、覆盖显示名称等覆盖掉。
  *
- * @author yc-2018
+ * @author yc556&claude-opus-5
  */
 object OldPluginConflictNotifier {
 

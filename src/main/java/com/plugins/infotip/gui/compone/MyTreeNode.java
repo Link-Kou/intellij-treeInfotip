@@ -27,6 +27,15 @@ public class MyTreeNode extends DefaultMutableTreeNode {
      */
     private boolean missing;
 
+    /**
+     * 前面已经有一条同路径同扩展名的规则了，这条被它盖住、永远不会生效，渲染时整行灰掉
+     * <p>
+     * 和 {@link #missing} 一样是建节点时算好的：判据只看配置本身（见
+     * {@code TreesUtils.ruleKey}），不碰 VFS。
+     * </p>
+     */
+    private boolean shadowed;
+
     public MyTreeNode(Object userObject) {
         super(userObject);
     }
@@ -55,6 +64,15 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     public MyTreeNode setMissing(boolean missing) {
         this.missing = missing;
+        return this;
+    }
+
+    public boolean isShadowed() {
+        return shadowed;
+    }
+
+    public MyTreeNode setShadowed(boolean shadowed) {
+        this.shadowed = shadowed;
         return this;
     }
 }

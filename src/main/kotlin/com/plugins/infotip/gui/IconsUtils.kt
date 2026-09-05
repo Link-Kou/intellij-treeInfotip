@@ -14,7 +14,10 @@ import javax.swing.Icon
  * 注意这是全项目最脆弱的一块：JetBrains 删掉或改名任何一个图标字段，
  * 老配置里的名字就静默匹配不上（[findFitIcon] 查不到就不设图标）。
  *
+ * 反射的部分来自 lk 的 Java 版，5.1.1 改写成 Kotlin；缩放（[fit]）是后来加的。
+ *
  * @author lk
+ * @author yc556&claude-opus-5
  */
 object IconsUtils {
 

@@ -10,6 +10,7 @@ import javax.swing.Icon
  * 构造点只有 [com.plugins.infotip.gui.IconsUtils] 一处，所以去掉 setter 不影响别人。
  *
  * @author lk
+ * @author yc556&claude-opus-5
  */
 data class IconEntity(
     val icon: Icon,

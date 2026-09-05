@@ -160,6 +160,114 @@ public class XmlStorage {
 
 
     /**
+     * 直接按 {@link XmlEntity#getTag()} 删除若干条规则
+     * <p>
+     * 和 {@link #remove(XmlFile, Project, XmlEntity)} 的区别：那个要重新遍历整个文件、按
+     * path + extension 找回标签，一次只能删一条，批量调用会反复解析。这里用解析时就存下的
+     * 标签本体，一个写操作删完所有的，只触发一次保存和一次重新解析。
+     * </p>
+     *
+     * @return 实际删掉的条数；标签已失效（文件被外部改过、还没重新解析）的会被跳过
+     */
+    public static synchronized int removeByTag(Project project, List<XmlEntity> entities) {
+        if (null == entities || entities.isEmpty()) {
+            return 0;
+        }
+        final int[] removed = {0};
+        WriteCommandAction.runWriteCommandAction(project, () -> {
+            for (XmlEntity entity : entities) {
+                if (null == entity) {
+                    continue;
+                }
+                final XmlTag tag = entity.getTag();
+                if (null != tag && tag.isValid()) {
+                    tag.delete();
+                    removed[0]++;
+                }
+            }
+            if (removed[0] > 0) {
+                XmlFileUtils.saveFileXml(project);
+            }
+        });
+        return removed[0];
+    }
+
+    /**
+     * 置顶：把这些 {@code <tree>} 整批移到 {@code <trees>} 的最前面，保持它们原来的相对顺序
+     * <p>
+     * 顺序在 XML 里是有意义的：{@link com.plugins.infotip.trees.TreesUtils#getMatchPath} 同优先级
+     * 多条命中时先遍历到的赢，侧边栏列表也按文件顺序显示。所以置顶是真的改文件，不是只改视图。
+     * </p>
+     * <p>
+     * PSI 没有「移动子节点」，只能先在头部插一份副本再删原件。{@code addSubTag(tag, true)} 的
+     * {@code true} 是插到最前，它返回的是新插进去的那个标签，原 {@code tag} 仍指向老位置，
+     * 所以两步的先后顺序不能颠倒。
+     * </p>
+     * <p>
+     * 多条一起置顶时要<b>倒着遍历</b>：每一条都插到最前面，正着走会把这批规则整体翻个面。
+     * 而且必须在<b>同一个写操作</b>里做完——每条各开一次写操作会各触发一次存盘和重新解析，
+     * 后面那些 {@link XmlEntity} 上存的标签就都失效了，只有第一条能成功（5.5.1 的表现是
+     * 多选只置顶了一条，不过那是因为当时只取了一条）。
+     * </p>
+     *
+     * @return 实际挪动的条数；标签已失效（文件被外部改过、还没重新解析）的会被跳过
+     */
+    public static synchronized int moveToTop(Project project, List<XmlEntity> entities) {
+        final XmlFile xmlFile = XmlFileUtils.getXmlFile(project);
+        if (null == xmlFile || null == entities || entities.isEmpty()) {
+            return 0;
+        }
+        final XmlDocument document = xmlFile.getDocument();
+        if (null == document) {
+            return 0;
+        }
+        final XmlTag rootTag = document.getRootTag();
+        if (null == rootTag || !TREES.equals(rootTag.getName())) {
+            return 0;
+        }
+        //已经整批贴在最前面且顺序没变，就不用动，省一次写操作和一次重新解析
+        if (alreadyOnTop(rootTag, entities)) {
+            return 0;
+        }
+        final int[] moved = {0};
+        WriteCommandAction.runWriteCommandAction(project, () -> {
+            for (int i = entities.size() - 1; i >= 0; i--) {
+                final XmlEntity entity = entities.get(i);
+                if (null == entity) {
+                    continue;
+                }
+                final XmlTag tag = entity.getTag();
+                if (null != tag && tag.isValid()) {
+                    rootTag.addSubTag(tag, true);
+                    tag.delete();
+                    moved[0]++;
+                }
+            }
+            if (moved[0] > 0) {
+                XmlFileUtils.saveFileXml(project);
+            }
+        });
+        return moved[0];
+    }
+
+    /**
+     * 这批标签是不是已经就在最前面，而且顺序和给进来的一致
+     */
+    private static boolean alreadyOnTop(XmlTag rootTag, List<XmlEntity> entities) {
+        final XmlTag[] subTags = rootTag.getSubTags();
+        if (subTags.length < entities.size()) {
+            return false;
+        }
+        for (int i = 0; i < entities.size(); i++) {
+            final XmlEntity entity = entities.get(i);
+            if (null == entity || subTags[i] != entity.getTag()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 创建新标签
      *
      * @param xmlFile   xml

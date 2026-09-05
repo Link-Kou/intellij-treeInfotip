@@ -30,7 +30,7 @@ import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE_ARRA
  * 单个文件自己的路径规则优先级更高，会盖过这里的类型规则。
  * </p>
  *
- * @author lk
+ * @author yc556&claude-opus-5
  * @version 1.0
  */
 public class ActionDescriptionExtension extends AnAction {

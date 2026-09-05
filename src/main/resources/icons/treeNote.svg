@@ -1,0 +1,15 @@
+<!-- 侧边栏「TreeInfotip 备注」的工具窗口图标：按 pluginIcon.svg 的 logo（竖干 + 三个备注块）
+     重绘的 16×16 单色版。工具窗口图标必须是单色的，彩色 logo 直接缩到 16 会糊成一团。
+
+     配色跟着主题走，靠平台的 _dark 后缀约定：浅色主题读这个文件，深色主题自动读同目录的
+     treeNote_dark.svg，plugin.xml 里只写这一个路径就行。
+     #6C707E 是 IntelliJ 浅色主题图标的标准灰（想要纯黑就把这个值换成 #000000）。 -->
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#6C707E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.6 3v10"/>
+    <path d="M2.6 8h2.1M2.6 13h2.1"/>
+    <rect x="4.9" y="1.4" width="8.6" height="3.2" rx="1"/>
+    <rect x="4.9" y="6.4" width="6.1" height="3.2" rx="1"/>
+    <rect x="4.9" y="11.4" width="9.4" height="3.2" rx="1"/>
+  </g>
+</svg>

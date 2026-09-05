@@ -19,7 +19,7 @@ import java.util.List;
  * 与「添加文字备注」不同，这里改的是节点自身的名字，留空则恢复成文件的真实名称。
  * </p>
  *
- * @author lk
+ * @author yc556&claude-opus-5
  * @version 1.0
  */
 public class ActionDescriptionPresentableText extends AnAction {

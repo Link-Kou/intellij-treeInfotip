@@ -2,19 +2,24 @@
     <!-- 复刻版独立的插件 id，不能和原版 com.linkkou.plugin.intellij.assistant 相同：
          IDE 的更新检查是按 id 去 Marketplace 查的，沿用原 id 会被原版的构建"更新"掉 -->
     <id>com.github.yc556.treeinfotip</id>
-    <!-- 首次上传 Marketplace 时名字只能用拉丁字符：会校验 name，允许的只有字母、数字、空格和
-         .,+_-/:()#'&[]| 这几个符号，中日韩文字直接被拒（Plugin Verifier 1.393 起明确写成
-         "Plugin name must be in Latin characters"）。
-         条目建起来之后可以再改成带中文的「TreeInfotip Notes / 目录树备注」——作者另一个插件
-         sql-heading-folding 就是先纯英文首发建条目，再改中英文名靠 CI publishPlugin 发上去的，
-         详见 CLAUDE.md 的「Marketplace 的描述符校验」一节。所以现在这个纯拉丁名是为了过首传，
-         别在条目还没建出来之前就改回中文。
-         另外这里不能只写 TreeInfotip，Marketplace 的条目名要和原版区分开 -->
+    <!-- 名字带中文的前提是**走 API 上传**：`<name>` 的拉丁字符限制属于 Plugin Verifier 的
+         structure 检查，放行的只有字母、数字、空格和 .,+_-/:()#'&[]|，中日韩文字直接被判
+         "contains invalid characters"。这条检查按通道区分、和是不是首次建条目无关——
+         网页后台上传 zip 会跑（5.2.0 就是这么被拒的），本地 runPluginVerifier 也会跑
+         （5.4.0 实测：直接判整个包 invalid，Scheduled verifications (0)，API 检查一个都不做），
+         **CI 上的 runPluginVerifier job 也会跑**（5.4.0 推送 96306bc 后实测），
+         只有 `./gradlew publishPlugin` 走 Marketplace API 不跑，作者另一个插件
+         sql-heading-folding 就带着中文名从 1.0.4 发到了 1.1.8。
+         所以中文名目前走不通：本地、CI、网页上传三条路全被 verifier 拦；
+         publishPlugin 虽然不校验，但仓库没配 JETBRAINS_MARKETPLACE_TOKEN。
+         详见 CLAUDE.md 的「Marketplace 的描述符校验」一节。
+         Marketplace 的展示名只从这里读，网页后台改不了，所以改名只能靠上传新版本。
+         另外名字里不能出现 JetBrains 品牌词和 emoji，长度上限 60、建议 30 以内 -->
     <name>TreeInfotip Notes</name>
     <vendor url="https://github.com/yc-2018/intellij-treeInfotip">yc-2018</vendor>
 
     <!-- 插件版本（打包时由 gradle.properties 中的 pluginVersion 覆盖） -->
-    <version>5.3.2</version>
+    <version>5.7.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="223"/>
     <!-- 插件的描述 -->
@@ -54,6 +59,68 @@
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+       <ul>
+        <p>5.7.0</p>
+        <li>「目录备注」列表的右键菜单整行都能点：以前只有点在备注文字上才弹得出来，点行尾的空白处没反应</li>
+        <li>「目录备注」会标出重复的规则：path 和 extension 都和前面某条一样的规则永远不会生效（同优先级时写在前面的那条赢），这种规则标灰显示，工具栏新增「清理重复规则」一键删掉它们，在生效的那条会保留，项目树的显示不变</li>
+        <li>重复规则只标不删，不在读取配置时静默去重：DirectoryV3.xml 在项目根目录里、会进版本库，插件不背着人重写它</li>
+        <li>Right-clicking a row in the 目录备注 list now works anywhere on the row; previously the menu only opened when the pointer was over the label text</li>
+        <li>The 目录备注 list now flags duplicate rules: a rule whose path and extension both match an earlier one can never take effect (the first rule wins among equal priorities), so it is greyed out, and a new "清理重复规则" toolbar button removes all of them while keeping the rule that is actually in effect — the project tree looks exactly the same afterwards</li>
+        <li>Duplicates are only flagged, never silently deduplicated at parse time: DirectoryV3.xml lives in the project root and goes into version control, so the plugin does not rewrite it behind your back</li>
+      </ul>
+       <ul>
+        <p>5.6.0</p>
+        <li>侧边栏「TreeInfotip 备注」新增「说明」tab：右键菜单七项分别做什么、DirectoryV3.xml 的九个参数怎么写、命中优先级怎么算，都在这一页里，工具栏上还有一个按钮直接打开配置文件</li>
+        <li>新项目第一次加备注时自动建出的 DirectoryV3.xml，会在 &lt;trees&gt; 下面带一段注释说明 &lt;tree&gt; 的全部参数和命中优先级，手改文件时不用再去翻文档</li>
+        <li>「目录备注」列表右键「置顶」支持 Ctrl 多选，一次置顶一批并保持它们原来的相对顺序：以前多选也只有一条真的挪上去了</li>
+        <li>「文件成员」单击有子节点的成员时等待第二下的时间从系统双击间隔（Windows 上是 500 毫秒）压到 200 毫秒，点一下就跳、不再像卡了一下</li>
+        <li>New "说明" (Help) tab in the TreeInfotip Notes tool window: what each of the seven context-menu items does, all nine DirectoryV3.xml attributes, and how match priority is resolved — plus a toolbar button that opens the config file</li>
+        <li>The DirectoryV3.xml created for a new project now carries a comment under &lt;trees&gt; documenting every &lt;tree&gt; attribute and the match priority, so editing the file by hand no longer needs the docs</li>
+        <li>Move-to-top in the 目录备注 list now handles Ctrl multi-selection, moving the whole batch while preserving its relative order; previously only one rule actually moved</li>
+        <li>Clicking a member that has children in 文件成员 now waits 200 ms for a second click instead of the full system double-click interval (500 ms on Windows), so navigation no longer feels laggy</li>
+      </ul>
+       <ul>
+        <p>5.5.1</p>
+        <li>修复「文件成员」点开成员跳转时报错 Read access is allowed from inside read-action only：求偏移量本身就要读 PSI，不能在读操作外面调 PsiElement.navigate，TS 的箭头函数上必崩</li>
+        <li>补全注释识别：写成 const Page = () =&gt; {} 的箭头函数、以及 const x = {...} 这类变量，上面的 JSDoc 和单行注释以前一条都读不到——注释挂在整条 const 语句上，而结构视图给的是里层的函数或初始值，现在会先往上找到语句那一层再读</li>
+        <li>往上找有边界：只在当前成员就处在父节点的开头（中间只隔着同一行的 token 和注释）时才往上抬，所以类的 JavaDoc 不会被认成它第一个方法的注释</li>
+        <li>「文件成员」改成单击跳转、双击收缩 / 展开：以前双击一个有子节点的成员会又收缩又定位，两件事一起发生</li>
+        <li>Fixed a "Read access is allowed from inside read-action only" crash when clicking an item in 文件成员: computing the target offset reads PSI, so PsiElement.navigate cannot be called outside a read action — TS arrow functions crashed every time</li>
+        <li>Comment detection now covers arrow functions and variables written as const Page = () =&gt; {} or const x = {...}: the comment is attached to the whole const statement while the Structure View hands back the inner function or initializer, so the lookup climbs to the statement level first</li>
+        <li>The climb is bounded: it only goes up while the member sits at the very start of its parent, with nothing but same-line tokens and comments in between, so a class's JavaDoc is never mistaken for its first method's comment</li>
+        <li>文件成员 now navigates on a single click and expands/collapses on a double click: a double-click on a member with children used to do both at once</li>
+      </ul>
+       <ul>
+        <p>5.5.0</p>
+        <li>侧边栏「TreeInfotip 备注」拆成两个 tab，默认打开新的「文件成员」：把当前编辑的文件里的方法和属性列成一棵树，每一项后面跟上它的注释——IDE 自带的结构视图只有成员没有注释，这里补上</li>
+        <li>注释按四级依次尝试：JavaDoc / JSDoc 文档注释 → 多行注释 → 同行尾部的单行注释 → 紧贴在上方的连续单行注释（空行即断开）</li>
+        <li>「文件成员」借用 IDE 的结构视图取节点，所以 Java、TS / JS / TSX / JSX、Kotlin、Python、Go 等凡是 IDE 能出结构视图的语言都支持；顶部可勾选只看方法或只看属性，拉杆调展开层数（1~10 层）</li>
+        <li>「目录备注」tab：路径已失效的规则一律排到最前面，工具栏新增「清除失效路径」一键删掉全部标红项</li>
+        <li>「目录备注」列表项支持右键：删除（可 Ctrl 多选批量删）、置顶——置顶是真的把这条规则挪到 DirectoryV3.xml 最前面，同优先级的多条规则命中同一节点时它先生效</li>
+        <li>「备注列表（双击刷新）」这个根节点去掉了，刷新挪到工具栏的按钮上，列表直接从第一行开始</li>
+        <li>The "TreeInfotip 备注" tool window now has two tabs, opening on the new "文件成员" (file members): the methods and properties of the current file as a tree, each followed by its comment — the built-in Structure View shows members but no comments</li>
+        <li>Comments are resolved through a four-step fallback: doc comment (JavaDoc / JSDoc) → block comment → trailing line comment on the same line → the run of line comments directly above (a blank line breaks the run)</li>
+        <li>Members come from the IDE's own Structure View, so Java, TS / JS / TSX / JSX, Kotlin, Python, Go and any other language with a structure view are supported; checkboxes filter methods or properties and a slider sets the expanded depth (1-10)</li>
+        <li>In the "目录备注" tab, rules whose path no longer exists are sorted to the top, and a new toolbar button deletes all of them at once</li>
+        <li>Right-click a note for delete (Ctrl-select for batch) and move-to-top — the latter physically moves the rule to the front of DirectoryV3.xml, where it wins among rules of equal priority</li>
+        <li>The "备注列表（双击刷新）" root node is gone; refresh is a toolbar button now and the list starts at the first row</li>
+      </ul>
+       <ul>
+        <p>5.4.1</p>
+        <li>备注列表的显示规则收紧：只要还能在项目树上看到（路径有效），没写备注也没改显示名的规则就不列出，按扩展名批量设置的规则也一样</li>
+        <li>反过来，路径已失效的规则即使什么文字都没配也一定列出——项目树上已经没有它的节点了，列表是唯一能发现并清掉它的地方，这时拿它配的路径当标题显示</li>
+        <li>Tightened the note list: as long as a rule is still visible in the project tree, it is skipped when it has neither a note nor an overridden display name — extension rules included</li>
+        <li>Conversely, a rule whose path no longer exists is always listed even with no text configured, since the project tree has no node for it any more and the list is the only place to find and remove it; its configured path is used as the label</li>
+      </ul>
+       <ul>
+        <p>5.4.0</p>
+        <li>右键菜单「目录备注」分组用新的备注图标，侧边栏改用按插件 logo 重绘的 16×16 单色图标，浅色主题显示深灰、深色主题自动切白色</li>
+        <li>备注列表不再出现空白行：只设了颜色/图标/删除线、没写备注也没改显示名的规则不再列出；没写备注但覆盖了显示名称的，显示那个显示名</li>
+        <li>备注列表双击不会再没反应：路径已失效的、以及只按扩展名匹配的全项目规则，双击直接跳到 DirectoryV3.xml 里这条规则所在的行</li>
+        <li>New icons: a dedicated icon for the "目录备注" context menu group, and a 16×16 monochrome tool window icon redrawn from the plugin logo, dark grey on light themes and white on dark ones</li>
+        <li>No more blank rows in the note list: rules that only set a color/icon/strikethrough are skipped, and rules with an overridden display name but no note now show that name</li>
+        <li>Double-clicking a note always does something now: dead paths and project-wide extension rules jump to the matching line in DirectoryV3.xml</li>
+      </ul>
        <ul>
         <p>5.3.2</p>
         <li>清掉 Marketplace 的 Plugin Verifier 报出的全部 9 处问题（5 处待删除 API、2 处已废弃 API、2 处内部 API），上传 5.3.1 时就是被这些卡住的</li>
@@ -226,8 +293,10 @@
              平台按 toolwindow.stripe.<id> 去资源包找标题，找不到就直接拿 id 当标题
              （com.intellij.toolWindow.ToolwindowKt#getStripeTitleSupplier）。
              所以这里的 id 既要唯一、又要能直接读，带空格是平台自己也在用的写法（如 Version Control） -->
-        <toolWindow id="TreeInfotip 备注" secondary="true" icon="AllIcons.General.Note" anchor="right"
-                    factoryClass="com.plugins.infotip.gui.view.NoteTreeView"/>
+        <!-- 图标写 /icons/treeNote.svg，深色主题下平台会自动去找同目录的 treeNote_dark.svg，
+             不用也不能在这里声明第二个路径 -->
+        <toolWindow id="TreeInfotip 备注" secondary="true" icon="/icons/treeNote.svg" anchor="right"
+                    factoryClass="com.plugins.infotip.gui.view.NotesToolWindowFactory"/>
         <toolWindow id="TreeInfotip XML" secondary="true" icon="AllIcons.FileTypes.Xml" anchor="bottom"
                     factoryClass="com.plugins.infotip.gui.view.XmlEditorToolWindow"/>
         <notificationGroup id="TreeInfotip" displayType="STICKY_BALLOON"/>
@@ -239,7 +308,9 @@
     <actions>
         <!-- action / group 的 id 也是 IDE 全局的，重名会被 ActionManager 拒绝注册；
              这些 id 不对用户显示（菜单文字来自 text 属性），所以统一加 TreeInfotip 前缀 -->
-        <group id="TreeInfotip.MenuGroup" text="目录备注" popup="true" icon="AllIcons.Actions.MenuPaste">
+        <!-- 图标用自带的 svg，不引 AllIcons：反射不到的 AllIcons 字段会在新版 IDE 上凭空消失，
+             历史事故是 AllIcons.Actions.Menu_paste 在 2026.2 被删，右键菜单整个不可用 -->
+        <group id="TreeInfotip.MenuGroup" text="目录备注" popup="true" icon="/icons/addNote.svg">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="ReplaceInPath"/>
             <action id="TreeInfotip.DescriptionText" class="com.plugins.infotip.action.ActionDescriptionText"
                     text="添加文字备注"
