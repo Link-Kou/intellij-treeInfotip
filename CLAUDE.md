@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-TreeInfotip 是一个 IntelliJ 平台插件，给项目目录树的节点加备注、颜色、图标、悬浮提示、删除线和自定义显示名。所有配置都存在**项目根目录的 `DirectoryV3.xml`** 里，不用 IDE 的持久化设置。
+TreeInfoTip Notes 是一个 IntelliJ 平台插件，给项目目录树的节点加备注、颜色、图标、悬浮提示、删除线和自定义显示名。所有配置都存在**项目根目录的 `DirectoryV3.xml`** 里，不用 IDE 的持久化设置。
 
 ## 构建命令
 
@@ -25,7 +25,7 @@ JAVA_HOME="D:/green/jdks/jdk-17.0.8" /d/green/Gradle/dists/gradle-7.6.4/bin/grad
 | 任务 | 用途 |
 |---|---|
 | `compileJava` | 只编译，最快的语法校验 |
-| `buildPlugin` | 打包，产物在 `build/distributions/TreeInfotip-Notes-<版本>.zip` |
+| `buildPlugin` | 打包，产物在 `build/distributions/TreeInfoTip-Notes-<版本>.zip` |
 | `verifyPlugin` | 校验 plugin.xml 配置 |
 | `runIde` | 起沙箱 IDE 实测（沙箱目录是仓库根的 `idea-sandbox/`） |
 | `runPluginVerifier -PverifierIdeVersions=IU-2022.3.2,IU-2026.2` | 跨版本兼容性检查 |
@@ -56,7 +56,7 @@ JAVA_HOME="D:/green/jdks/jdk-17.0.8" /d/green/Gradle/dists/gradle-7.6.4/bin/grad
 
 混编的硬约束：
 
-- **绝对不能把 kotlin-stdlib 打进插件**。IDE 自带一份，重复会冲突。靠两条配合实现：`gradle.properties` 里 `kotlin.stdlib.default.dependency=false`，`build.gradle` 里 stdlib 写成 `compileOnly`。打包后 `TreeInfotip/lib/` 下只应该有插件 jar、`javatuples`、`searchableOptions` 三个，出现 `kotlin-stdlib-*.jar` 就是配置漏了。
+- **绝对不能把 kotlin-stdlib 打进插件**。IDE 自带一份，重复会冲突。靠两条配合实现：`gradle.properties` 里 `kotlin.stdlib.default.dependency=false`，`build.gradle` 里 stdlib 写成 `compileOnly`。打包后 `TreeInfoTip-Notes/lib/` 下只应该有插件 jar、`javatuples`、`searchableOptions` 三个，出现 `kotlin-stdlib-*.jar` 就是配置漏了。
 - **Kotlin 语言版本要压到最低支持 IDE 那一档**。`since-build=223` 对应 2022.3.0，它自带 Kotlin 1.7.21，所以 `apiVersion`/`languageVersion` 都锁 `"1.7"`。不锁的话用到新 stdlib 才有的函数编译期不报错，要到用户的老 IDE 上炸 `NoSuchMethodError`。
 - Java 要调 Kotlin，签名得手动配：`object` 里的函数加 `@JvmStatic`，字段加 `@JvmField`，**被 Java `switch` case 标签用到的常量必须是 `const val`**（`ColorsUtils.COLOR_TEXT_COLOR_NAME` 就是，写成 `@JvmField val` 直接编译不过）。
 
@@ -124,11 +124,11 @@ PresentationData：图标 / locationString / tooltip / presentableText / 文字�
 
 新增一个可配置属性要同时改四处：`XmlEntity` 加字段、`XmlStorage` 加常量并在 `tree()` / `modify()` / `create()` 三处登记、`TreesStyle.setStyle` 应用到 `PresentationData`、最后加对应 action 并在 `plugin.xml` 注册。**还有第五处**：`XmlFileUtils.XML_TEMPLATE` 的注释和 `HelpView.attributes()` 的参数列表都要补一条，否则用户看到的说明会缺项。
 
-新项目第一次加备注时由 `XmlFileUtils.createXmlFile` 写出 `XML_TEMPLATE`，`<trees>` 下面带一段注释列全九个参数和命中优先级（5.6.0 起，之前是个空 `<trees/>`）——这文件躺在项目根目录，用户迟早点开它，而 `presentableText`、`tooltipTitle` 这些参数名单看名字猜不全。**改这段注释时有四样东西不能出现**，都会被「TreeInfotip XML」窗口的「格式化」误伤：`<trees>` 和 `</trees>`（会被塞进换行）、带空格的 `<tree `（会被缩进四格）、行尾的 `>` 紧接下一行开头的 `<`（`>\s*<` 会被压成一个换行）；另外 XML 注释本身不允许出现连续两个减号。
+新项目第一次加备注时由 `XmlFileUtils.createXmlFile` 写出 `XML_TEMPLATE`，`<trees>` 下面带一段注释列全九个参数和命中优先级（5.6.0 起，之前是个空 `<trees/>`）——这文件躺在项目根目录，用户迟早点开它，而 `presentableText`、`tooltipTitle` 这些参数名单看名字猜不全。**改这段注释时有四样东西不能出现**，都会被「TreeInfoTip Notes XML」窗口的「格式化」误伤：`<trees>` 和 `</trees>`（会被塞进换行）、带空格的 `<tree `（会被缩进四格）、行尾的 `>` 紧接下一行开头的 `<`（`>\s*<` 会被压成一个换行）；另外 XML 注释本身不允许出现连续两个减号。
 
 ### 侧边栏工具窗口（5.6.0 起三个 tab）
 
-`plugin.xml` 里 `TreeInfotip 备注` 这个 `toolWindow` 的 `factoryClass` 指向 `NotesToolWindowFactory`，它建三个 `Content`：
+`plugin.xml` 里 `TreeInfoTip Notes` 这个 `toolWindow` 的 `factoryClass` 指向 `NotesToolWindowFactory`，它建三个 `Content`：
 
 | tab | 面板类 | 内容 |
 |---|---|---|
@@ -190,13 +190,13 @@ const CarrierRecruitRegPage: React.FC = () => {}
 | 名字 | 在哪 | 撞了会怎样 |
 |---|---|---|
 | `<id>` = `com.github.yc556.treeinfotip` | `plugin.xml` | IDE 的更新检查按 id 去 Marketplace 查，沿用原 id 会被原版的构建静默"更新"掉 |
-| `<name>` = `TreeInfotip Notes / 目录树备注` | `plugin.xml` | Marketplace 条目名要唯一。**首次建条目时只能用拉丁字符**，条目建出来之后才能改成中英文（5.4.0 起就是中英文），详见下面一节 |
-| `intellij.pluginName` = `TreeInfotip-Notes` | `build.gradle` | 它是 zip 根目录名，也就是装完后 `plugins/<这个名字>/`；和原版同名时后装的直接覆盖前一个的安装目录 |
-| action / group / toolWindow / notificationGroup 的 id | `plugin.xml` | 这些注册表是 IDE 全局的，重名会被拒绝注册。全部加了 `TreeInfotip` 前缀 |
+| `<name>` = `TreeInfoTip Notes` | `plugin.xml` | Marketplace 条目名要唯一。源码用纯拉丁名，release 工作流注入 `TreeInfoTip Notes / 目录树备注`；各上传通道的校验差异见下面一节 |
+| `intellij.pluginName` = `TreeInfoTip-Notes` | `build.gradle` | 它是 zip 根目录名，也就是装完后 `plugins/<这个名字>/`；和原版同名时后装的直接覆盖前一个的安装目录 |
+| action / group / toolWindow / notificationGroup 的 id | `plugin.xml` | 这些注册表是 IDE 全局的，重名会被拒绝注册。action / group 使用 `TreeInfotip` 前缀，toolWindow / notificationGroup 使用 `TreeInfoTip Notes` 名称 |
 
 `group 'com.github.yc556'`（`build.gradle`）只是 Gradle 坐标，纯装饰，和上面四个都无关。
 
-**工具窗口 id 同时就是侧边栏上显示的文字**：平台按 `toolwindow.stripe.<id，空格换成下划线>` 去插件自己的资源包（没声明 `<resource-bundle>` 时是 `messages.IdeBundle`）找标题，找不到就**直接拿 id 当标题**（`com.intellij.toolWindow.ToolwindowKt#getStripeTitleSupplier` → `BundleBase.messageOrDefault`）。所以 id 带空格是合法且常见的（平台自己就有 `Version Control`、`Event Log`），现在这两个窗口的 id 是 `TreeInfotip 备注` 和 `TreeInfotip XML`，靠这条回退直接当标题用，不用建资源包。改 id 的代价是 `workspace.xml` 里记的窗口位置和大小会重置一次。
+**工具窗口 id 直接作为侧边栏标题**：两个窗口的 id 是 `TreeInfoTip Notes` 和 `TreeInfoTip Notes XML`，通知组 id 是 `TreeInfoTip Notes`，无需额外的文案资源文件。改名直接更新这些 id，不迁移旧 id 保存的窗口布局或通知设置；通知代码中的 `NOTIFICATION_GROUP` 必须与 `plugin.xml` 一致。
 
 action id 不对用户显示（菜单文字来自 `text=` 属性），改名只会丢掉用户自己配的快捷键——这些 action 本来就没有默认快捷键，可以忽略。
 
@@ -214,7 +214,7 @@ action id 不对用户显示（菜单文字来自 `text=` 属性），改名只�
 上传 zip 时 Marketplace 会校验 `plugin.xml`，不过这一关就传不上去。踩过的两条：
 
 - **`<name>` 只能用拉丁字符**。放行的是字母、数字、空格和 `.,+_-/:()#'&[]|`，中日韩文字直接判"包含无效字符"。5.2.0 设的 `TreeInfotip 目录树备注` 就是这么被网页上传拒掉的（5.3.1 改成 `TreeInfotip Notes`）。Plugin Verifier 1.393 的发布说明把这条写死成 "Plugin name must be in Latin characters"。
-- **`<description>` 要以拉丁字符开头、正文至少 40 字**。正文里的中文没问题，现在开头那句 `TreeInfotip plugin for IntelliJ IDEs.` 正好满足，**改描述时别把中文段落挪到最前面**，emoji 放开头也会被拒。
+- **`<description>` 要以拉丁字符开头、正文至少 40 字**。正文里的中文没问题，现在开头那句 `TreeInfoTip Notes plugin for IntelliJ IDEs.` 正好满足，**改描述时别把中文段落挪到最前面**，emoji 放开头也会被拒。
 
 #### 中文名到底行不行：分上传通道，不分首次/更新（5.4.0 实测）
 

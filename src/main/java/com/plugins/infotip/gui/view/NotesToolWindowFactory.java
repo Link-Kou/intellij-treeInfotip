@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A <code>NotesToolWindowFactory</code> Class
  * <p>
- * 「TreeInfotip 备注」工具窗口，三个 tab：
+ * 「TreeInfoTip Notes」工具窗口，三个 tab：
  * </p>
  * <ol>
  *   <li><b>文件成员</b>（默认打开）：当前文件的方法和属性，每项后面跟它的注释，

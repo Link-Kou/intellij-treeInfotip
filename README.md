@@ -1,4 +1,4 @@
-# [![TreeInfotip](trees2.svg)](https://github.com/yc-2018/intellij-treeInfotip) TreeInfotip
+# [![TreeInfoTip Notes](trees2.svg)](https://github.com/yc-2018/intellij-treeInfotip) TreeInfoTip Notes
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/yc-2018/intellij-treeInfotip)
 ![GitHub](https://img.shields.io/github/license/yc-2018/intellij-treeInfotip)
@@ -6,7 +6,7 @@
 ![JetBrains plugins](https://img.shields.io/jetbrains/plugin/d/12994)
 ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/12994)
 
-### TreeInfotip 能做什么？
+### TreeInfoTip Notes 能做什么？
 
 > 给 IntelliJ 系 IDE 的项目目录树加备注。在目录树里右键选中文件或目录，就能挂上说明文字、改颜色、换图标，配置全部落在项目根目录的一个 XML 里，跟着项目走。
 
@@ -48,10 +48,9 @@
 
 ### 在线安装(搜索)
 
-IDE -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
+IDE -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfoTip Notes</kbd>
 
-![样例](https://raw.githubusercontent.com/yc-2018/intellij-treeInfotip/master/image/2023-04-14_14.54.35.png "样例")
-
+![img_3.png](image/img_3.png)
 ### 源代码构建
 
     项目管理：Gradle，需要 JDK 17
@@ -64,5 +63,6 @@ IDE -> <kbd>Preferences</kbd> -> <kbd>Plugins</kbd> -> <kbd>TreeInfotip</kbd>
 
 > ##### 图片示例：
 
-![样例](https://raw.githubusercontent.com/yc-2018/intellij-treeInfotip/master/image/2023-04-14_14.51.58.png "样例")
-![样例](https://raw.githubusercontent.com/yc-2018/intellij-treeInfotip/master/image/2023-04-14_14.52.35.png "样例")
+![img_1.png](image/img_1.png)
+![img.png](image/img.png)
+![img_2.png](image/img_2.png)

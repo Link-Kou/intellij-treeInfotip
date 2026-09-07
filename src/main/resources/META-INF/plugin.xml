@@ -15,7 +15,7 @@
          详见 CLAUDE.md 的「Marketplace 的描述符校验」一节。
          Marketplace 的展示名只从这里读，网页后台改不了，所以改名只能靠上传新版本。
          另外名字里不能出现 JetBrains 品牌词和 emoji，长度上限 60、建议 30 以内 -->
-    <name>TreeInfotip Notes</name>
+    <name>TreeInfoTip Notes</name>
     <vendor url="https://github.com/yc-2018/intellij-treeInfotip">yc-2018</vendor>
 
     <!-- 插件版本（打包时由 gradle.properties 中的 pluginVersion 覆盖） -->
@@ -24,7 +24,7 @@
     <idea-version since-build="223"/>
     <!-- 插件的描述 -->
     <description><![CDATA[
-      <p><b>TreeInfotip plugin for IntelliJ IDEs.</b></p>
+      <p><b>TreeInfoTip Notes plugin for IntelliJ IDEs.</b></p>
       <br/>
       <p>
           <b>
@@ -301,17 +301,14 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- 工具窗口 id 是 IDE 全局的，同时也是侧边栏上显示的文字：
-             平台按 toolwindow.stripe.<id> 去资源包找标题，找不到就直接拿 id 当标题
-             （com.intellij.toolWindow.ToolwindowKt#getStripeTitleSupplier）。
-             所以这里的 id 既要唯一、又要能直接读，带空格是平台自己也在用的写法（如 Version Control） -->
+        <!-- 工具窗口 id 直接作为侧边栏标题，使用插件名称区分全局注册项。 -->
         <!-- 图标写 /icons/treeNote.svg，深色主题下平台会自动去找同目录的 treeNote_dark.svg，
              不用也不能在这里声明第二个路径 -->
-        <toolWindow id="TreeInfotip 备注" secondary="true" icon="/icons/treeNote.svg" anchor="right"
+        <toolWindow id="TreeInfoTip Notes" secondary="true" icon="/icons/treeNote.svg" anchor="right"
                     factoryClass="com.plugins.infotip.gui.view.NotesToolWindowFactory"/>
-        <toolWindow id="TreeInfotip XML" secondary="true" icon="AllIcons.FileTypes.Xml" anchor="bottom"
+        <toolWindow id="TreeInfoTip Notes XML" secondary="true" icon="AllIcons.FileTypes.Xml" anchor="bottom"
                     factoryClass="com.plugins.infotip.gui.view.XmlEditorToolWindow"/>
-        <notificationGroup id="TreeInfotip" displayType="STICKY_BALLOON"/>
+        <notificationGroup id="TreeInfoTip Notes" displayType="STICKY_BALLOON"/>
         <postStartupActivity implementation="com.plugins.infotip.PluginStartupActivity"/>
         <treeStructureProvider implementation="com.plugins.infotip.TreeOnlyTextProvider"/>
         <projectViewNodeDecorator implementation="com.plugins.infotip.IgnoreViewNodeDecorator"/>

@@ -80,8 +80,8 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
 intellij {
     // 这个名字就是 zip 里的根目录名，也就是 IDE 装完后 plugins/ 下的目录名。
     // 原版用的是 TreeInfotip，复刻版必须换一个，否则两个插件会抢同一个安装目录，
-    // 后装的那个直接把前一个的目录覆盖掉。产物名跟着变成 TreeInfotip-Notes-<版本>.zip。
-    pluginName = 'TreeInfotip-Notes'
+    // 后装的那个直接把前一个的目录覆盖掉。产物名跟着变成 TreeInfoTip-Notes-<版本>.zip。
+    pluginName = 'TreeInfoTip-Notes'
     // 开发环境运行时使用的版本，不同的版本编译会采用默认支持java版本编译
     version = project.property('platformVersion').toString()
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。

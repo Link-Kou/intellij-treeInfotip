@@ -57,11 +57,11 @@ jobs:
               exit 1
             fi
           fi
-          echo "Releasing TreeInfotip $version"
+          echo "Releasing TreeInfoTip Notes $version"
 
       - name: Inject Chinese name for release
         run: |
-          sed -i 's|<name>TreeInfotip Notes</name>|<name>TreeInfotip Notes / 目录树备注</name>|' \
+          sed -i 's|<name>TreeInfoTip Notes</name>|<name>TreeInfoTip Notes / 目录树备注</name>|' \
             src/main/resources/META-INF/plugin.xml
           echo "Plugin name updated for Marketplace"
 
@@ -86,14 +86,14 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" \
             "${{ steps.artifact.outputs.path }}" \
-            --title "TreeInfotip ${{ steps.meta.outputs.version }}" \
+            --title "TreeInfoTip Notes ${{ steps.meta.outputs.version }}" \
             --generate-notes
 
       - name: Upload artifact (manual run)
         if: github.ref_type != 'tag'
         uses: actions/upload-artifact@v7
         with:
-          name: TreeInfotip-${{ steps.meta.outputs.version }}
+          name: TreeInfoTip-Notes-${{ steps.meta.outputs.version }}
           path: build/distributions/*.zip
           if-no-files-found: error
 

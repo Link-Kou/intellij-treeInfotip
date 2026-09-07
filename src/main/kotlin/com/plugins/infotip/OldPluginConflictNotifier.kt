@@ -30,8 +30,8 @@ object OldPluginConflictNotifier {
     /** 原版插件的 id，也是本插件 5.1.x 及更早版本用的 id */
     private const val OLD_PLUGIN_ID = "com.linkkou.plugin.intellij.assistant"
 
-    /** 对应 plugin.xml 里注册的 `<notificationGroup id="TreeInfotip"/>` */
-    private const val NOTIFICATION_GROUP = "TreeInfotip"
+    /** 对应 plugin.xml 里注册的 `<notificationGroup id="TreeInfoTip Notes"/>` */
+    private const val NOTIFICATION_GROUP = "TreeInfoTip Notes"
 
     /**
      * 插件管理页那个 configurable 的 id，取自 `PluginManagerConfigurable.getId()`
