@@ -215,9 +215,18 @@ public class NoteTreeView extends Tree {
                 if (2 != e.getClickCount()) {
                     return;
                 }
-                final XmlEntity entity = selectedEntity();
-                if (null != entity) {
-                    navigate(project, entity);
+                final TreePath path = getPathForLocation(e.getX(), e.getY());
+                if (null == path) {
+                    return;
+                }
+                final Object component = path.getLastPathComponent();
+                if (!(component instanceof MyTreeNode)) {
+                    return;
+                }
+                final MyTreeNode node = (MyTreeNode) component;
+                final Object obj = node.getUserEntity();
+                if (obj instanceof XmlEntity) {
+                    navigate(project, (XmlEntity) obj, node.isShadowed());
                 }
             }
         });
@@ -322,15 +331,25 @@ public class NoteTreeView extends Tree {
     /**
      * 双击一条备注：能落到真实文件就跳文件，否则跳到 {@code DirectoryV3.xml} 里这条规则所在的行
      * <p>
-     * 跳 XML 覆盖两种双击没反应的情况：路径已经被删或改名的（列表里标红那些），
+     * 跳 XML 覆盖三种双击没反应的情况：路径已经被删或改名的（列表里标红那些）、
+     * 被前面同键规则覆盖而不生效的（列表里标灰加删除线那些），
      * 以及只写了 extension 的全项目类型规则（本来就没有路径可跳）。
      * </p>
      * <p>
      * 这里重新查一次 VFS 而不是看 {@link MyTreeNode#isMissing()}：那个状态是建节点时算的，
      * 建完之后在 IDE 外面删文件不会刷新，会把已经失效的当成有效去跳，结果又是没反应。
      * </p>
+     * <p>
+     * 同样不能看 {@link MyTreeNode#isShadowed()}：被覆盖的规则路径可能还在（只是不生效），
+     * 跳到项目文件没意义，应该跳到配置文件让用户决定留还是删。
+     * </p>
      */
-    private static void navigate(Project project, XmlEntity entity) {
+    private static void navigate(Project project, XmlEntity entity, boolean shadowed) {
+        //被覆盖的规则直接跳配置文件，不管路径在不在
+        if (shadowed) {
+            navigateToRule(project, entity);
+            return;
+        }
         final String path = entity.getPath();
         if (null != path && !path.trim().isEmpty() && null != TreesUtils.findProjectFile(project, path)) {
             TreesUtils.Navigation(project, path);

@@ -154,7 +154,7 @@ public class HelpView extends JEditorPane {
     }
 
     private static String intro() {
-        return "<h3>TreeInfotip 目录树备注</h3>"
+        return "<h3>TreeInfoTip Notes</h3>"
                 + "<p>给项目树上的文件和目录加备注、颜色、图标、悬浮提示、删除线，也能改掉节点显示的名字。"
                 + "配置全部存在<b>项目根目录的 DirectoryV3.xml</b> 里，跟着项目走，"
                 + "提交进版本库整个团队就能共用。</p>";
@@ -195,7 +195,7 @@ public class HelpView extends JEditorPane {
                 + "「清除失效路径」和「清理重复规则」。</li>"
                 + "<li><b>说明</b>：就是这一页。</li>"
                 + "</ul>"
-                + "<p>另外底部还有一个「TreeInfotip XML」窗口，直接编辑配置文件本身。</p>";
+                + "<p>另外底部还有一个「TreeInfoTip Notes XML」窗口，直接编辑配置文件本身。</p>";
     }
 
     /**

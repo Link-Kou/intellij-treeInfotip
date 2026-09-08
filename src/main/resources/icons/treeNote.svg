@@ -1,4 +1,4 @@
-<!-- 侧边栏「TreeInfotip 备注」的工具窗口图标：按 pluginIcon.svg 的 logo（竖干 + 三个备注块）
+<!-- 侧边栏「TreeInfoTip Notes」的工具窗口图标：按 pluginIcon.svg 的 logo（竖干 + 三个备注块）
      重绘的 16×16 单色版。工具窗口图标必须是单色的，彩色 logo 直接缩到 16 会糊成一团。
 
      配色跟着主题走，靠平台的 _dark 后缀约定：浅色主题读这个文件，深色主题自动读同目录的

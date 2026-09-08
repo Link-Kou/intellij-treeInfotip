@@ -41,7 +41,7 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "TreeInfotip version: $version"
+          echo "TreeInfoTip Notes version: $version"
 
       - name: Build plugin
         run: gradle --no-daemon clean buildPlugin verifyPlugin
@@ -55,7 +55,7 @@ jobs:
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v7
         with:
-          name: TreeInfotip-${{ steps.meta.outputs.version }}
+          name: TreeInfoTip-Notes-${{ steps.meta.outputs.version }}
           path: build/distributions/*.zip
           if-no-files-found: error
 
