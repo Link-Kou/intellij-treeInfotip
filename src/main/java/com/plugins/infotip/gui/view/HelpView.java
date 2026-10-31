@@ -26,7 +26,7 @@ import javax.swing.ScrollPaneConstants;
 /**
  * A <code>HelpView</code> Class
  * <p>
- * 「说明」tab：一页 HTML，讲清楚菜单怎么用、{@code DirectoryV3.xml} 有哪些参数、命中优先级怎么算。
+ * 「说明」tab：一页 HTML，讲清楚菜单怎么用、{@code DirectoryV7.xml} 有哪些参数、命中优先级怎么算。
  * </p>
  * <p>
  * 做成 tab 而不是弹窗：参数表要对着配置文件看，弹窗一关就没了，而侧边栏可以一直开着。
@@ -101,7 +101,7 @@ public class HelpView extends JEditorPane {
     }
 
     /**
-     * 工具栏上的「打开 DirectoryV3.xml」，省得用户自己去项目根目录里翻
+     * 工具栏上的「打开 DirectoryV7.xml」，省得用户自己去项目根目录里翻
      * <p>
      * 文件不存在时只提示，<b>不顺手建一个</b>：空配置文件对用户没用，而右键菜单加第一条备注时
      * 会自动建（{@link XmlFileUtils#createXmlFile}），带着参数说明的注释也是那时写进去的。
@@ -110,14 +110,14 @@ public class HelpView extends JEditorPane {
     private class OpenXmlAction extends AnAction {
 
         OpenXmlAction() {
-            super("打开 DirectoryV3.xml", "打开项目根目录下的配置文件", AllIcons.FileTypes.Xml);
+            super("打开 DirectoryV7.xml", "打开项目根目录下的配置文件", AllIcons.FileTypes.Xml);
         }
 
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
             final XmlFile xmlFile = XmlFileUtils.getXmlFile(project);
             if (null == xmlFile) {
-                Messages.showInfoMessage(project, "这个项目还没有 DirectoryV3.xml。\n"
+                Messages.showInfoMessage(project, "这个项目还没有 DirectoryV7.xml。\n"
                         + "在项目树上右键任意文件或目录 → 目录备注 → 添加文字备注，加第一条备注时会自动建出来。", "打开配置文件");
                 return;
             }
@@ -156,12 +156,12 @@ public class HelpView extends JEditorPane {
     private static String intro() {
         return "<h3>TreeInfoTip Notes</h3>"
                 + "<p>给项目树上的文件和目录加备注、颜色、图标、悬浮提示、删除线，也能改掉节点显示的名字。"
-                + "配置全部存在<b>项目根目录的 DirectoryV3.xml</b> 里，跟着项目走，"
+                + "配置全部存在<b>项目根目录的 DirectoryV7.xml</b> 里，跟着项目走，"
                 + "提交进版本库整个团队就能共用。</p>";
     }
 
     /**
-     * 七项菜单文字要和 {@code plugin.xml} 里 {@code TreeInfotip.MenuGroup} 的 {@code text=} 一致，
+     * 六项菜单文字要和 {@code plugin.xml} 里 {@code TreeInfotip.MenuGroup} 的 {@code text=} 一致，
      * 改菜单文字时这里也要跟着改
      */
     private static String menu() {
@@ -171,12 +171,14 @@ public class HelpView extends JEditorPane {
                 + "<li><b>添加文字备注</b>：节点名后面跟一段灰色的说明文字</li>"
                 + "<li><b>覆盖显示名称</b>：整个换掉节点显示的名字，留空恢复原名</li>"
                 + "<li><b>设置悬浮提示</b>：鼠标停在节点上时弹出的提示，可以写多行</li>"
-                + "<li><b>添加颜色或图标</b>：换图标、改文字颜色和背景色</li>"
+                + "<li><b>添加颜色或图标</b>：换图标、改文字颜色和背景色。"
+                + "三项都能清空：图标选下拉框第一项「（不设置）」，两个颜色各自点右边的「清除」</li>"
                 + "<li><b>添加/取消删除线</b>：给节点名加一道删除线，用来标记废弃的东西</li>"
-                + "<li><b>按扩展名批量设置</b>：一条规则管一批同扩展名的文件，"
-                + "范围可以限定在选中的目录，也可以是整个项目</li>"
                 + "<li><b>清除全部设置</b>：把选中节点的备注和样式全删掉</li>"
                 + "</ul>"
+                + "<p><b>文字颜色不会盖掉 Git 的状态色</b>：被改过（蓝）、已加（绿）、"
+                + "未纳入版本控制（红）的节点，文字颜色让给 Git，图标和背景色照常生效。"
+                + "文件回到「无改动」状态，你选的颜色就自己回来了。</p>"
                 + "<p>存盘立刻生效，不用重启 IDE。目录树只在<b>重绘</b>时才应用新样式，"
                 + "偶尔看着没变，把上一级目录折叠再展开一下就好。</p>";
     }
@@ -188,52 +190,45 @@ public class HelpView extends JEditorPane {
                 + "<b>单击</b>跳到定义处，<b>双击</b>收缩或展开。上面的「方法」「属性」勾选框控制显示哪一类，"
                 + "「层数」拉杆控制展开几层，最多 10 层。注释按四级找：文档注释、多行注释、"
                 + "行尾的单行注释、紧贴在上方的单行注释，命中一级就不再往下找。</li>"
-                + "<li><b>目录备注</b>：DirectoryV3.xml 里的规则一行一条。<b>双击</b>跳到对应的文件；"
-                + "路径已经不存在的<b>标红排在最前面</b>，双击跳到 XML 里那条规则所在的行；"
-                + "被前面同路径规则盖住、永远不生效的<b>标灰</b>。"
+                + "<li><b>目录备注</b>：DirectoryV7.xml 里的规则按目录层级组织成一棵树。<b>单击</b>定位到对应的文件，"
+                + "<b>双击目录</b>展开 / 收起；路径已经不存在的<b>标红</b>、其祖先链自动展开，单击跳到 XML 里那条规则所在的行；"
+                + "被前面同路径规则盖住、永远不生效的<b>标灰</b>。工具栏第二行的数字 1-10 点几就展开到第几层。"
                 + "右键有<b>置顶</b>和<b>删除</b>，都支持 Ctrl 多选；工具栏上还有「刷新」"
                 + "「清除失效路径」和「清理重复规则」。</li>"
                 + "<li><b>说明</b>：就是这一页。</li>"
-                + "</ul>"
-                + "<p>另外底部还有一个「TreeInfoTip Notes XML」窗口，直接编辑配置文件本身。</p>";
+                + "</ul>";
     }
 
     /**
-     * 九个参数要和 {@link com.plugins.infotip.storage.XmlStorage} 里的常量对得上，
+     * 七个参数要和 {@link com.plugins.infotip.storage.XmlStorage} 里的常量对得上，
      * 新增可配置属性时这里也要补一条
      */
     private static String attributes() {
-        return "<h4>DirectoryV3.xml 的参数</h4>"
-                + "<p>一条 &lt;tree&gt; 就是一条规则，参数<b>全是可选的</b>，按需要写几个：</p>"
+        return "<h4>DirectoryV7.xml 的参数</h4>"
+                + "<p>配置是<b>嵌套</b>的：一个 &lt;node&gt; 可以套下一层 &lt;node&gt;，每层的 "
+                + "<tt>path</tt> 只写相对上一层的那一截，完整路径由各层拼起来。一个 &lt;node&gt; "
+                + "就是一条规则，参数<b>全是可选的</b>，按需要写几个：</p>"
                 + "<ul>"
-                + "<li><tt>path</tt> — 相对项目根目录的路径，以 / 开头，例如 <tt>/src/main/java</tt>；"
-                + "只写 <tt>/</tt> 表示整个项目。末尾多写的 / 会被忽略。</li>"
-                + "<li><tt>extension</tt> — 扩展名，<b>不带点</b>，例如 <tt>java</tt>。"
-                + "只作用于文件，目录节点不参与；和 <tt>path</tt> 一起写，表示这个目录"
-                + "连各级子目录下的这类文件。</li>"
-                + "<li><tt>title</tt> — 备注文字，灰色跟在节点名后面。</li>"
-                + "<li><tt>presentableText</tt> — 覆盖节点显示的名字。</li>"
-                + "<li><tt>tooltipTitle</tt> — 鼠标悬浮时的提示，可以写多行。</li>"
+                + "<li><tt>path</tt> — 相对上一层的路径，例如 <tt>src/main/java</tt>；"
+                + "写在最外层就是相对项目根目录。末尾多写的 / 会被忽略。</li>"
+                + "<li><tt>note</tt> — 备注文字，灰色跟在节点名后面。</li>"
+                + "<li><tt>label</tt> — 覆盖节点显示的名字。</li>"
+                + "<li><tt>tooltip</tt> — 鼠标悬浮时的提示，可以写多行。</li>"
                 + "<li><tt>icon</tt> — 换图标，填 AllIcons 里的字段路径，例如 <tt>Nodes.Folder</tt>。</li>"
-                + "<li><tt>textColor</tt> — 文字颜色，十进制 <tt>r,g,b</tt>，例如 <tt>255,0,0</tt>。</li>"
-                + "<li><tt>backgroundColor</tt> — 背景色，写法同上。</li>"
-                + "<li><tt>strikethrough</tt> — 填 <tt>true</tt> 给节点加删除线。</li>"
-                + "</ul>";
+                + "<li><tt>color</tt> — 文字颜色，十进制 <tt>r,g,b</tt>，例如 <tt>255,0,0</tt>。</li>"
+                + "<li><tt>bg</tt> — 背景色，写法同上。</li>"
+                + "<li><tt>strike</tt> — 填 <tt>true</tt> 给节点加删除线。</li>"
+                + "</ul>"
+                + "<p>只为了分层而存在、自己什么都没配的节点不算规则，删光底下的规则时会跟着消失。</p>";
     }
 
     private static String priority() {
         return "<h4>命中优先级</h4>"
-                + "<p>同一个节点被多条规则命中时，从高到低：</p>"
-                + "<ol>"
-                + "<li><b>路径规则</b>（只写 <tt>path</tt>）：路径全等的那一个文件或目录</li>"
-                + "<li><b>目录级类型规则</b>（<tt>path</tt> 加 <tt>extension</tt>）：该目录及各级子目录下的"
-                + "这类文件，多条同时命中时 <b>path 更长的赢</b></li>"
-                + "<li><b>全项目类型规则</b>（只写 <tt>extension</tt>）：整个项目的这类文件，只做兜底</li>"
-                + "</ol>"
-                + "<p>同优先级时<b>写在前面的那条赢</b>，所以「目录备注」里的「置顶」不是列表排序，"
-                + "是真的把这条标签挪到文件最前面。</p>"
-                + "<p>也因此，<tt>path</tt> 和 <tt>extension</tt> 都一样的<b>第二条规则完全没用</b>——"
-                + "不是「部分生效」，哪怕它多配了前面那条没有的参数也读不到。这种规则在「目录备注」里"
+                + "<p>一个 &lt;node&gt; 只对<b>完整路径全等</b>的那一个文件或目录生效。"
+                + "同一路径写了多条时，写在前面的那条赢——所以「目录备注」里的「置顶」不是列表排序，"
+                + "是真的把这条标签挪到同层兄弟的最前面。</p>"
+                + "<p>也因此，<tt>path</tt> 一样的<b>第二条规则完全没用</b>——不是「部分生效」，"
+                + "哪怕它多配了前面那条没有的参数也读不到。这种规则在「目录备注」里"
                 + "标灰，用工具栏的「清理重复规则」一键删掉，在生效的那条会保留。</p>";
     }
 
@@ -244,11 +239,12 @@ public class HelpView extends JEditorPane {
         return "<h4>例子</h4>"
                 + "<pre>"
                 + "&lt;trees&gt;\n"
-                + "  &lt;tree path=\"/src\" title=\"源码\"/&gt;\n"
-                + "  &lt;tree path=\"/old\"\n"
-                + "        strikethrough=\"true\"/&gt;\n"
-                + "  &lt;tree path=\"/api\" extension=\"ts\"\n"
-                + "        textColor=\"255,0,0\"/&gt;\n"
+                + "  &lt;node path=\"src\" note=\"源码\"&gt;\n"
+                + "    &lt;node path=\"old\"\n"
+                + "          strike=\"true\"/&gt;\n"
+                + "    &lt;node path=\"App.java\"\n"
+                + "          color=\"255,0,0\"/&gt;\n"
+                + "  &lt;/node&gt;\n"
                 + "&lt;/trees&gt;"
                 + "</pre>";
     }

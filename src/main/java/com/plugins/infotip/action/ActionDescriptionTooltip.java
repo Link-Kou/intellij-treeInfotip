@@ -27,10 +27,10 @@ public class ActionDescriptionTooltip extends AnAction {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入鼠标悬浮时显示的提示内容", "设置悬浮提示", Messages.getQuestionIcon(), xmlEntity.getTooltipTitle(), null);
+                String txt = Messages.showInputDialog(project, "请输入鼠标悬浮时显示的提示内容", "设置悬浮提示", Messages.getQuestionIcon(), xmlEntity.getTooltip(), null);
                 if (null != txt) {
                     for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setTooltipTitle(txt));
+                        XmlStorage.modify(project, fileDirectoryXml, x.setTooltip(txt));
                     }
                 }
             }
@@ -40,7 +40,7 @@ public class ActionDescriptionTooltip extends AnAction {
                 String txt = Messages.showInputDialog(project, "请输入鼠标悬浮时显示的提示内容", "设置悬浮提示", Messages.getQuestionIcon(), "", null);
                 if (null != txt) {
                     for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTooltipTitle(txt));
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTooltip(txt));
                     }
                 }
             }

@@ -34,6 +34,9 @@ public class PluginStartupActivity implements StartupActivity {
 
     @Override
     public void runActivity(@NotNull Project project) {
+        //先看要不要把老配置转成 V7：已经有 V7 就直接跳过，老文件原样留着不动，
+        //详见 XmlFileUtils.migrateIfNeeded
+        XmlFileUtils.migrateIfNeeded(project);
         final XmlFile xmlFile = XmlFileUtils.loadXmlFile(project);
         XmlStorage.parsing(project, xmlFile);
         for (Map.Entry<Object, RunCallback> objectRunCallbackEntry : callbackList.entrySet()) {

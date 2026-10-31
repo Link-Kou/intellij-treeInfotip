@@ -36,6 +36,16 @@ public class MyTreeNode extends DefaultMutableTreeNode {
      */
     private boolean shadowed;
 
+    /**
+     * 这个节点在项目里的完整路径（以 / 开头）
+     * <p>
+     * 树形展示（7.0.2 起）里有一类<b>纯目录容器</b>节点：它自己没配任何规则，只为撑起层级而存在，
+     * 因此没有 {@link #UserEntity}。双击这种节点要能跳到对应目录，就得把路径记在这里；
+     * 带规则的节点路径从 {@code XmlEntity} 上取，这个字段留空也无妨。
+     * </p>
+     */
+    private String fullPath;
+
     public MyTreeNode(Object userObject) {
         super(userObject);
     }
@@ -46,6 +56,15 @@ public class MyTreeNode extends DefaultMutableTreeNode {
 
     public MyTreeNode setUserEntity(Object userEntity) {
         UserEntity = userEntity;
+        return this;
+    }
+
+    public String getFullPath() {
+        return fullPath;
+    }
+
+    public MyTreeNode setFullPath(String fullPath) {
+        this.fullPath = fullPath;
         return this;
     }
 

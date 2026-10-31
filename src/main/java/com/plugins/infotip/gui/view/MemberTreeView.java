@@ -315,7 +315,7 @@ public class MemberTreeView extends Tree {
      * </p>
      * <p>
      * 拆成两半：偏移量在读操作里取，开编辑器在读操作外面做。和 {@link NoteTreeView} 里跳
-     * {@code DirectoryV3.xml} 是同一套写法。
+     * {@code DirectoryV7.xml} 是同一套写法。
      * </p>
      */
     private void navigate(PsiElement element) {

@@ -27,9 +27,9 @@ public class ActionDescriptionStrikethrough extends AnAction {
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 //以第一个选中节点的当前状态取反，作为本次批量操作的目标状态，
                 //这样多选时行为一致，不会出现有的加上有的取消。
-                final boolean enable = !xmlEntities.get(0).isStrikethroughEnabled();
+                final boolean enable = !xmlEntities.get(0).isStrikeEnabled();
                 for (XmlEntity x : xmlEntities) {
-                    XmlStorage.modify(project, fileDirectoryXml, x.setStrikethrough(enable ? "true" : null));
+                    XmlStorage.modify(project, fileDirectoryXml, x.setStrike(enable ? "true" : null));
                 }
             }
 
@@ -38,7 +38,7 @@ public class ActionDescriptionStrikethrough extends AnAction {
                 //尚无任何配置时，直接为选中节点建立带删除线的配置
                 for (Pair<String, String> pair : asBasePathOrExtension) {
                     XmlStorage.create(project, fileDirectoryXml,
-                            new XmlEntity().setPath(pair.getValue0()).setStrikethrough("true"));
+                            new XmlEntity().setPath(pair.getValue0()).setStrike("true"));
                 }
             }
         });

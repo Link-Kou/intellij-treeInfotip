@@ -1,0 +1,12 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><!-- tree lines -->
+  <path d="M10 14.5V31M10 21H15M10 31H15" stroke="#9AA0B0" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <!-- root folder + name -->
+  <path d="M4 8.7a1.5 1.5 0 0 1 1.5-1.5h3l1.4 1.6h4.2a1.5 1.5 0 0 1 1.5 1.5v4.1a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 14.2z" fill="#8AA4FF"/>
+  <rect x="20" y="9.5" width="15" height="3.4" rx="1.7" fill="#FFFFFF" fill-opacity="0.85"/>
+  <!-- child nodes -->
+  <rect x="15" y="17.5" width="7" height="7" rx="1.8" fill="#8AA4FF"/>
+  <rect x="15" y="27.5" width="7" height="7" rx="1.8" fill="#8AA4FF"/>
+  <!-- note tags -->
+  <rect x="25" y="18.2" width="11" height="5.6" rx="2.8" fill="#FFC53D"/>
+  <rect x="25" y="28.2" width="8.5" height="5.6" rx="2.8" fill="#3DDC97"/>
+</svg>

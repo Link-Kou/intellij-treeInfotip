@@ -28,10 +28,10 @@ public class ActionDescriptionText extends AnAction {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), xmlEntity.getTitle(), null);
+                String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), xmlEntity.getNote(), null);
                 if (null != txt) {
                     for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setTitle(txt));
+                        XmlStorage.modify(project, fileDirectoryXml, x.setNote(txt));
                     }
                 }
             }
@@ -41,7 +41,7 @@ public class ActionDescriptionText extends AnAction {
                 String txt = Messages.showInputDialog(project, "请输入备注内容", "添加文字备注", Messages.getQuestionIcon(), "", null);
                 if (null != txt) {
                     for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setTitle(txt));
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setNote(txt));
                     }
                 }
             }

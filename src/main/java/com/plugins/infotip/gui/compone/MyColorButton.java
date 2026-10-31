@@ -37,10 +37,16 @@ public class MyColorButton extends JButton {
         if (myColor != null) {
             g.setColor(myColor);
             g.fillRect(0, 0, width, height);
-        } else {
-            g.setColor(Color.WHITE);
-            g.drawRect(0, 0, width, height);
+            return;
         }
+        //未设置：白底加一条斜杠。原来是只画个方框，和「选了一个深色」几乎分不出来，
+        //有了「清除」按钮之后必须一眼看出当前是空的。
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, width, height);
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawRect(0, 0, width - 1, height - 1);
+        g.setColor(Color.RED);
+        g.drawLine(0, height - 1, width - 1, 0);
     }
 
     public void setColor(Color myColor) {

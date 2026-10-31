@@ -46,13 +46,13 @@ public class ActionDescriptionColorOrIcon extends AnAction {
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntitys, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntitys.get(0);
                 dialog.setIcons(xmlEntity.getIcon());
-                dialog.setTextColor(xmlEntity.getTextColor());
-                dialog.setBackgroundColor(xmlEntity.getBackgroundColor());
+                dialog.setTextColor(xmlEntity.getColor());
+                dialog.setBackgroundColor(xmlEntity.getBg());
                 dialog.setVisible(true);
                 for (XmlEntity entity : xmlEntitys) {
                     entity.setIcon(dialog.getIcons());
-                    entity.setTextColor(dialog.getTextColor());
-                    entity.setBackgroundColor(dialog.getBackgroundColor());
+                    entity.setColor(dialog.getTextColor());
+                    entity.setBg(dialog.getBackgroundColor());
                     XmlStorage.modify(project, fileDirectoryXml, entity);
                 }
             }
@@ -63,8 +63,8 @@ public class ActionDescriptionColorOrIcon extends AnAction {
                 for (Pair<String, String> pair : asBasePathOrExtension) {
                     final XmlEntity x = new XmlEntity().setPath(pair.getValue0());
                     x.setIcon(dialog.getIcons());
-                    x.setTextColor(dialog.getTextColor());
-                    x.setBackgroundColor(dialog.getBackgroundColor());
+                    x.setColor(dialog.getTextColor());
+                    x.setBg(dialog.getBackgroundColor());
                     XmlStorage.create(project, fileDirectoryXml, x);
                 }
             }

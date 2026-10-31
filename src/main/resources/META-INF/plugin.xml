@@ -19,7 +19,7 @@
     <vendor url="https://github.com/yc-2018/intellij-treeInfotip">yc-2018</vendor>
 
     <!-- 插件版本（打包时由 gradle.properties 中的 pluginVersion 覆盖） -->
-    <version>5.7.4</version>
+    <version>6.2.0</version>
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
     <idea-version since-build="223"/>
     <!-- 插件的描述 -->
@@ -36,24 +36,22 @@
           <ul>
             <h3>English:</h3>
             <li>Right-click any file or folder in the project view: append a text note, override the display name, set a hover tooltip, change text/background color, pick any built-in IDE icon, or add a strikethrough</li>
-            <li>Batch rules by file extension, scoped to the current directory (subdirectories included) or the whole project</li>
             <li>"File members" tab: the methods and properties of the file you are editing as a tree, each followed by its comment (JavaDoc / JSDoc / line comments) — any language with a structure view works: Java, Kotlin, TS / JS / TSX, Python, Go, and more</li>
             <li>"Directory notes" tab: every configured rule in one list — dead paths flagged red, never-matching duplicates greyed out, one-click cleanup for both, double-click to jump to the file or to the rule's line in the XML</li>
             <li>"Help" tab: what each context-menu item does, all XML attributes, and how match priority is resolved</li>
-            <li>XML editor tool window to view and edit the configuration without digging into the project root</li>
-            <li>Everything lives in one <b>DirectoryV3.xml</b> in the project root: commit it to share with your team, delete it to reset, hand edits apply on save</li>
+            <li>Rules are stored as a nested tree, so a long shared directory is written once as a parent node</li>
+            <li>Everything lives in one <b>DirectoryV7.xml</b> in the project root: commit it to share with your team, delete it to reset, hand edits apply on save</li>
           </ul>
       </p>
       <p>
           <ul>
             <h3>中文：</h3>
             <li>项目树右键文件或目录：添加文字备注、覆盖显示名称、设置悬浮提示、改文字色和背景色、换成 IDE 内置的任意图标、加删除线</li>
-            <li>按扩展名批量设置：一条规则命中一批同扩展名的文件，范围可限定为当前目录（含子目录）或整个项目</li>
             <li>「文件成员」tab：把当前文件的方法和属性列成一棵树，每项后面跟它的注释（JavaDoc / JSDoc / 行注释）——凡是有结构视图的语言都支持：Java、Kotlin、TS / JS / TSX、Python、Go 等</li>
             <li>「目录备注」tab：全部规则集中在一个列表——失效路径标红、永不生效的重复规则标灰、一键清理，双击跳到对应文件或 XML 里那条规则所在的行</li>
             <li>「说明」tab：右键菜单每一项做什么、XML 全部参数怎么写、命中优先级怎么算</li>
-            <li>XML 编辑工具窗口：不用去项目根目录里翻，直接查看和编辑配置文件</li>
-            <li>全部配置存在项目根目录的一个 <b>DirectoryV3.xml</b> 里：提交它就能同步给同事。删掉它就全部重置，手动改完保存即时生效</li>
+            <li>规则以嵌套树的形式存储：重复的长目录作为父节点只写一遍</li>
+            <li>全部配置存在项目根目录的一个 <b>DirectoryV7.xml</b> 里：提交它就能同步给同事。删掉它就全部重置，手动改完保存即时生效</li>
           </ul>
       </p>
       <br/>
@@ -83,6 +81,143 @@
 
     <!-- 插件的功能 -->
     <change-notes><![CDATA[
+      <ul>
+        <p>7.1.4</p>
+        <li>「清除失效路径」「清理重复规则」两个图标补上深色变体，跟刷新按钮一样浅色主题深灰、深色主题浅灰自动切换，不再是一团黑</li>
+        <li>删掉插件 logo SVG 里的 c2pa 元数据（文件从 8.6KB 瘦到不到 1KB）；两个明暗 logo 尺寸一致（都是 40×40、同一套图形，只差颜色）</li>
+        <li>The two toolbar icons now have dark variants and switch shade with the theme like the Refresh button; stripped c2pa metadata from the plugin logo SVGs</li>
+      </ul>
+      <ul>
+        <p>7.1.3</p>
+        <li>「目录备注」工具栏的按钮和「展开」层数数字并到同一行，省一行高度</li>
+        <li>换了图标：「清除失效路径」用扫把、「清理重复规则」用垃圾桶，插件 logo 也换了新的（带深色变体）</li>
+        <li>The "Directory notes" toolbar buttons and the "expand depth" numbers are now on one row; new icons for "clear dead paths" (broom) and "clean duplicates" (trash), plus a new plugin logo with a dark variant</li>
+      </ul>
+      <ul>
+        <p>7.1.2</p>
+        <li>「目录备注」树现在也按规则配置渲染：配了图标就显示那个图标（没配才用目录 / 文件类型图标），文字套上配的颜色和删除线，等于项目树效果的预览。失效（红）和被覆盖（灰）两种状态更要紧，仍旧盖过配色</li>
+        <li>The "Directory notes" tree now reflects each rule's own styling: its configured icon (falling back to the folder / file-type icon), text color and strikethrough — a preview of the project-tree effect. Dead (red) and shadowed (grey) states still take precedence</li>
+      </ul>
+      <ul>
+        <p>7.1.1</p>
+        <li>「目录备注」树的展开层数数字 1-10 加了方框，看着像按钮、也把那行的空白填起来</li>
+        <li>定位改成<b>单击</b>、<b>双击目录</b>展开 / 收起：以前双击目录会又展开又定位，两件事一起发生。单击一个文件立刻定位，单击目录短暂等一下（被双击打断就只展开）</li>
+        <li>The depth numbers 1-10 in the "Directory notes" tree now have boxed borders; navigation moved to <b>single-click</b> and double-click on a directory now only expands/collapses it (previously double-click both expanded and navigated)</li>
+      </ul>
+      <ul>
+        <p>7.1.0</p>
+        <li>去掉了 <tt>extension</tt> 属性和「按扩展名批量设置」菜单：一条规则只对应一个路径。命中规则简化为「完整路径全等」一种，不再有目录级 / 全项目的类型规则。老配置里带 extension 的规则在迁移时会被丢弃</li>
+        <li>Removed the <tt>extension</tt> attribute and the "batch by extension" menu: a rule now maps to a single path. Matching is simplified to exact full-path equality; extension-based rules in old configs are dropped on migration</li>
+      </ul>
+      <ul>
+        <p>7.0.3</p>
+        <li>「目录备注」树工具栏加了一排数字 1-10：点几就把树展开到第几层，默认 3 层。没展开的照样能手动点开，失效节点无论层数都会展开露出来</li>
+        <li>The "Directory notes" tree toolbar now has a row of numbers 1-10: click one to expand the tree to that depth (default 3). Collapsed nodes can still be opened by hand, and dead nodes are always revealed regardless of depth</li>
+      </ul>
+      <ul>
+        <p>7.0.2</p>
+        <li>「目录备注」侧边栏从平铺列表改成<b>目录树</b>，结构和配置文件、项目树一致；单链目录会压平成一段。失效的规则留在原位标红、其祖先链自动展开，一眼能看到；纯目录容器双击跳到对应目录</li>
+        <li>The "Directory notes" sidebar is now a <b>tree</b> mirroring the config/project structure; single-child directories are collapsed into one node. Dead-path rules stay in place, highlighted red with their ancestors auto-expanded; double-clicking a pure container jumps to that directory</li>
+      </ul>
+      <ul>
+        <p>7.0.1</p>
+        <li>迁移生成的 DirectoryV7.xml 缩进从 4 个空格改成 2 个空格，嵌套深了也不至于把行推得太靠右</li>
+        <li>The migrated DirectoryV7.xml now indents with 2 spaces instead of 4, so deeply nested nodes don't drift too far right</li>
+      </ul>
+      <ul>
+        <p>7.0.0</p>
+        <li>配置文件升级为 <b>DirectoryV7.xml</b>，结构从平铺改成<b>嵌套树</b>：一个 &lt;node&gt; 可以套下一层 &lt;node&gt;，每层的 path 只写相对上一层的那一截，重复的长目录天生只写一遍——原来的「抽离路径前缀」机制因此去掉了
+        </li>
+        <li>属性名全部改短：title→note、presentableText→label、tooltipTitle→tooltip、textColor→color、backgroundColor→bg、strikethrough→strike</li>
+        <li>开项目时若只有旧的 DirectoryV6.xml / DirectoryV3.xml，会自动按它的内容生成一份 V7 并发通知；<b>旧文件原样保留、不改名也不删</b>，方便还在用旧版插件的同事，确认无误后可自行删除
+        </li>
+        <li>The config file is now <b>DirectoryV7.xml</b> with a <b>nested tree</b> structure: a &lt;node&gt; can contain child &lt;node&gt;s and each level's path is relative to its parent, so a long shared directory is written once (the old prefix-extraction feature is removed)
+        </li>
+        <li>Attributes renamed for brevity: title→note, presentableText→label, tooltipTitle→tooltip, textColor→color, backgroundColor→bg, strikethrough→strike</li>
+        <li>On open, an existing DirectoryV6.xml / DirectoryV3.xml is auto-converted into a new V7 file; the old file is kept untouched (not renamed, not deleted) for teammates still on the old plugin
+        </li>
+      </ul>
+      <ul>
+        <p>6.2.0</p>
+        <li>「选择图标或颜色」弹窗的三项现在都能<b>清空</b>：图标选下拉框第一项「（不设置）」，文字颜色和背景色各自点旁边的「清除」。
+          以前三样一旦设上就再也去不掉；顺带修掉「新建一条规则一点确定就必然写入一个图标」的老毛病——现在没选就不写 icon 属性
+        </li>
+        <li><b>文字颜色不再盖掉 Git 的状态色</b>：被改过（蓝）、已加（绿）、未纳入版本控制（红）的节点，文字颜色让给 Git。
+          配置里的颜色不会丢，文件回到「无改动」状态时自己回来；图标和背景色不受影响
+        </li>
+        <li>「未设置」的颜色色块改成白底加红斜杠，和「选了深色」区分得开</li>
+        <li>All three rows of the icon/color dialog can now be <b>cleared</b>: pick the first item "（不设置）" for the icon,
+          or the "清除" button next to each color. Previously none of them could be removed once set, and a brand-new rule
+          always got an icon written whether you picked one or not
+        </li>
+        <li>Text color no longer overrides the VCS status color: modified (blue), added (green) and unversioned (red) nodes
+          keep the Git color. Your color stays in the config and returns once the file is clean; icons and background colors
+          are unaffected
+        </li>
+        <li>The "no color" swatch is now white with a red slash, so it reads differently from a dark color</li>
+      </ul>
+      <ul>
+        <p>6.1.0</p>
+        <li><b>配置文件改名推迟到「保存」那一刻</b>：开 IDE 不再动它。只有第一次点「抽离」并保存时才把
+          DirectoryV3.xml 改名为 DirectoryV6.xml，中途反悔文件名也没被动过，文件名和内容永远一致
+        </li>
+        <li>「抽离」的兼容性提醒<b>只在真的要改名时弹一次</b>，本来就是 DirectoryV6.xml 的、或者已经抽过再点一次的都不再打扰
+        </li>
+        <li>「还原」多给一个选择：<b>换回 DirectoryV3.xml</b> / 保留 DirectoryV6.xml / 取消。还原后内容旧版插件就能读了，文件名换不换由你定
+        </li>
+        <li>弹窗打开时给有问题的 prefix 声明<b>上底色</b>：红色是目录在磁盘上已经没有了，黄色是没有任何规则引用它。一条前缀失效意味着底下一批规则一起失效，光看「目录备注」列表看不出根因
+        </li>
+        <li>新增<b>「清理前缀」</b>按钮：没人引用的只删声明；路径失效的连引用它的规则一起删——只删声明会让那些规则剩下半截相对路径，变成指向别处的错规则
+        </li>
+        <li><b>手改过的 prefix id 会留着</b>：把 carrier5 改成「承运商基础包」之后再点一次「抽离」，不会被打回自动生成的名字
+        </li>
+        <li>「说明」tab 补了「抽离路径前缀」一整节，写清了抽离的判据（净收益为正，<b>没有「几条起步」的门槛</b>，前缀越长越容易够本，/src 这种再多条也抽不出来）
+        </li>
+        <li>Config file rename now happens only when you hit Save after Extract — never on IDE startup, so the file name
+          always matches its contents
+        </li>
+        <li>The compatibility warning is shown only when a rename will actually happen</li>
+        <li>Restore now offers three choices: rename back to DirectoryV3.xml, keep DirectoryV6.xml, or cancel</li>
+        <li>Broken (red) and unreferenced (yellow) prefix declarations are highlighted in the dialog, with a new "Clean
+          prefixes" button
+        </li>
+        <li>Hand-edited prefix ids are preserved when re-extracting</li>
+      </ul>
+      <ul>
+        <p>6.0.0</p>
+        <li>配置文件改名为 <b>DirectoryV6.xml</b>：第一次抽离路径前缀并保存时，老的 DirectoryV3.xml 会改名过来，内容一个字不动，并发一条通知告知
+        </li>
+        <li>新增<b>抽离路径前缀</b>：重复的长目录提到 &lt;prefixes&gt; 里只写一遍，每条规则只留剩下那截。真实数据实测 19
+          条规则的路径部分从 1012 个字符降到 830 个
+        </li>
+        <li>入口在侧边栏「目录备注」工具栏的「抽离或还原路径前缀」，点开是一个弹窗，直接显示配置文件正文；抽离和还原只改弹窗里的内容，看清楚了再保存，不满意点「还原」或者直接关掉
+        </li>
+        <li>去掉底部的「TreeInfoTip Notes XML」工具窗口：常驻占一栏、又只是偶尔用一次，内容收进了上面那个弹窗。「检查失效路径」由「目录备注」列表自带的标红代替，正则实现的「格式化」和「清理空属性」一并去掉（属性值里带
+          &lt; &gt; 时它们本来就不安全）
+        </li>
+        <li>改名的原因：抽离过的文件旧版插件读不了——它不认 prefix 属性，会把剩下那截当成完整路径。换个文件名，新旧两版就各读各的，不会互相读坏
+        </li>
+        <li>Renamed the config file to <b>DirectoryV6.xml</b>; an existing DirectoryV3.xml is renamed the first time you
+          extract prefixes and save, contents untouched
+        </li>
+        <li>New: extract repeated path prefixes into a &lt;prefixes&gt; table, so a long shared directory is written once
+        </li>
+        <li>New entry point in the "Directory notes" toolbar opens a dialog showing the config file. Extract and Restore
+          only change the dialog text — nothing is written until you hit Save
+        </li>
+        <li>Removed the bottom "TreeInfoTip Notes XML" tool window; its content moved into that dialog</li>
+      </ul>
+      <ul>
+        <p>5.7.5</p>
+        <li>修复「TreeInfoTip Notes XML」窗口点「保存」在新版 IDE 上报 Read access is allowed from inside read-action
+          only：读取 PSI 那一步现在自己包了读操作
+        </li>
+        <li>「保存」改走 IDE 的虚拟文件系统，不再绕过它直接写磁盘：保存能用 Ctrl+Z 撤销，文件正在编辑器里开着时也不会和手上的改动互相覆盖，配置改动即时生效</li>
+        <li>Fixed "Read access is allowed from inside read-action only" when clicking Save in the XML tool window</li>
+        <li>Save now goes through the IDE virtual file system instead of writing to disk directly: undo works, edits no
+          longer clash with the file open in an editor, and changes take effect immediately
+        </li>
+      </ul>
       <ul>
         <p>5.7.3</p>
         <li>插件名称、工具窗口和通知组统一使用 TreeInfoTip Notes，同步更新帮助说明、配置文件模板及发布产物名称</li>
@@ -270,8 +405,6 @@
              不用也不能在这里声明第二个路径 -->
         <toolWindow id="TreeInfoTip Notes" secondary="true" icon="/icons/treeNote.svg" anchor="right"
                     factoryClass="com.plugins.infotip.gui.view.NotesToolWindowFactory"/>
-        <toolWindow id="TreeInfoTip Notes XML" secondary="true" icon="AllIcons.FileTypes.Xml" anchor="bottom"
-                    factoryClass="com.plugins.infotip.gui.view.XmlEditorToolWindow"/>
         <notificationGroup id="TreeInfoTip Notes" displayType="STICKY_BALLOON"/>
         <postStartupActivity implementation="com.plugins.infotip.PluginStartupActivity"/>
         <treeStructureProvider implementation="com.plugins.infotip.TreeOnlyTextProvider"/>
@@ -300,10 +433,6 @@
             <action id="TreeInfotip.Strikethrough" class="com.plugins.infotip.action.ActionDescriptionStrikethrough"
                     text="添加/取消删除线"
                     description="给选中的文件或目录名称添加或取消删除线"/>
-            <separator/>
-            <action id="TreeInfotip.Extension" class="com.plugins.infotip.action.ActionDescriptionExtension"
-                    text="按扩展名批量设置"
-                    description="一条规则命中一批同扩展名的文件,范围可限定为当前目录或整个项目"/>
             <separator/>
             <action id="TreeInfotip.ClearAll" class="com.plugins.infotip.action.ActionDescriptionClearAll"
                     text="清除全部设置"

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JetBrains 安装插件【TreeInfoTip Notes / 目录树备注】 安装后就能看到目录后面的备注信息 -->
+<trees>
+    <tree path="/src/main/java/com/plugins/infotip/gui" title="界面"/>
+</trees>
+<!--
+  TreeInfoTip Notes 的配置文件：一条 <tree> 就是一条规则，存盘立刻生效，不用重启 IDE。
+  平时不用手写，右键项目树上的文件或目录，走「目录备注」菜单加就行。
+
+  参数全是可选的，按需要写几个：
+    path             相对项目根目录的路径，以 / 开头；只写 / 表示整个项目
+    extension        扩展名，不带点，只作用于文件；和 path 一起写表示该目录连子目录下的这类文件
+    title            备注文字，灰色跟在节点名后面
+    presentableText  覆盖节点显示的名字
+    tooltipTitle     鼠标悬浮时的提示，可以写多行
+    icon             换图标，填 AllIcons 里的字段路径，例如 Nodes.Folder
+    textColor        文字颜色，十进制 r,g,b，例如 255,0,0
+    backgroundColor  背景色，写法同上
+    strikethrough    填 true 给节点加删除线
+    prefix           引用下面 prefixes 里声明的某个 id，path 只写剩下的那截
+
+  路径前缀可以抽出来，重复的长目录只写一遍：先在 trees 里加一个 prefixes 段，
+  里面一条 prefix 声明一个 id 和它的完整路径，再让 tree 用 prefix= 指过去。
+  这件事不用手写，侧边栏「目录备注」工具栏上的「抽离或还原路径前缀」按钮来回切。
+  抽不抽看净收益：条数 x (前缀长 - id长 - 10) - (前缀长 + id长 + 25) 为正才抽，
+  没有「几条起步」的门槛，长目录 2 条就够本，/src 这种再多条也抽不出来。
+  id 可以手改成看得懂的名字（中文也行），重新抽离时会留着不动。
+
+  命中优先级：path 全等的最高，其次 path 加 extension（path 更长的赢），
+  最后是只写 extension 的全项目规则。同优先级时写在前面的那条赢，所以侧边栏
+  「目录备注」里的「置顶」是真的把标签挪到文件最前面。
+-->

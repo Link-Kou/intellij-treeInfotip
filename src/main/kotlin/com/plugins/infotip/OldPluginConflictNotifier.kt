@@ -18,10 +18,12 @@ import java.util.concurrent.atomic.AtomicBoolean
  * [OLD_PLUGIN_ID] 现在可能来自两处：Marketplace 上原作者的那个插件，或者用户
  * 自己装的本插件 5.1.x 及更早的构建。两种情况的处理方式一样——留一个就行。
  *
- * 两份插件不会写坏配置：`DirectoryV3.xml` 各自解析进自己类加载器里的
- * [com.plugins.infotip.storage.XmlStorage] 静态缓存，写入只发生在用户点菜单的时候，
- * 另一边靠 PSI 监听重新解析。真正的代价是每次重绘都算两遍，而且两个装饰入口的执行
- * 顺序不定，旧版跑在后面时会把新版才有的悬浮提示、覆盖显示名称等覆盖掉。
+ * 6.0.0 起两份插件连配置文件都不再共用：本插件读 `DirectoryV6.xml`，旧版只认
+ * `DirectoryV3.xml`，所以旧版看不到新加的备注，反过来也一样——这正是改名要的效果，
+ * 抽离过路径前缀的文件交给旧版读只会读出一堆错路径。
+ *
+ * 剩下的代价是每次重绘都算两遍，而且两个装饰入口的执行顺序不定，旧版跑在后面时会把
+ * 新版才有的悬浮提示、覆盖显示名称等覆盖掉。
  *
  * @author yc556&claude-opus-5
  */
@@ -72,8 +74,9 @@ object OldPluginConflictNotifier {
             manager.getNotificationGroup(NOTIFICATION_GROUP)
                 .createNotification(
                     "检测到旧版 TreeInfotip",
-                    "旧 id（$OLD_PLUGIN_ID）的 TreeInfotip 还在启用中。两边读的是同一个 DirectoryV3.xml，" +
-                            "备注不会丢，但目录树会被装饰两遍、右键菜单里会出现两个「目录备注」，" +
+                    "旧 id（$OLD_PLUGIN_ID）的 TreeInfotip 还在启用中。两边读的已经不是同一个" +
+                            "配置文件（本插件 7.0.0 起读 DirectoryV7.xml，旧版只认 DirectoryV3.xml），所以旧版看不到" +
+                            "新加的备注；目录树还是会被装饰两遍、右键菜单里会出现两个「目录备注」，" +
                             "而且旧版跑在后面时会把悬浮提示、覆盖显示名称这些新设置覆盖掉。建议只保留一个。",
                     NotificationType.WARNING
                 )

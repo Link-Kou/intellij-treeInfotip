@@ -30,10 +30,10 @@ public class ActionDescriptionPresentableText extends AnAction {
             @Override
             public void onModifyPath(List<Pair<String, String>> asBasePathOrExtension, List<XmlEntity> xmlEntities, XmlFile fileDirectoryXml, Project project) {
                 final XmlEntity xmlEntity = xmlEntities.get(0);
-                String txt = Messages.showInputDialog(project, "请输入要显示的名称，留空则恢复文件原名", "覆盖显示名称", Messages.getQuestionIcon(), xmlEntity.getPresentableText(), null);
+                String txt = Messages.showInputDialog(project, "请输入要显示的名称，留空则恢复文件原名", "覆盖显示名称", Messages.getQuestionIcon(), xmlEntity.getLabel(), null);
                 if (null != txt) {
                     for (XmlEntity x : xmlEntities) {
-                        XmlStorage.modify(project, fileDirectoryXml, x.setPresentableText(txt));
+                        XmlStorage.modify(project, fileDirectoryXml, x.setLabel(txt));
                     }
                 }
             }
@@ -43,7 +43,7 @@ public class ActionDescriptionPresentableText extends AnAction {
                 String txt = Messages.showInputDialog(project, "请输入要显示的名称，留空则恢复文件原名", "覆盖显示名称", Messages.getQuestionIcon(), "", null);
                 if (null != txt) {
                     for (Pair<String, String> pair : asBasePathOrExtension) {
-                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setPresentableText(txt));
+                        XmlStorage.create(project, fileDirectoryXml, new XmlEntity().setPath(pair.getValue0()).setLabel(txt));
                     }
                 }
             }

@@ -16,7 +16,6 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A <code>TreesUtils</code> Class
@@ -30,14 +29,8 @@ public class TreesUtils {
     /**
      * 匹配路径
      * <p>
-     * 支持两类规则，优先级从高到低：
-     * <ol>
-     *     <li>路径规则 —— 只写 path，路径全等时命中，比任何扩展名规则都优先；</li>
-     *     <li>目录级类型规则 —— path + extension，命中该目录（含各级子目录）下的同扩展名文件，
-     *     多条同时命中时 path 更长（更靠里）的那条生效；</li>
-     *     <li>全项目类型规则 —— 只写 extension，命中整个项目里的同扩展名文件。</li>
-     * </ol>
-     * 扩展名规则只作用于文件，目录节点不参与匹配。
+     * 只有一种规则：完整路径全等时命中。7.1.0 去掉了 {@code extension} 类型规则，
+     * 所以不再有「目录级 / 全项目按扩展名」那两档兜底。
      * </p>
      *
      * @param virtualFile 文件对象
@@ -54,39 +47,17 @@ public class TreesUtils {
             return null;
         }
         final String relativePath = canonicalPath.substring(basePath.length());
-        final String fileExtension = virtualFile.isDirectory() ? null : virtualFile.getExtension();
-        XmlEntity extensionMatch = null;
-        //已命中扩展名规则的限定目录长度：越长表示范围越具体，-1 表示还没命中过
-        int matchedScopeLength = -1;
         for (XmlEntity listTreeInfo : xml) {
             if (null == listTreeInfo) {
                 continue;
             }
             final String rulePath = trimTrailingSlash(listTreeInfo.getPath());
-            final String ruleExtension = listTreeInfo.getExtension();
-            if (!isNotEmpty(ruleExtension)) {
-                //路径规则：全等即命中，优先级最高，直接返回
-                if (isNotEmpty(rulePath) && rulePath.equals(relativePath)) {
-                    return listTreeInfo;
-                }
-                continue;
-            }
-            if (null == fileExtension || !ruleExtension.trim().equalsIgnoreCase(fileExtension)) {
-                continue;
-            }
-            if (isNotEmpty(rulePath)) {
-                //目录级：文件要落在这个目录之下
-                if (relativePath.startsWith(rulePath + "/") && rulePath.length() > matchedScopeLength) {
-                    matchedScopeLength = rulePath.length();
-                    extensionMatch = listTreeInfo;
-                }
-            } else if (matchedScopeLength < 0) {
-                //全项目：范围最宽，只在没有目录级规则命中时兜底
-                matchedScopeLength = 0;
-                extensionMatch = listTreeInfo;
+            //全等即命中；同一路径多条时靠前的赢（列表就是文件里的先后顺序）
+            if (isNotEmpty(rulePath) && rulePath.equals(relativePath)) {
+                return listTreeInfo;
             }
         }
-        return extensionMatch;
+        return null;
     }
 
     private static boolean isNotEmpty(String value) {
@@ -97,29 +68,23 @@ public class TreesUtils {
      * 规则的「身份」：两条键相同的规则在 {@link #getMatchPath} 眼里完全无法区分，文件里靠前的
      * 那条永远赢，靠后的一辈子都不会生效
      * <p>
-     * 三类规则都是先到先得：路径规则全等即 {@code return}；目录级类型规则的判据是
-     * {@code rulePath.length() > matchedScopeLength} 严格大于，同一个范围时后来的顶不掉先来的；
-     * 全项目类型规则只在还没命中过时兜底。所以键相同的第二条不是「部分生效」，是完全没用——
-     * 哪怕它多配了一个先来那条没有的属性，也不会被读到。
+     * 现在只按完整路径算：路径全等即命中、靠前的赢，所以键相同的第二条不是「部分生效」，
+     * 是完全没用——哪怕它多配了一个先来那条没有的属性也读不到。
      * </p>
      * <p>
      * 归一化必须和匹配时一致，否则会漏判：路径去掉末尾多写的斜杠（{@code /src/} 和 {@code /src}
-     * 是同一条规则，见 {@link #trimTrailingSlash}），扩展名 trim 后转小写（匹配用的是
-     * {@code equalsIgnoreCase}）。
+     * 是同一条规则，见 {@link #trimTrailingSlash}）。
      * </p>
      *
      * @param entity 一条规则
-     * @return 用 {@code \0} 隔开的「路径 + 扩展名」。用 {@code \0} 而不是斜杠之类的可见字符，
-     * 是因为它不可能出现在属性值里，不会把两条不同的规则拼成同一个键
+     * @return 归一化后的完整路径
      */
     public static String ruleKey(XmlEntity entity) {
         if (null == entity) {
             return null;
         }
         final String path = trimTrailingSlash(entity.getPath());
-        final String extension = entity.getExtension();
-        return (null == path ? "" : path) + '\0'
-                + (null == extension ? "" : extension.trim().toLowerCase(Locale.ROOT));
+        return null == path ? "" : path;
     }
 
     /**
@@ -141,7 +106,7 @@ public class TreesUtils {
      * 按项目内的相对路径找 VirtualFile
      *
      * @param project 项目
-     * @param path    {@code DirectoryV3.xml} 里记的相对路径，形如 {@code /src/main/java}
+     * @param path    {@code DirectoryV7.xml} 里记的相对路径，形如 {@code /src/main/java}
      * @return 路径为空、或指向的文件已经不存在时返回 null
      */
     public static VirtualFile findProjectFile(Project project, String path) {

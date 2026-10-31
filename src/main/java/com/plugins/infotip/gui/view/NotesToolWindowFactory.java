@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * <ol>
  *   <li><b>文件成员</b>（默认打开）：当前文件的方法和属性，每项后面跟它的注释，
  *   见 {@link MemberTreeView}</li>
- *   <li><b>目录备注</b>：{@code DirectoryV3.xml} 里配的那些规则，见 {@link NoteTreeView}</li>
+ *   <li><b>目录备注</b>：{@code DirectoryV7.xml} 里配的那些规则，见 {@link NoteTreeView}</li>
  *   <li><b>说明</b>：菜单怎么用、配置文件有哪些参数，见 {@link HelpView}</li>
  * </ol>
  * <p>
